@@ -162,15 +162,15 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;a id&#x3D;&quot;master&quot; href&#x3D;&quot;.&#x2F;Archive_room.php&quot; style&#x3D;&quot;background-color:#000000;height:70px;width:200px;color:black;left:44%;cursor:default;&quot;&gt;Oh! You found me&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
 
 <p>发现一个隐藏链接，进入</p>
-<p><img src="C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161728627.png" alt="image-20200726161728627"></p>
+<p><img src="/.com//G:%5CBlog%5Csource_posts%5Cweek20200720-20200726%5Cimage-20200726161728627.png" alt="image-20200726161728627"></p>
 <p>点击跳转到了end.php，但是查看源代码发现该链接目标是”<a href="view-source:http://adb61f74-015f-4f39-be21-ee11ec36a0cc.node3.buuoj.cn/action.php">./action.php</a>“ </p>
 <p>推断action.php自动跳转到了end.php</p>
 <p>BurpSuite抓包：</p>
-<p><img src="C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161711389.png" alt="image-20200726161711389"></p>
+<p><img src="/.com//G:%5CBlog%5Csource_posts%5Cweek20200720-20200726%5Cimage-20200726161711389.png" alt="image-20200726161711389"></p>
 <p>发现 secr3t.php 内容：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;html&gt;    &lt;title&gt;secret&lt;&#x2F;title&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;&lt;?php    highlight_file(__FILE__);    error_reporting(0);    $file&#x3D;$_GET[&#39;file&#39;];    if(strstr($file,&quot;..&#x2F;&quot;)||stristr($file, &quot;tp&quot;)||stristr($file,&quot;input&quot;)||stristr($file,&quot;data&quot;))&#123;        echo &quot;Oh no!&quot;;        exit();    &#125;    include($file); &#x2F;&#x2F;flag放在了flag.php里?&gt;&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200726161601390.png" alt="image-20200726161601390"></p>
+<p><img src="/.com//G:%5CBlog%5Csource_posts%5Cweek20200720-20200726%5Cimage-20200726161601390.png" alt="image-20200726161601390"></p>
 <p>看不到。。</p>
 <p>分析secr3t.php文件包含漏洞，有若干过滤</p>
 <p>绕过 ：</p>
@@ -180,7 +180,7 @@
 
 <p>解密找到flag</p>
 <p>flag{0a8222f7-7e66-4cbe-a5df-1a252c8b1257}</p>
-<h2 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h2><h2 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h2><h2 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h2><h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+<h2 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h2><h2 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h2><h2 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h2><h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><h2 id><a href="#" class="headerlink" title></a></h2>]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
