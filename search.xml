@@ -8,7 +8,10 @@
   <entry>
     <title>week20200713-20200719</title>
     <url>/2020/07/23/week20200713-20200719/</url>
-    <content><![CDATA[<h1 id="Week-1-lt-2020-07-13-2020-07-19-gt"><a href="#Week-1-lt-2020-07-13-2020-07-19-gt" class="headerlink" title="Week 1 &lt;2020.07.13 - 2020.07.19&gt;"></a>Week 1 &lt;2020.07.13 - 2020.07.19&gt;</h1><h2 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h2><p>打开实例，只有一张图片，右键查看网页代码：</p>
+    <content><![CDATA[<h1 id="Week-1-lt-2020-07-13-2020-07-19-gt"><a href="#Week-1-lt-2020-07-13-2020-07-19-gt" class="headerlink" title="Week 1 &lt;2020.07.13 - 2020.07.19&gt;"></a>Week 1 &lt;2020.07.13 - 2020.07.19&gt;</h1><a id="more"></a>
+
+
+<h2 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h2><p>打开实例，只有一张图片，右键查看网页代码：</p>
 <table>
 <thead>
 <tr>
@@ -113,7 +116,9 @@
   <entry>
     <title>week20200720-20200726</title>
     <url>/2020/07/26/week20200720-20200726/</url>
-    <content><![CDATA[<h1 id="Week-2-lt-2020-07-20-2020-07-26-gt"><a href="#Week-2-lt-2020-07-20-2020-07-26-gt" class="headerlink" title="Week 2 &lt;2020.07.20 - 2020.07.26&gt;"></a>Week 2 &lt;2020.07.20 - 2020.07.26&gt;</h1><h2 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h2><p>打开页面有三个链接：</p>
+    <content><![CDATA[<h1 id="Week-2-lt-2020-07-20-2020-07-26-gt"><a href="#Week-2-lt-2020-07-20-2020-07-26-gt" class="headerlink" title="Week 2 &lt;2020.07.20 - 2020.07.26&gt;"></a>Week 2 &lt;2020.07.20 - 2020.07.26&gt;</h1><a id="more"></a>
+
+<h2 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h2><p>打开页面有三个链接：</p>
 <p>/flag.txt</p>
 <p>/welcome.txt</p>
 <p>/hints.txt</p>
