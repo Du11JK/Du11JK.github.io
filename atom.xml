@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-27T13:02:20.291Z</updated>
+  <updated>2020-07-29T16:32:39.222Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SQL-Inject-20200729</title>
+    <link href="http://yoursite.com/2020/07/29/SQL-Inject-20200729/"/>
+    <id>http://yoursite.com/2020/07/29/SQL-Inject-20200729/</id>
+    <published>2020-07-29T08:24:59.000Z</published>
+    <updated>2020-07-29T16:32:39.222Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;SQL注入总结&quot;&gt;&lt;a href=&quot;#SQL注入总结&quot; class=&quot;headerlink&quot; title=&quot;SQL注入总结&quot;&gt;&lt;/a&gt;SQL注入总结&lt;/h1&gt;&lt;h2 id=&quot;常规操作流程：&quot;&gt;&lt;a href=&quot;#常规操作流程：&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="note" scheme="http://yoursite.com/categories/note/"/>
+    
+    
+      <category term="CTF - web" scheme="http://yoursite.com/tags/CTF-web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>week20200727-20200802</title>
+    <link href="http://yoursite.com/2020/07/28/week20200727-20200802/"/>
+    <id>http://yoursite.com/2020/07/28/week20200727-20200802/</id>
+    <published>2020-07-27T17:28:32.000Z</published>
+    <updated>2020-07-29T16:51:35.187Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Week-2-lt-2020-07-27-2020-08-02-gt&quot;&gt;&lt;a href=&quot;#Week-2-lt-2020-07-27-2020-08-02-gt&quot; class=&quot;headerlink&quot; title=&quot;Week 2 &amp;lt;2020.07.27 - 2020.08.02&amp;gt;&quot;&gt;&lt;/a&gt;Week 2 &amp;lt;2020.07.27 - 2020.08.02&amp;gt;&lt;/h1&gt;
+    
+    </summary>
+    
+    
+      <category term="BUUCTF" scheme="http://yoursite.com/categories/BUUCTF/"/>
+    
+    
+      <category term="CTF - Web" scheme="http://yoursite.com/tags/CTF-Web/"/>
+    
+  </entry>
   
   <entry>
     <title>week20200720-20200726</title>
