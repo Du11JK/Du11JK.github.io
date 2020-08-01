@@ -372,8 +372,8 @@
       </tags>
   </entry>
   <entry>
-    <title>shell study</title>
-    <url>/2020/08/02/shell-study/</url>
+    <title>OEP入口查找和基本壳的识别</title>
+    <url>/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/</url>
     <content><![CDATA[<h1 id="OEP入口查找和基本壳的识别"><a href="#OEP入口查找和基本壳的识别" class="headerlink" title="OEP入口查找和基本壳的识别"></a>OEP入口查找和基本壳的识别</h1><h2 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h2><p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。</p>
 <p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。</p>
 <p>易语言特点：可以从程序里找一些call的调用，这个方法可以区分和VC的区别，非独立编译比较容易识别，入口特征和模块特征都有krnln.fnr。</p>
