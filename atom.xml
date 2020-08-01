@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-29T16:32:39.222Z</updated>
+  <updated>2020-08-01T18:38:39.072Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>shell study</title>
+    <link href="http://yoursite.com/2020/08/02/shell-study/"/>
+    <id>http://yoursite.com/2020/08/02/shell-study/</id>
+    <published>2020-08-01T16:18:33.000Z</published>
+    <updated>2020-08-01T18:38:39.072Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;OEP入口查找和基本壳的识别&quot;&gt;&lt;a href=&quot;#OEP入口查找和基本壳的识别&quot; class=&quot;headerlink&quot; title=&quot;OEP入口查找和基本壳的识别&quot;&gt;&lt;/a&gt;OEP入口查找和基本壳的识别&lt;/h1&gt;&lt;h2 id=&quot;入口点的查找：&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="note" scheme="http://yoursite.com/categories/note/"/>
+    
+    
+      <category term="Reverse" scheme="http://yoursite.com/tags/Reverse/"/>
+    
+  </entry>
+  
+  <entry>
     <title>SQL-Inject-20200729</title>
     <link href="http://yoursite.com/2020/07/29/SQL-Inject-20200729/"/>
     <id>http://yoursite.com/2020/07/29/SQL-Inject-20200729/</id>
     <published>2020-07-29T08:24:59.000Z</published>
-    <updated>2020-07-29T16:32:39.222Z</updated>
+    <updated>2020-08-01T16:20:41.646Z</updated>
     
     <summary type="html">
     
@@ -39,7 +66,7 @@
       <category term="note" scheme="http://yoursite.com/categories/note/"/>
     
     
-      <category term="CTF - web" scheme="http://yoursite.com/tags/CTF-web/"/>
+      <category term="CTF - Web" scheme="http://yoursite.com/tags/CTF-Web/"/>
     
   </entry>
   
@@ -48,7 +75,7 @@
     <link href="http://yoursite.com/2020/07/28/week20200727-20200802/"/>
     <id>http://yoursite.com/2020/07/28/week20200727-20200802/</id>
     <published>2020-07-27T17:28:32.000Z</published>
-    <updated>2020-07-29T16:51:35.187Z</updated>
+    <updated>2020-07-31T16:29:22.441Z</updated>
     
     <summary type="html">
     

