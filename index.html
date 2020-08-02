@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-02 00:18:33 / 修改时间：02:40:42" itemprop="dateCreated datePublished" datetime="2020-08-02T00:18:33+08:00">2020-08-02</time>
+              <time title="创建时间：2020-08-02 00:18:33 / 修改时间：13:59:46" itemprop="dateCreated datePublished" datetime="2020-08-02T00:18:33+08:00">2020-08-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -237,24 +237,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="OEP入口查找和基本壳的识别"><a href="#OEP入口查找和基本壳的识别" class="headerlink" title="OEP入口查找和基本壳的识别"></a>OEP入口查找和基本壳的识别</h1><h2 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h2><p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。</p>
-<p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。</p>
-<p>易语言特点：可以从程序里找一些call的调用，这个方法可以区分和VC的区别，非独立编译比较容易识别，入口特征和模块特征都有krnln.fnr。</p>
-<h2 id="脱壳基本方法"><a href="#脱壳基本方法" class="headerlink" title="脱壳基本方法"></a>脱壳基本方法</h2><p>1.单步跟踪</p>
-<p>2.平衡堆栈</p>
-<p>​    OEP的第一条指令是<code>pushad</code>，作用一般是保存寄存器环境，将8各通用寄存器压入堆栈；单步执行程序，指令<code>pushad</code>执行，堆栈变化，此时在栈顶（ESP）设置硬件断点；<br>​    运行，程序在<code>popad</code>附近停止，表示已经处在壳代码末尾，继续单步到一个较大的<code>jmp</code>跳转，目标应该是原始OEP。<br>​    观察代码是否确是原始OEP，可以参照上文不同情况入口点特征做判断。</p>
-<p>步骤：</p>
-<p>1.查找原始OEP</p>
-<p>​    确定原始程序代码的位置</p>
-<p>2.dump内存到文件</p>
-<p>​    内存中被还原的代码和数据抓取下来，重新保存成一个文件</p>
-<p>3.修复文件</p>
-<p>​    修复IAT，对从内存中转储到本地的文件进行修复</p>
-<p>参考：</p>
-<p><a href="https://www.52pojie.cn/forum-68-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/forum-68-1.html</a></p>
-<p><a href="https://www.52pojie.cn/thread-234739-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-234739-1-1.html</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/34263050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34263050</a></p>
-
+          <h1 id="OEP入口查找和基本壳的识别"><a href="#OEP入口查找和基本壳的识别" class="headerlink" title="OEP入口查找和基本壳的识别"></a>OEP入口查找和基本壳的识别</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -273,7 +264,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/SQL-Inject-20200729/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/SQL%E6%B3%A8%E5%85%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/a.jpg">
@@ -287,7 +278,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/29/SQL-Inject-20200729/" class="post-title-link" itemprop="url">SQL-Inject-20200729</a>
+            <a href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/" class="post-title-link" itemprop="url">SQL注入</a>
         </h2>
 
         <div class="post-meta">
@@ -304,7 +295,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-02 00:20:41" itemprop="dateModified" datetime="2020-08-02T00:20:41+08:00">2020-08-02</time>
+                <time title="修改时间：2020-08-02 18:05:04" itemprop="dateModified" datetime="2020-08-02T18:05:04+08:00">2020-08-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -327,14 +318,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SQL注入总结"><a href="#SQL注入总结" class="headerlink" title="SQL注入总结"></a>SQL注入总结</h1><h2 id="常规操作流程："><a href="#常规操作流程：" class="headerlink" title="常规操作流程："></a>常规操作流程：</h2><p>1.测试有多少字段<br>2.爆出数据库名<br>3.爆出数据库里的表<br>4.爆出表的列名<br>5.爆出所有数据</p>
-<h2 id="常见注入方法："><a href="#常见注入方法：" class="headerlink" title="常见注入方法："></a>常见注入方法：</h2><h3 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#39; or &#39;1&#39;&#x3D;&#39;1	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or &#39;1&#39;&#x3D;&#39;1&#39;</span><br><span class="line">&#39; or 1&#x3D;1#	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or 1&#x3D;1#&#39;</span><br><span class="line">&#39;&#x3D;0#		&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39;&#x3D;0#</span><br></pre></td></tr></table></figure>
-
-<h3 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xx&#39; union select 1,(select database()) #</span><br><span class="line">xx&#39; union select (select database()),2 or &#39;</span><br></pre></td></tr></table></figure>
-
-<h3 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&#39;;show databases;#</span><br><span class="line">1&#39;;show tables from supersqli;#</span><br><span class="line">1&#39;;show columns from __;</span><br></pre></td></tr></table></figure>
-<h2 id="绕过方法："><a href="#绕过方法：" class="headerlink" title="绕过方法："></a>绕过方法：</h2><h3 id="注释符号绕过"><a href="#注释符号绕过" class="headerlink" title="注释符号绕过"></a>注释符号绕过</h3><h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><h3 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h3><h3 id="双写关键字绕过"><a href="#双写关键字绕过" class="headerlink" title="双写关键字绕过"></a>双写关键字绕过</h3><h3 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h3><h3 id="过滤or-and-xor-not-绕过"><a href="#过滤or-and-xor-not-绕过" class="headerlink" title="过滤or and xor not 绕过"></a>过滤or and xor not 绕过</h3><h3 id="过滤等号-绕过"><a href="#过滤等号-绕过" class="headerlink" title="过滤等号=绕过"></a>过滤等号=绕过</h3><h3 id="过滤大小于号绕过"><a href="#过滤大小于号绕过" class="headerlink" title="过滤大小于号绕过"></a>过滤大小于号绕过</h3><h3 id="过滤引号绕过"><a href="#过滤引号绕过" class="headerlink" title="过滤引号绕过"></a>过滤引号绕过</h3><h3 id="过滤逗号绕过"><a href="#过滤逗号绕过" class="headerlink" title="过滤逗号绕过"></a>过滤逗号绕过</h3><h3 id="过滤函数绕过"><a href="#过滤函数绕过" class="headerlink" title="过滤函数绕过"></a>过滤函数绕过</h3><p>参考：<a href="https://blog.csdn.net/huanghelouzi/article/details/82995313" target="_blank" rel="noopener">https://blog.csdn.net/huanghelouzi/article/details/82995313</a></p>
-
+          <h1 id="SQL注入总结"><a href="#SQL注入总结" class="headerlink" title="SQL注入总结"></a>SQL注入总结</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

