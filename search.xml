@@ -358,9 +358,12 @@
     <url>/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/</url>
     <content><![CDATA[<h1 id="OEP入口查找和基本壳的识别"><a href="#OEP入口查找和基本壳的识别" class="headerlink" title="OEP入口查找和基本壳的识别"></a>OEP入口查找和基本壳的识别</h1><a id="more"></a>
 
-<h2 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h2><p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。</p>
-<p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。</p>
-<p>易语言特点：可以从程序里找一些call的调用，这个方法可以区分和VC的区别，非独立编译比较容易识别，入口特征和模块特征都有krnln.fnr。</p>
+<h2 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h2><blockquote>
+<p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。<br>特征：固定调用API<br>GetVersion;  GetCommandLineA;  GetStartupInfoA</p>
+</blockquote>
+<blockquote>
+<p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。<br>特征：call + jmp指令<br>API：GetSystemTimeAsFlieTime;  GetCurrentThreadId;  GetCurrentProcessId;  QueryPerformanceCounter</p>
+</blockquote>
 <h2 id="脱壳基本方法"><a href="#脱壳基本方法" class="headerlink" title="脱壳基本方法"></a>脱壳基本方法</h2><p>1.单步跟踪</p>
 <p>2.平衡堆栈</p>
 <p>​    OEP的第一条指令是<code>pushad</code>，作用一般是保存寄存器环境，将8各通用寄存器压入堆栈；单步执行程序，指令<code>pushad</code>执行，堆栈变化，此时在栈顶（ESP）设置硬件断点；<br>​    运行，程序在<code>popad</code>附近停止，表示已经处在壳代码末尾，继续单步到一个较大的<code>jmp</code>跳转，目标应该是原始OEP。<br>​    观察代码是否确是原始OEP，可以参照上文不同情况入口点特征做判断。</p>
@@ -372,9 +375,7 @@
 <p>3.修复文件</p>
 <p>​    修复IAT，对从内存中转储到本地的文件进行修复</p>
 <p>参考：</p>
-<p><a href="https://www.52pojie.cn/forum-68-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/forum-68-1.html</a></p>
-<p><a href="https://www.52pojie.cn/thread-234739-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-234739-1-1.html</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/34263050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34263050</a></p>
+<p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a><br><a href="https://www.52pojie.cn/forum-68-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/forum-68-1.html</a><br><a href="https://www.52pojie.cn/thread-234739-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-234739-1-1.html</a><br><a href="https://zhuanlan.zhihu.com/p/34263050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34263050</a><br><a href="https://www.cnblogs.com/iBinary/p/7764483.html" target="_blank" rel="noopener">https://www.cnblogs.com/iBinary/p/7764483.html</a></p>
 ]]></content>
       <categories>
         <category>note</category>
@@ -433,6 +434,54 @@
       </categories>
       <tags>
         <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UPX壳详解</title>
+    <url>/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<h1 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
+
+<h1 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h1><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
+<h1 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h1><p><strong>（“堆栈平衡”原理）</strong></p>
+<blockquote>
+<p>call指令：<br>  1.向堆栈中压入下一行程序的地址；<br>  2.JMP到call的子程序地址处。</p>
+</blockquote>
+<blockquote>
+<p>RETN指令：<br>  1.将当前的ESP中指向的地址出栈；<br>  2.JMP到这个地址。这个就完成了一次调用子程序的过程</p>
+</blockquote>
+<blockquote>
+<p>如果我们要返回父程序，则当我们在堆栈中进行堆栈的操作的时候，一定要保证在RETN这条指令之前，ESP指向的是我们压入栈中的地址。</p>
+</blockquote>
+<blockquote>
+<p>在程序自解密或者自解压过程中, 多数壳会先将当前寄存器状态压栈, 如使用pushad, 而在解压结束后, 会将之前的寄存器值出栈, 如使用popad. 因此在寄存器出栈时, 往往程序代码被恢复, 此时硬件断点触发（这就是我们要下硬件断点的原因），然后在程序当前位置, 只需要一些单步操作, 就会到达正确的OEP位置</p>
+</blockquote>
+<p><strong>载入程序后只有esp寄存器内容发生变化，那么这个程序多半可以用ESP定律(存疑)</strong></p>
+<h1 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h1><h2 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h2><blockquote>
+<p>① 寻找原始OEP<br>这一步骤的主要作用就是要确定原始程序代码到底在哪里，能找到原始程序的代码，说明壳代码执行完了，我们只有找到原始OEP才能进行下一步的动作。</p>
+<p>② dump内存到文件<br>当我们找到原始OEP，调试运行到原始OEP时，只要代码被还原，我们就可以在这个地方进行dump内存，将内存中被还原的代码和数据抓取下来，重新保存成一个文件，这样脱完壳时，我们就可以用静态分析工具分析程序了。</p>
+<p>③ 修复文件<br>这一步主要就是修复IAT，对从内存中转储到本地的文件进行修复。</p>
+</blockquote>
+<h2 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h2><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200803160918611.png" alt="image-20200803160918611"></p>
+<p>使用ExeinfoPE查壳，确认是UPX</p>
+<p>x32dbg打开，寻找原始OEP</p>
+<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png" alt="image-20200803161135150"></p>
+<p>不需要下ESP硬件断点，F9运行，可以看到popad在上方</p>
+<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161244521.png" alt="image-20200803161244521"></p>
+<p>有一系列jmp指令，选择跳转较远的，地址00401280，一般就是原始OEP，可以下一个断电F9运行，确认是原始OEP</p>
+<p>使用Scylla插件，Dump，自动寻找IAT，获取导入表，修复Dump文件</p>
+<p>IDA打开脱壳文件，确认成功</p>
+<p>注：原始OEP也可以通过逐条分析汇编指令寻找，难度较大；有经验的话可以直接搜索popad</p>
+<p>参考：</p>
+<p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
+<p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a></p>
+<p><a href="https://blog.csdn.net/qq_42967398/article/details/96444954" target="_blank" rel="noopener">https://blog.csdn.net/qq_42967398/article/details/96444954</a></p>
+<p><a href="https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc</a></p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
       </tags>
   </entry>
 </search>
