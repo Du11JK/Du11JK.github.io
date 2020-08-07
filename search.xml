@@ -512,7 +512,7 @@
   <entry>
     <title>BUUCTF-RE-crackMe WriteUp</title>
     <url>/2020/08/07/BUUCTF-RE-crackMe-WriteUp/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<h1 id="BUUCTF-crackMe-WriteUp"><a href="#BUUCTF-crackMe-WriteUp" class="headerlink" title="BUUCTF crackMe WriteUp"></a>BUUCTF crackMe WriteUp</h1><a id="more"></a>
 
 <p>脚本：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a=<span class="string">"dbappsec"</span></span><br><span class="line">c=[]</span><br><span class="line">b=<span class="string">"welcomebeijing"</span></span><br><span class="line">d=[<span class="number">0x2a</span>,<span class="number">0xd7</span>,<span class="number">0x92</span>,<span class="number">0xe9</span>,<span class="number">0x53</span>,<span class="number">0xe2</span>,<span class="number">0xc4</span>,<span class="number">0xCD</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">    c.append(ord(a[i])^ord(b[i]))</span><br><span class="line">print(c)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">    d[i]=hex(d[i]^ord(a[i])).replace(<span class="string">"0x"</span>,<span class="string">''</span>)</span><br><span class="line">    print(d[i],end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
@@ -528,7 +528,7 @@
   <entry>
     <title>BUUCTF-RE-[GWCTF2019]xxor-WriteUp</title>
     <url>/2020/08/07/BUUCTF-RE-GWCTF2019-xxor-WriteUp/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<h1 id="GWCTF2019-xxor-WriteUp"><a href="#GWCTF2019-xxor-WriteUp" class="headerlink" title="[GWCTF2019]xxor-WriteUp"></a>[GWCTF2019]xxor-WriteUp</h1><a id="more"></a>
 
 <p>脚本：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __int64 a[<span class="number">6</span>] = &#123; <span class="number">3746099070</span>, <span class="number">550153460</span>, <span class="number">3774025685</span>, <span class="number">1548802262</span>, <span class="number">2652626477</span>, <span class="number">2230518816</span> &#125;;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> a2[<span class="number">4</span>] = &#123; <span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> &#125;;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> v3, v4;</span><br><span class="line">    <span class="keyword">int</span> v5;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">4</span>; j += <span class="number">2</span>) &#123;</span><br><span class="line">        v3 = a[j];</span><br><span class="line">        v4 = a[j + <span class="number">1</span>];</span><br><span class="line">        v5 = <span class="number">1166789954</span>*<span class="number">0x40</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">0x3F</span>; ++i) &#123;</span><br><span class="line">            v4 -= (v3 + v5 + <span class="number">20</span>) ^ ((v3 &lt;&lt; <span class="number">6</span>) + a2[<span class="number">2</span>]) ^ ((v3 &gt;&gt; <span class="number">9</span>) + a2[<span class="number">3</span>]) ^ <span class="number">0x10</span>;</span><br><span class="line">            v3 -= (v4 + v5 + <span class="number">11</span>) ^ ((v4 &lt;&lt; <span class="number">6</span>) + *a2) ^ ((v4 &gt;&gt; <span class="number">9</span>) + a2[<span class="number">1</span>]) ^ <span class="number">0x20</span>;</span><br><span class="line">            v5 -= <span class="number">1166789954</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a[j] = v3;</span><br><span class="line">        a[j + <span class="number">1</span>] = v4;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*将整型数组作为字符输出，注意计算机小端排序*/</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; ++i) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *((<span class="keyword">char</span>*)&amp;a[i] + <span class="number">2</span>) &lt;&lt; *((<span class="keyword">char</span>*)&amp;a[i] + <span class="number">1</span>) &lt;&lt;  * ((<span class="keyword">char</span>*)&amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"PAUSE"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -572,7 +572,7 @@
   <entry>
     <title>BUUCTF-RE-[SUCTF2019]SignIn-WriteUp</title>
     <url>/2020/08/08/BUUCTF-RE-SUCTF2019-SignIn-WriteUp/</url>
-    <content><![CDATA[<a id="more"></a>]]></content>
+    <content><![CDATA[<h1 id="SUCTF2019-SignIn-WriteUp"><a href="#SUCTF2019-SignIn-WriteUp" class="headerlink" title="[SUCTF2019]SignIn-WriteUp"></a>[SUCTF2019]SignIn-WriteUp</h1><a id="more"></a>]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
@@ -583,7 +583,7 @@
   <entry>
     <title>BUUCTF-RE-[V&amp;N2020公开赛]strangeCpp-WriteUp</title>
     <url>/2020/08/08/BUUCTF-RE-V-N2020%E5%85%AC%E5%BC%80%E8%B5%9B-strangeCpp-WriteUp/</url>
-    <content><![CDATA[<a id="more"></a>]]></content>
+    <content><![CDATA[<h1 id="V-amp-N2020公开赛-strangeCpp-WriteUp"><a href="#V-amp-N2020公开赛-strangeCpp-WriteUp" class="headerlink" title="[V&amp;N2020公开赛]strangeCpp-WriteUp"></a>[V&amp;N2020公开赛]strangeCpp-WriteUp</h1><a id="more"></a>]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
