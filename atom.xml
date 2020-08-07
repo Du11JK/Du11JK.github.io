@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-07T18:03:19.649Z</updated>
+  <updated>2020-08-07T18:30:49.867Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BUUCTF-RE-[V&amp;N2020公开赛]strangeCpp-WriteUp</title>
+    <link href="http://yoursite.com/2020/08/08/BUUCTF-RE-V-N2020%E5%85%AC%E5%BC%80%E8%B5%9B-strangeCpp-WriteUp/"/>
+    <id>http://yoursite.com/2020/08/08/BUUCTF-RE-V-N2020%E5%85%AC%E5%BC%80%E8%B5%9B-strangeCpp-WriteUp/</id>
+    <published>2020-08-07T18:28:20.000Z</published>
+    <updated>2020-08-07T18:30:49.867Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="BUUCTF" scheme="http://yoursite.com/categories/BUUCTF/"/>
+    
+    
+      <category term="CTF - Re" scheme="http://yoursite.com/tags/CTF-Re/"/>
+    
+  </entry>
   
   <entry>
     <title>BUUCTF-RE-[SUCTF2019]SignIn-WriteUp</title>
