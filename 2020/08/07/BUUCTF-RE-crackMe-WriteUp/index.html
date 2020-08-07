@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jkjk">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="脚本： 12345678910a&#x3D;&quot;dbappsec&quot;c&#x3D;[]b&#x3D;&quot;welcomebeijing&quot;d&#x3D;[0x2a,0xd7,0x92,0xe9,0x53,0xe2,0xc4,0xCD]for i in range(0,8):    c.append(ord(a[i])^ord(b[i]))print(c)for i in range(0,8):    d[i]&#x3D;hex(d[i]^ord(a[i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BUUCTF-RE-crackMe WriteUp">
+<meta property="og:url" content="http://yoursite.com/2020/08/07/BUUCTF-RE-crackMe-WriteUp/index.html">
 <meta property="og:site_name" content="jkjk">
+<meta property="og:description" content="脚本： 12345678910a&#x3D;&quot;dbappsec&quot;c&#x3D;[]b&#x3D;&quot;welcomebeijing&quot;d&#x3D;[0x2a,0xd7,0x92,0xe9,0x53,0xe2,0xc4,0xCD]for i in range(0,8):    c.append(ord(a[i])^ord(b[i]))print(c)for i in range(0,8):    d[i]&#x3D;hex(d[i]^ord(a[i">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-08-06T18:39:53.000Z">
+<meta property="article:modified_time" content="2020-08-06T18:46:24.314Z">
 <meta property="article:author" content="Du11JK">
+<meta property="article:tag" content="CTF - Re">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/">
+<link rel="canonical" href="http://yoursite.com/2020/08/07/BUUCTF-RE-crackMe-WriteUp/">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | jkjk</title>
+  <title>BUUCTF-RE-crackMe WriteUp | jkjk</title>
   
 
 
@@ -183,230 +188,115 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">-! 目前共计 10 篇日志。 -</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/07/BUUCTF-RE-crackMe-WriteUp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BUUCTF-RE-crackMe WriteUp
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-07 02:39:53 / 修改时间：02:46:24" itemprop="dateCreated datePublished" datetime="2020-08-07T02:39:53+08:00">2020-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BUUCTF/" itemprop="url" rel="index"><span itemprop="name">BUUCTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <a id="more"></a>
+
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">"dbappsec"</span></span><br><span class="line">c=[]</span><br><span class="line">b=<span class="string">"welcomebeijing"</span></span><br><span class="line">d=[<span class="number">0x2a</span>,<span class="number">0xd7</span>,<span class="number">0x92</span>,<span class="number">0xe9</span>,<span class="number">0x53</span>,<span class="number">0xe2</span>,<span class="number">0xc4</span>,<span class="number">0xCD</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">    c.append(ord(a[i])^ord(b[i]))</span><br><span class="line">print(c)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">    d[i]=hex(d[i]^ord(a[i])).replace(<span class="string">"0x"</span>,<span class="string">''</span>)</span><br><span class="line">    print(d[i],end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+<p>获得flag：<br>flag{d2be2981b84f2a905669995873d6a36c}</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-07T15:39:58+08:00"
-              content="2020-08-07">
-          08-07
-        </time>
-      </div>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/07/BUUCTF-RE-GWCTF2019-xxor-WriteUp/" itemprop="url">
-            <span itemprop="name">BUUCTF-RE-[GWCTF2019]xxor-WriteUp</span>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
           </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-07T02:39:53+08:00"
-              content="2020-08-07">
-          08-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/07/BUUCTF-RE-crackMe-WriteUp/" itemprop="url">
-            <span itemprop="name">BUUCTF-RE-crackMe WriteUp</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-06T02:06:44+08:00"
-              content="2020-08-06">
-          08-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/06/week20200803-20200809/" itemprop="url">
-            <span itemprop="name">week20200803-20200809</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-02T21:29:41+08:00"
-              content="2020-08-02">
-          08-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/" itemprop="url">
-            <span itemprop="name">UPX壳详解</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-02T00:18:33+08:00"
-              content="2020-08-02">
-          08-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/" itemprop="url">
-            <span itemprop="name">OEP入口查找和基本壳的识别</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-29T16:24:59+08:00"
-              content="2020-07-29">
-          07-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/" itemprop="url">
-            <span itemprop="name">SQL注入</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T01:28:32+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/28/week20200727-20200802/" itemprop="url">
-            <span itemprop="name">week20200727-20200802</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-26T17:00:25+08:00"
-              content="2020-07-26">
-          07-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/26/week20200720-20200726/" itemprop="url">
-            <span itemprop="name">week20200720-20200726</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-23T01:41:17+08:00"
-              content="2020-07-23">
-          07-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/23/week20200713-20200719/" itemprop="url">
-            <span itemprop="name">week20200713-20200719</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-22T21:00:57+08:00"
-              content="2020-07-22">
-          07-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/22/PE-Files-1/" itemprop="url">
-            <span itemprop="name">PE Files (1)</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
+        </div>
     </div>
   </div>
-  
-  
-  
 
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF-Re/" rel="tag"># CTF - Re</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/06/week20200803-20200809/" rel="prev" title="week20200803-20200809">
+      <i class="fa fa-chevron-left"></i> week20200803-20200809
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/07/BUUCTF-RE-GWCTF2019-xxor-WriteUp/" rel="next" title="BUUCTF-RE-[GWCTF2019]xxor-WriteUp">
+      BUUCTF-RE-[GWCTF2019]xxor-WriteUp <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 

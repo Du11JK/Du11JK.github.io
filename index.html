@@ -189,6 +189,226 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/07/BUUCTF-RE-GWCTF2019-xxor-WriteUp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/07/BUUCTF-RE-GWCTF2019-xxor-WriteUp/" class="post-title-link" itemprop="url">BUUCTF-RE-[GWCTF2019]xxor-WriteUp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-07 15:39:58 / 修改时间：15:58:02" itemprop="dateCreated datePublished" datetime="2020-08-07T15:39:58+08:00">2020-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BUUCTF/" itemprop="url" rel="index"><span itemprop="name">BUUCTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<p>脚本：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> <span class="meta-keyword">warning</span>(disable:4996)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    __int64 a[<span class="number">6</span>] = &#123; <span class="number">3746099070</span>, <span class="number">550153460</span>, <span class="number">3774025685</span>, <span class="number">1548802262</span>, <span class="number">2652626477</span>, <span class="number">2230518816</span> &#125;;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> a2[<span class="number">4</span>] = &#123; <span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span> &#125;;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> v3, v4;</span><br><span class="line">    <span class="keyword">int</span> v5;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">4</span>; j += <span class="number">2</span>) &#123;</span><br><span class="line">        v3 = a[j];</span><br><span class="line">        v4 = a[j + <span class="number">1</span>];</span><br><span class="line">        v5 = <span class="number">1166789954</span>*<span class="number">0x40</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">0x3F</span>; ++i) &#123;</span><br><span class="line">            v4 -= (v3 + v5 + <span class="number">20</span>) ^ ((v3 &lt;&lt; <span class="number">6</span>) + a2[<span class="number">2</span>]) ^ ((v3 &gt;&gt; <span class="number">9</span>) + a2[<span class="number">3</span>]) ^ <span class="number">0x10</span>;</span><br><span class="line">            v3 -= (v4 + v5 + <span class="number">11</span>) ^ ((v4 &lt;&lt; <span class="number">6</span>) + *a2) ^ ((v4 &gt;&gt; <span class="number">9</span>) + a2[<span class="number">1</span>]) ^ <span class="number">0x20</span>;</span><br><span class="line">            v5 -= <span class="number">1166789954</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a[j] = v3;</span><br><span class="line">        a[j + <span class="number">1</span>] = v4;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*将整型数组作为字符输出，注意计算机小端排序*/</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; ++i) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; *((<span class="keyword">char</span>*)&amp;a[i] + <span class="number">2</span>) &lt;&lt; *((<span class="keyword">char</span>*)&amp;a[i] + <span class="number">1</span>) &lt;&lt;  * ((<span class="keyword">char</span>*)&amp;a[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"PAUSE"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>flag:<code>flag{re_is_great!}</code></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/07/BUUCTF-RE-crackMe-WriteUp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/07/BUUCTF-RE-crackMe-WriteUp/" class="post-title-link" itemprop="url">BUUCTF-RE-crackMe WriteUp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-07 02:39:53 / 修改时间：02:46:24" itemprop="dateCreated datePublished" datetime="2020-08-07T02:39:53+08:00">2020-08-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BUUCTF/" itemprop="url" rel="index"><span itemprop="name">BUUCTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <a id="more"></a>
+
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">"dbappsec"</span></span><br><span class="line">c=[]</span><br><span class="line">b=<span class="string">"welcomebeijing"</span></span><br><span class="line">d=[<span class="number">0x2a</span>,<span class="number">0xd7</span>,<span class="number">0x92</span>,<span class="number">0xe9</span>,<span class="number">0x53</span>,<span class="number">0xe2</span>,<span class="number">0xc4</span>,<span class="number">0xCD</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">    c.append(ord(a[i])^ord(b[i]))</span><br><span class="line">print(c)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">8</span>):</span><br><span class="line">    d[i]=hex(d[i]^ord(a[i])).replace(<span class="string">"0x"</span>,<span class="string">''</span>)</span><br><span class="line">    print(d[i],end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+<p>获得flag：<br>flag{d2be2981b84f2a905669995873d6a36c}</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/06/week20200803-20200809/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/06/week20200803-20200809/" class="post-title-link" itemprop="url">week20200803-20200809</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-08-06 02:06:44 / 修改时间：02:56:59" itemprop="dateCreated datePublished" datetime="2020-08-06T02:06:44+08:00">2020-08-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BUUCTF/" itemprop="url" rel="index"><span itemprop="name">BUUCTF</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Week-4-lt-2020-08-03-2020-08-09-gt"><a href="#Week-4-lt-2020-08-03-2020-08-09-gt" class="headerlink" title="Week 4&lt;2020.08.03 - 2020.08.09&gt;"></a>Week 4&lt;2020.08.03 - 2020.08.09&gt;</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/06/week20200803-20200809/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -494,7 +714,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-05 03:17:12" itemprop="dateModified" datetime="2020-08-05T03:17:12+08:00">2020-08-05</time>
+                <time title="修改时间：2020-08-06 02:07:11" itemprop="dateModified" datetime="2020-08-06T02:07:11+08:00">2020-08-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -517,7 +737,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Week-2-lt-2020-07-27-2020-08-02-gt"><a href="#Week-2-lt-2020-07-27-2020-08-02-gt" class="headerlink" title="Week 2 &lt;2020.07.27 - 2020.08.02&gt;"></a>Week 2 &lt;2020.07.27 - 2020.08.02&gt;</h1>
+          <h1 id="Week-3-lt-2020-07-27-2020-08-02-gt"><a href="#Week-3-lt-2020-07-27-2020-08-02-gt" class="headerlink" title="Week 3 &lt;2020.07.27 - 2020.08.02&gt;"></a>Week 3 &lt;2020.07.27 - 2020.08.02&gt;</h1>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/07/28/week20200727-20200802/#more" rel="contents">
@@ -732,6 +952,22 @@
 
               <time title="创建时间：2020-07-22 21:00:57" itemprop="dateCreated datePublished" datetime="2020-07-22T21:00:57+08:00">2020-07-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-08-07 15:58:35" itemprop="dateModified" datetime="2020-08-07T15:58:35+08:00">2020-08-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+                </span>
+            </span>
 
           
 
@@ -744,7 +980,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <a id="more"></a>
       
     </div>
 
@@ -827,7 +1063,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -840,7 +1076,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
