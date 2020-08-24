@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-09T08:53:26.531Z</updated>
+  <updated>2020-08-21T18:56:00.422Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[GXYCTF2019]simple CPP-WriteUp</title>
+    <link href="http://yoursite.com/2020/08/22/GXYCTF2019-simple-CPP-WriteUp/"/>
+    <id>http://yoursite.com/2020/08/22/GXYCTF2019-simple-CPP-WriteUp/</id>
+    <published>2020-08-21T18:56:00.000Z</published>
+    <updated>2020-08-21T18:56:00.422Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>BUUCTF-RE-firmware-WriteUp</title>
@@ -183,7 +198,7 @@
     <link href="http://yoursite.com/2020/07/29/SQL%E6%B3%A8%E5%85%A5/"/>
     <id>http://yoursite.com/2020/07/29/SQL%E6%B3%A8%E5%85%A5/</id>
     <published>2020-07-29T08:24:59.000Z</published>
-    <updated>2020-08-02T10:05:04.139Z</updated>
+    <updated>2020-08-24T15:47:30.490Z</updated>
     
     <summary type="html">
     
