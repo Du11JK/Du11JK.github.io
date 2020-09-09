@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jkjk">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="MD5算法分组，填充处理算法哈希长度拓展攻击参考资料：https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;2563">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MD5算法详解 &amp; 哈希长度拓展攻击">
+<meta property="og:url" content="http://yoursite.com/2020/09/10/MD5-and-Hash-Length-Extension-Attack/index.html">
 <meta property="og:site_name" content="jkjk">
+<meta property="og:description" content="MD5算法分组，填充处理算法哈希长度拓展攻击参考资料：https:&#x2F;&#x2F;xz.aliyun.com&#x2F;t&#x2F;2563">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-09T16:45:35.000Z">
+<meta property="article:modified_time" content="2020-09-09T16:51:10.348Z">
 <meta property="article:author" content="Du11JK">
+<meta property="article:tag" content="Web">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/">
+<link rel="canonical" href="http://yoursite.com/2020/09/10/MD5-and-Hash-Length-Extension-Attack/">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | jkjk</title>
+  <title>MD5算法详解 & 哈希长度拓展攻击 | jkjk</title>
   
 
 
@@ -183,234 +188,113 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">-! 目前共计 12 篇日志。 -</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/MD5-and-Hash-Length-Extension-Attack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MD5算法详解 & 哈希长度拓展攻击
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-10 00:45:35 / 修改时间：00:51:10" itemprop="dateCreated datePublished" datetime="2020-09-10T00:45:35+08:00">2020-09-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <a id="more"></a>
+
+
+
+<h1 id="MD5算法"><a href="#MD5算法" class="headerlink" title="MD5算法"></a>MD5算法</h1><h2 id="分组，填充"><a href="#分组，填充" class="headerlink" title="分组，填充"></a>分组，填充</h2><h2 id="处理算法"><a href="#处理算法" class="headerlink" title="处理算法"></a>处理算法</h2><h1 id="哈希长度拓展攻击"><a href="#哈希长度拓展攻击" class="headerlink" title="哈希长度拓展攻击"></a>哈希长度拓展攻击</h1><h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><p><a href="https://xz.aliyun.com/t/2563" target="_blank" rel="noopener">https://xz.aliyun.com/t/2563</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-10T00:45:35+08:00"
-              content="2020-09-10">
-          09-10
-        </time>
-      </div>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/10/MD5-and-Hash-Length-Extension-Attack/" itemprop="url">
-            <span itemprop="name">MD5算法详解 & 哈希长度拓展攻击</span>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
           </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-10T00:45:35+08:00"
-              content="2020-09-10">
-          09-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/10/MD5%E2%80%94-and-Hash-Length-Extension-Attack/" itemprop="url">
-            <span itemprop="name">MD5— and Hash Length Extension Attack</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-08T21:00:08+08:00"
-              content="2020-09-08">
-          09-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/08/CQ-CTF-20200908-%E9%A2%84%E9%80%89%E8%B5%9B-WriteUp/" itemprop="url">
-            <span itemprop="name">2020 9月 重庆市赛选拔赛（安恒） Reverse Write Up</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-01T22:47:46+08:00"
-              content="2020-09-01">
-          09-01
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/01/ciscn2020-%E5%88%9D%E8%B5%9B-reverse-writeup/" itemprop="url">
-            <span itemprop="name">ciscn2020-初赛-reverse-writeup</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-06T02:06:44+08:00"
-              content="2020-08-06">
-          08-06
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/06/week20200803-20200809/" itemprop="url">
-            <span itemprop="name">week20200803-20200809</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-02T21:29:41+08:00"
-              content="2020-08-02">
-          08-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/" itemprop="url">
-            <span itemprop="name">UPX壳详解</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-08-02T00:18:33+08:00"
-              content="2020-08-02">
-          08-02
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/" itemprop="url">
-            <span itemprop="name">OEP入口查找和基本壳的识别</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-29T16:24:59+08:00"
-              content="2020-07-29">
-          07-29
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/" itemprop="url">
-            <span itemprop="name">SQL注入</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T01:28:32+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/28/week20200727-20200802/" itemprop="url">
-            <span itemprop="name">week20200727-20200802</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-26T17:00:25+08:00"
-              content="2020-07-26">
-          07-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/26/week20200720-20200726/" itemprop="url">
-            <span itemprop="name">week20200720-20200726</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
+        </div>
     </div>
   </div>
-  
-  
-  
 
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/10/MD5%E2%80%94-and-Hash-Length-Extension-Attack/" rel="prev" title="MD5— and Hash Length Extension Attack">
+      <i class="fa fa-chevron-left"></i> MD5— and Hash Length Extension Attack
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -462,6 +346,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MD5算法"><span class="nav-number">1.</span> <span class="nav-text">MD5算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分组，填充"><span class="nav-number">1.1.</span> <span class="nav-text">分组，填充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理算法"><span class="nav-number">1.2.</span> <span class="nav-text">处理算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希长度拓展攻击"><span class="nav-number">2.</span> <span class="nav-text">哈希长度拓展攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">2.1.</span> <span class="nav-text">参考资料：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
