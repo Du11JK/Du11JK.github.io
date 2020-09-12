@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-12T15:19:12.205Z</updated>
+  <updated>2020-09-12T17:37:08.466Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,65 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>OLLVM 控制流平坦化</title>
+    <link href="http://yoursite.com/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/"/>
+    <id>http://yoursite.com/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/</id>
+    <published>2020-09-12T17:06:38.000Z</published>
+    <updated>2020-09-12T17:37:08.466Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;hr&gt;
+
+        
+      
+    
+    </summary>
+    
+    
+      <category term="note" scheme="http://yoursite.com/categories/note/"/>
+    
+    
+      <category term="Reverse" scheme="http://yoursite.com/tags/Reverse/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[安洵杯 2019]game WriteUp</title>
+    <link href="http://yoursite.com/2020/09/13/%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-game-WriteUp/"/>
+    <id>http://yoursite.com/2020/09/13/%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-game-WriteUp/</id>
+    <published>2020-09-12T17:06:11.000Z</published>
+    <updated>2020-09-12T18:04:38.819Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;hr&gt;
+&lt;p&gt;考点：&lt;/p&gt;
+&lt;p&gt;控制流平坦化&lt;/p&gt;
+&lt;p&gt;反编译main函数&lt;/p&gt;
+&lt;figure class=&quot;highlight c&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
+        
+      
+    
+    </summary>
+    
+    
+      <category term="BUUCTF" scheme="http://yoursite.com/categories/BUUCTF/"/>
+    
+    
+      <category term="CTF - Re" scheme="http://yoursite.com/tags/CTF-Re/"/>
+    
+  </entry>
   
   <entry>
     <title>week20200907-20200913</title>
