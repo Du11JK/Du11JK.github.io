@@ -189,6 +189,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">RSA算法原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-13 02:14:21 / 修改时间：14:54:43" itemprop="dateCreated datePublished" datetime="2020-09-13T02:14:21+08:00">2020-09-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <hr>
+<h1 id="数论的一些知识"><a href="#数论的一些知识" class="headerlink" title="数论的一些知识"></a>数论的一些知识</h1><h2 id="欧拉函数-φ-x"><a href="#欧拉函数-φ-x" class="headerlink" title="欧拉函数 φ(x)"></a>欧拉函数 φ(x)</h2><p>​    将不大于正整数m且与之互素的正整数个数称之为欧拉函数，记为φ(m) </p>
+<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><p>​    设正整数m与整数a互素，则 </p>
+<blockquote>
+<p>a<sup>φ(m)</sup> ≡ 1 (mod m)</p>
+</blockquote>
+<h2 id="欧拉函数的积性"><a href="#欧拉函数的积性" class="headerlink" title="欧拉函数的积性"></a>欧拉函数的积性</h2><p>​    <strong>定义</strong>：设正整数m与n互素，若 f(mn) = f(m) f(n)，则称数论函数f为积性函数</p>
+<p>​    <strong>-&gt;定理</strong>：设正整数n有素分解式 n = p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则积性函数f的函数值 </p>
+<blockquote>
+<p>​            f(n) = f(p<sub>1</sub><sup>a<sub>1</sub></sup>) f(p<sub>2</sub><sup>a<sub>2</sub></sup>) … f(p<sub>s</sub><sup>a<sub>s</sub></sup>)</p>
+</blockquote>
+<h2 id="φ-x-的计算"><a href="#φ-x-的计算" class="headerlink" title="φ(x) 的计算"></a>φ(x) 的计算</h2><p>​    <strong>定理1</strong> 若p为素数，则 φ(p) = p - 1；反之，若自然数p满足等式 φ(p) = p - 1，则p是素数</p>
+<p>​    <strong>定理2</strong> 若p为素数，a为正整数，则</p>
+<blockquote>
+<p>​            φ(p<sup>a</sup>) = p<sup>a</sup> - p<sup>a-1</sup></p>
+</blockquote>
+<p>​    <strong>定理3</strong> 设正整数n有素分解式 n = p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则</p>
+<blockquote>
+<p>​            φ(x) = n (1-${1\over p_{1}}$) (1-${1\over p_{2}}$) … (1-${1\over p_{s}}$)</p>
+</blockquote>
+<p>​    <strong>定理4</strong> 设n是大于2的正整数，则欧拉函数 φ(x) 是偶数</p>
+<h2 id="模反元素"><a href="#模反元素" class="headerlink" title="模反元素"></a>模反元素</h2><h1 id="密钥的生成"><a href="#密钥的生成" class="headerlink" title="密钥的生成"></a>密钥的生成</h1><p><strong>Step 1</strong>：随机选两个不相等的质数p和q</p>
+<p><strong>Step 2</strong>：计算 p * q = n</p>
+<p><strong>Step 3</strong>：计算欧拉函数φ(n)</p>
+<p><strong>Step 4</strong>：随机选择一个整数e（1&lt; e &lt; φ(n)，e与φ(n) 互素）</p>
+<p><strong>Step 5</strong>：计算e对于φ(n)的模反元素d</p>
+<p><strong>Step 6</strong>：公钥和私钥</p>
+<h1 id="RSA算法的安全性"><a href="#RSA算法的安全性" class="headerlink" title="RSA算法的安全性"></a>RSA算法的安全性</h1><h1 id="加密解密"><a href="#加密解密" class="headerlink" title="加密解密"></a>加密解密</h1><h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -889,87 +983,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/a.jpg">
-      <meta itemprop="name" content="Du11JK">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jkjk">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/" class="post-title-link" itemprop="url">OEP入口查找和基本壳的识别</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-02 00:18:33" itemprop="dateCreated datePublished" datetime="2020-08-02T00:18:33+08:00">2020-08-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-03 18:24:31" itemprop="dateModified" datetime="2020-08-03T18:24:31+08:00">2020-08-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="OEP入口查找和基本壳的识别"><a href="#OEP入口查找和基本壳的识别" class="headerlink" title="OEP入口查找和基本壳的识别"></a>OEP入口查找和基本壳的识别</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1041,7 +1054,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1054,7 +1067,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
