@@ -20,18 +20,16 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="UPX壳详解">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="UPX壳详解">
 <meta property="og:url" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="jkjk">
-<meta property="og:description" content="UPX壳详解">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803160918611.png">
 <meta property="og:image" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png">
 <meta property="og:image" content="http://yoursite.com/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161244521.png">
 <meta property="article:published_time" content="2020-08-02T13:29:41.000Z">
-<meta property="article:modified_time" content="2020-08-07T18:37:12.993Z">
+<meta property="article:modified_time" content="2020-09-13T12:53:22.083Z">
 <meta property="article:author" content="Du11JK">
 <meta property="article:tag" content="Reverse">
 <meta name="twitter:card" content="summary">
@@ -229,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-08-08 02:37:12" itemprop="dateModified" datetime="2020-08-08T02:37:12+08:00">2020-08-08</time>
+                <time title="修改时间：2020-09-13 20:53:22" itemprop="dateModified" datetime="2020-09-13T20:53:22+08:00">2020-09-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,12 +264,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="UPX壳详解"><a href="#UPX壳详解" class="headerlink" title="UPX壳详解"></a>UPX壳详解</h1><a id="more"></a>
+        <hr>
+<a id="more"></a>
 
-<h2 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
+<h1 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
 
-<h2 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h2><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
-<h2 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h2><p><strong>（“堆栈平衡”原理）</strong></p>
+<h1 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h1><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
+<h1 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h1><p><strong>（“堆栈平衡”原理）</strong></p>
 <blockquote>
 <p>call指令：<br>  1.向堆栈中压入下一行程序的地址；<br>  2.JMP到call的子程序地址处。</p>
 </blockquote>
@@ -285,12 +284,12 @@
 <p>在程序自解密或者自解压过程中, 多数壳会先将当前寄存器状态压栈, 如使用pushad, 而在解压结束后, 会将之前的寄存器值出栈, 如使用popad. 因此在寄存器出栈时, 往往程序代码被恢复, 此时硬件断点触发（这就是我们要下硬件断点的原因），然后在程序当前位置, 只需要一些单步操作, 就会到达正确的OEP位置</p>
 </blockquote>
 <p><strong>载入程序后只有esp寄存器内容发生变化，那么这个程序多半可以用ESP定律(存疑)</strong></p>
-<h2 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h2><h3 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h3><blockquote>
+<h1 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h1><h2 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h2><blockquote>
 <p>① 寻找原始OEP<br>这一步骤的主要作用就是要确定原始程序代码到底在哪里，能找到原始程序的代码，说明壳代码执行完了，我们只有找到原始OEP才能进行下一步的动作。</p>
 <p>② dump内存到文件<br>当我们找到原始OEP，调试运行到原始OEP时，只要代码被还原，我们就可以在这个地方进行dump内存，将内存中被还原的代码和数据抓取下来，重新保存成一个文件，这样脱完壳时，我们就可以用静态分析工具分析程序了。</p>
 <p>③ 修复文件<br>这一步主要就是修复IAT，对从内存中转储到本地的文件进行修复。</p>
 </blockquote>
-<h3 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h3><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803160918611.png" alt="image-20200803160918611"></p>
+<h2 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h2><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803160918611.png" alt="image-20200803160918611"></p>
 <p>使用ExeinfoPE查壳，确认是UPX</p>
 <p>x32dbg打开，寻找原始OEP</p>
 <p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png" alt="image-20200803161135150"></p>
@@ -300,7 +299,7 @@
 <p>使用Scylla插件，Dump，自动寻找IAT，获取导入表，修复Dump文件</p>
 <p>IDA打开脱壳文件，确认成功</p>
 <p>注：原始OEP也可以通过逐条分析汇编指令寻找，难度较大；有经验的话可以直接搜索popad</p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
 <p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a></p>
 <p><a href="https://blog.csdn.net/qq_42967398/article/details/96444954" target="_blank" rel="noopener">https://blog.csdn.net/qq_42967398/article/details/96444954</a></p>
 <p><a href="https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc</a></p>
@@ -406,7 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UPX壳详解"><span class="nav-number">1.</span> <span class="nav-text">UPX壳详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UPX简介"><span class="nav-number">1.1.</span> <span class="nav-text">UPX简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脱壳工具"><span class="nav-number">1.2.</span> <span class="nav-text">脱壳工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESP定律"><span class="nav-number">1.3.</span> <span class="nav-text">ESP定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#手动脱壳"><span class="nav-number">1.4.</span> <span class="nav-text">手动脱壳</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脱壳三步法"><span class="nav-number">1.4.1.</span> <span class="nav-text">脱壳三步法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例：BUUCTF-Reverse-新年快乐"><span class="nav-number">1.4.2.</span> <span class="nav-text">示例：BUUCTF_Reverse_新年快乐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考："><span class="nav-number">1.5.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UPX简介"><span class="nav-number">1.</span> <span class="nav-text">UPX简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#脱壳工具"><span class="nav-number">2.</span> <span class="nav-text">脱壳工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ESP定律"><span class="nav-number">3.</span> <span class="nav-text">ESP定律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#手动脱壳"><span class="nav-number">4.</span> <span class="nav-text">手动脱壳</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脱壳三步法"><span class="nav-number">4.1.</span> <span class="nav-text">脱壳三步法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例：BUUCTF-Reverse-新年快乐"><span class="nav-number">4.2.</span> <span class="nav-text">示例：BUUCTF_Reverse_新年快乐</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -478,7 +477,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">58 分钟</span>
+    <span title="站点阅读时长">57 分钟</span>
 </div>
 
 
