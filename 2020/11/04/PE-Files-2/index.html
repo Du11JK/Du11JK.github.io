@@ -20,15 +20,18 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="jkjk">
-<meta property="og:url" content="http://yoursite.com/archives/2020/07/index.html">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="PE文件结构（2） DOS头">
+<meta property="og:url" content="http://yoursite.com/2020/11/04/PE-Files-2/index.html">
 <meta property="og:site_name" content="jkjk">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-04T13:00:57.000Z">
+<meta property="article:modified_time" content="2020-11-04T16:01:20.971Z">
 <meta property="article:author" content="Du11JK">
+<meta property="article:tag" content="Reverse">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/archives/2020/07/">
+<link rel="canonical" href="http://yoursite.com/2020/11/04/PE-Files-2/">
 
 
 <script id="page-configurations">
@@ -36,12 +39,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | jkjk</title>
+  <title>PE文件结构（2） DOS头 | jkjk</title>
   
 
 
@@ -183,130 +186,150 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">-! 目前共计 20 篇日志。 -</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/04/PE-Files-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/a.jpg">
+      <meta itemprop="name" content="Du11JK">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jkjk">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PE文件结构（2） DOS头
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-04 21:00:57" itemprop="dateCreated datePublished" datetime="2020-11-04T21:00:57+08:00">2020-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-05 00:01:20" itemprop="dateModified" datetime="2020-11-05T00:01:20+08:00">2020-11-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <hr>
+<a id="more"></a>
+
+<p>对于16位DOS系统而言，PE文件被划分为DOS头和冗余数据，冗余数据常常包括PE文件头和PE数据等，这些16位系统下的冗余数据正是32位或64位系统使用的主要数据，在32位系统下运行时，DOS头实际上就成为了冗余数据。但也不完全正确，因为DOS头在非16位系统下依然是必须的，没有MZ头的文件在非16位系统下是不会被认为是符合规范的PE文件的，因为其中某些字段对于文件十分必要。</p>
+<p>关键的部分是MZ头，结构如下：</p>
+<p>DOS MZ 头 IMAGE_DOS_HEADER（总共是64byte）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">IMAGE_DOS_HEADER STRUCT</span><br><span class="line">    e_magic     WORD        ?       ; 0000h - Magic number									; EXE标志 MZ</span><br><span class="line">    e_cblp      WORD        ?       ; 0002h - Bytes on last page of file					; 最后（部分）页中的字节数</span><br><span class="line">    e_cp        WORD        ?       ; 0004h - Pages in file									; 文件中的全部和部分页数</span><br><span class="line">    e_crlc      WORD        ?       ; 0006h - Relocations									; 重定位表中的指针数</span><br><span class="line">    e_cparhdr   WORD        ?       ; 0008h - Size of header in paragraphs					; 头部尺寸，以段落为单位</span><br><span class="line">    e_minalloc  WORD        ?       ; 000ah - Minimum extra paragraphs needed				; 所需的最小附加段</span><br><span class="line">    e_maxalloc  WORD        ?       ; 000ch - Maximum extra paragraphs needed				; 所需的最大附加段</span><br><span class="line">    e_ss        WORD        ?       ; 000eh - Initial (relative) SS value					; 初始的SS值（相对偏移量）</span><br><span class="line">    e_sp        WORD        ?       ; 0010h - Initial SP value								; 初始的SP值</span><br><span class="line">    e_csum      WORD        ?       ; 0012h - Checksum   									; 补码校验值</span><br><span class="line">    e_ip        WORD        ?       ; 0014h - Initial IP value								; 初始的IP值</span><br><span class="line">    e_cs        WORD        ?       ; 0016h - Initial (relative) CS value					; 初始的CS值</span><br><span class="line">    e_lfarlc    WORD        ?       ; 0018h - File address of relocation table				; 重定位表中的字节偏移量</span><br><span class="line">    e_ovno      WORD        ?       ; 001ah - Overlay number								; 覆盖号</span><br><span class="line">    </span><br><span class="line">    e_res       WORD  4 dup(?)      ; 001ch - Reserved words								; 保留字</span><br><span class="line">    e_oemid     WORD        ?       ; 0024h - OEM identifier (for e_oeminfo)				; OEM标识符（相对e_oeminfo）</span><br><span class="line">    e_oeminfo   WORD        ?       ; 0026h - OEM information; e_oemid specific				; OEM信息</span><br><span class="line">    e_res2      WORD 10 dup(?)      ; 0028h - Reserved words								; 保留字</span><br><span class="line">    e_lfanew    DWORD       ?       ; 003ch - 指向PE文件头的位置为中的PE文件头标志的地址		; PE头相对于文件的偏移地址</span><br><span class="line">IMAGE_DOS_HEADER ENDS</span><br></pre></td></tr></table></figure>
+
+<p>注：最后5项在16位系统下不存在</p>
+<p>其中<code>e_lfanew</code>字段指向PE文件头的<strong>偏移量</strong>，计算方法为：</p>
+<blockquote>
+<p>PE文件头位置 = MZ头基址 + e_lfanew </p>
+</blockquote>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-29T16:24:59+08:00"
-              content="2020-07-29">
-          07-29
-        </time>
-      </div>
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/" itemprop="url">
-            <span itemprop="name">SQL注入总结</span>
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
           </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-28T01:28:32+08:00"
-              content="2020-07-28">
-          07-28
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/28/week20200727-20200802/" itemprop="url">
-            <span itemprop="name">week20200727-20200802</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-26T17:00:25+08:00"
-              content="2020-07-26">
-          07-26
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/26/week20200720-20200726/" itemprop="url">
-            <span itemprop="name">week20200720-20200726</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-23T01:41:17+08:00"
-              content="2020-07-23">
-          07-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/23/week20200713-20200719/" itemprop="url">
-            <span itemprop="name">week20200713-20200719</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-07-22T21:00:57+08:00"
-              content="2020-07-22">
-          07-22
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/07/22/PE-Files-1/" itemprop="url">
-            <span itemprop="name">PE文件结构（1） 概述</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-
+        </div>
     </div>
   </div>
-  
-  
-  
 
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/17/%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96%E5%B7%A5%E5%85%B7deflat-py%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="prev" title="控制流平坦化工具deflat.py使用及代码分析">
+      <i class="fa fa-chevron-left"></i> 控制流平坦化工具deflat.py使用及代码分析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/04/PE-Files-3/" rel="next" title="PE文件结构（3） PE文件头">
+      PE文件结构（3） PE文件头 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 

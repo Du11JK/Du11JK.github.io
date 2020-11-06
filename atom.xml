@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-22T16:01:15.193Z</updated>
+  <updated>2020-11-06T09:02:15.554Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,64 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PE手工加壳实例“
+</title>
+    <link href="http://yoursite.com/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/"/>
+    <id>http://yoursite.com/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/</id>
+    <published>2020-11-06T09:02:15.000Z</published>
+    <updated>2020-11-06T09:02:15.554Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PE文件结构（3） PE文件头</title>
+    <link href="http://yoursite.com/2020/11/04/PE-Files-3/"/>
+    <id>http://yoursite.com/2020/11/04/PE-Files-3/</id>
+    <published>2020-11-04T15:00:57.000Z</published>
+    <updated>2020-11-04T16:04:15.370Z</updated>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+    
+    </summary>
+    
+    
+      <category term="note" scheme="http://yoursite.com/categories/note/"/>
+    
+    
+      <category term="Reverse" scheme="http://yoursite.com/tags/Reverse/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PE文件结构（2） DOS头</title>
+    <link href="http://yoursite.com/2020/11/04/PE-Files-2/"/>
+    <id>http://yoursite.com/2020/11/04/PE-Files-2/</id>
+    <published>2020-11-04T13:00:57.000Z</published>
+    <updated>2020-11-04T16:01:20.971Z</updated>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+    
+    </summary>
+    
+    
+      <category term="note" scheme="http://yoursite.com/categories/note/"/>
+    
+    
+      <category term="Reverse" scheme="http://yoursite.com/tags/Reverse/"/>
+    
+  </entry>
   
   <entry>
     <title>控制流平坦化工具deflat.py使用及代码分析</title>
@@ -168,7 +226,7 @@
     <link href="http://yoursite.com/2020/09/08/CQ-CTF-20200908-%E9%A2%84%E9%80%89%E8%B5%9B-WriteUp/"/>
     <id>http://yoursite.com/2020/09/08/CQ-CTF-20200908-%E9%A2%84%E9%80%89%E8%B5%9B-WriteUp/</id>
     <published>2020-09-08T13:00:08.000Z</published>
-    <updated>2020-09-13T12:49:55.760Z</updated>
+    <updated>2020-11-04T16:05:35.724Z</updated>
     
     <summary type="html">
     
@@ -353,21 +411,15 @@
   </entry>
   
   <entry>
-    <title>PE Files (1)</title>
+    <title>PE文件结构（1） 概述</title>
     <link href="http://yoursite.com/2020/07/22/PE-Files-1/"/>
     <id>http://yoursite.com/2020/07/22/PE-Files-1/</id>
     <published>2020-07-22T13:00:57.000Z</published>
-    <updated>2020-09-13T12:53:31.655Z</updated>
+    <updated>2020-11-04T15:46:40.363Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;a
-        
-      
+      &lt;hr&gt;
     
     </summary>
     
