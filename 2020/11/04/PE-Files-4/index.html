@@ -21,17 +21,19 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="OEP入口查找和基本壳的识别">
-<meta property="og:url" content="http://yoursite.com/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/index.html">
+<meta property="og:title" content="PE文件结构（4） 节表项与节">
+<meta property="og:url" content="http://yoursite.com/2020/11/04/PE-Files-4/index.html">
 <meta property="og:site_name" content="某jk的奇怪博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-08-01T16:18:33.000Z">
-<meta property="article:modified_time" content="2020-11-08T15:30:34.099Z">
+<meta property="og:image" content="http://yoursite.com/2020/11/04/PE-Files-4/image-20201113220426144.png">
+<meta property="article:published_time" content="2020-11-04T15:00:57.000Z">
+<meta property="article:modified_time" content="2020-11-13T14:18:34.361Z">
 <meta property="article:author" content="Du11JK">
-<meta property="article:tag" content="PE文件壳">
+<meta property="article:tag" content="PE文件结构">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/04/PE-Files-4/image-20201113220426144.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/">
+<link rel="canonical" href="http://yoursite.com/2020/11/04/PE-Files-4/">
 
 
 <script id="page-configurations">
@@ -44,7 +46,7 @@
   };
 </script>
 
-  <title>OEP入口查找和基本壳的识别 | 某jk的奇怪博客</title>
+  <title>PE文件结构（4） 节表项与节 | 某jk的奇怪博客</title>
   
 
 
@@ -193,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/02/OEP%E5%85%A5%E5%8F%A3%E6%9F%A5%E6%89%BE%E5%92%8C%E5%9F%BA%E6%9C%AC%E5%A3%B3%E7%9A%84%E8%AF%86%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/04/PE-Files-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/a.jpg">
@@ -206,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          OEP入口查找和基本壳的识别
+          PE文件结构（4） 节表项与节
         </h1>
 
         <div class="post-meta">
@@ -216,14 +218,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-08-02 00:18:33" itemprop="dateCreated datePublished" datetime="2020-08-02T00:18:33+08:00">2020-08-02</time>
+              <time title="创建时间：2020-11-04 23:00:57" itemprop="dateCreated datePublished" datetime="2020-11-04T23:00:57+08:00">2020-11-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-08 23:30:34" itemprop="dateModified" datetime="2020-11-08T23:30:34+08:00">2020-11-08</time>
+                <time title="修改时间：2020-11-13 22:18:34" itemprop="dateModified" datetime="2020-11-13T22:18:34+08:00">2020-11-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>807</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -270,23 +272,201 @@
         <hr>
 <a id="more"></a>
 
-<h1 id="入口点的查找："><a href="#入口点的查找：" class="headerlink" title="入口点的查找："></a>入口点的查找：</h1><blockquote>
-<p>VC6特点：入口点代码是固定的代码，入口调用的API也是相同的，其中有的push地址不同程序可能不同；区段有四个也是固定的.text、.rdata、.data和.rsrc。<br>特征：固定调用API<br>GetVersion;  GetCommandLineA;  GetStartupInfoA</p>
-</blockquote>
+<h1 id="IMAGE-SECTION-HEADER"><a href="#IMAGE-SECTION-HEADER" class="headerlink" title="IMAGE_SECTION_HEADER"></a>IMAGE_SECTION_HEADER</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">IMAGE_SECTION_HEADER STRUCT </span><br><span class="line">	Name					BYTE		; 节表名</span><br><span class="line">	Misc					UNION		; 联合结构，可以使用其中的任何一个,一般后者</span><br><span class="line">		Physical_Address	DWORD		; 物理文件地址</span><br><span class="line">		VirtualSize			DWORD		; 载入内存时长度（未对齐)</span><br><span class="line">	VirtualAddress			DWORD		; RVA 地址</span><br><span class="line">	SizeOfRawData			DWORD		; 在文件中对齐后的尺寸</span><br><span class="line">	PointerToRawData		DWORD		; 在文件中的偏移量</span><br><span class="line">	PointerToRelocations	DWORD		; 在OBJ文件中使用，重定位的偏移</span><br><span class="line">	PointerToLinenumbers	DWORD		; 行号表的偏移（调试使用）</span><br><span class="line">	NumberOfRelocations		WORD		; 在OBJ文件中使用，重定位项数目</span><br><span class="line">	NumberOfLinenumbers		WORD		; 行号表中行号的数目</span><br><span class="line">	Characteristics			DWORD		; 节属性</span><br><span class="line">IMAGE_SECTION_HEADER ENDS</span><br></pre></td></tr></table></figure>
+
+<p>SECTION_CHARACTERISTICS Characteristics：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Flag</th>
+<th align="left">Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0x00000000</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left">0x00000001</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left">0x00000002</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left">0x00000004</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_TYPE_NO_PAD</strong>&emsp;0x00000008</td>
+<td align="left">The section should not be padded to the next boundary. This flag is obsolete and is replaced by IMAGE_SCN_ALIGN_1BYTES.</td>
+</tr>
+<tr>
+<td align="left">0x00000010</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_CNT_CODE</strong>&emsp;0x00000020</td>
+<td align="left">The section contains executable code.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_CNT_INITIALIZED_DATA</strong>&emsp;0x00000040</td>
+<td align="left">The section contains initialized data.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_CNT_UNINITIALIZED_DATA</strong>&emsp;0x00000080</td>
+<td align="left">The section contains uninitialized data.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_LNK_OTHER</strong>&emsp;0x00000100</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_LNK_INFO</strong>&emsp;0x00000200</td>
+<td align="left">The section contains comments or other information. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left">0x00000400</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_LNK_REMOVE</strong>&emsp;0x00000800</td>
+<td align="left">The section will not become part of the image. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_LNK_COMDAT</strong>&emsp;0x00001000</td>
+<td align="left">The section contains COMDAT data. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left">0x00002000</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_NO_DEFER_SPEC_EXC</strong>&emsp;0x00004000</td>
+<td align="left">Reset speculative exceptions handling bits in the TLB entries for this section.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_GPREL</strong>&emsp;0x00008000</td>
+<td align="left">The section contains data referenced through the global pointer.</td>
+</tr>
+<tr>
+<td align="left">0x00010000</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_PURGEABLE</strong>&emsp;0x00020000</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_LOCKED</strong>&emsp;0x00040000</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_PRELOAD</strong>&emsp;0x00080000</td>
+<td align="left">Reserved.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_1BYTES</strong>&emsp;0x00100000</td>
+<td align="left">Align data on a 1-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_2BYTES</strong>&emsp;0x00200000</td>
+<td align="left">Align data on a 2-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_4BYTES</strong>&emsp;0x00300000</td>
+<td align="left">Align data on a 4-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_8BYTES</strong>&emsp;0x00400000</td>
+<td align="left">Align data on a 8-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_16BYTES</strong>&emsp;0x00500000</td>
+<td align="left">Align data on a 16-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_32BYTES</strong>&emsp;0x00600000</td>
+<td align="left">Align data on a 32-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_64BYTES</strong>&emsp;0x00700000</td>
+<td align="left">Align data on a 64-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_128BYTES</strong>&emsp;0x00800000</td>
+<td align="left">Align data on a 128-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_256BYTES</strong>&emsp;0x00900000</td>
+<td align="left">Align data on a 256-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_512BYTES</strong>&emsp;0x00A00000</td>
+<td align="left">Align data on a 512-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_1024BYTES</strong>&emsp;0x00B00000</td>
+<td align="left">Align data on a 1024-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_2048BYTES</strong>&emsp;0x00C00000</td>
+<td align="left">Align data on a 2048-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_4096BYTES</strong>&emsp;0x00D00000</td>
+<td align="left">Align data on a 4096-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_ALIGN_8192BYTES</strong>&emsp;0x00E00000</td>
+<td align="left">Align data on a 8192-byte boundary. This is valid only for object files.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_LNK_NRELOC_OVFL</strong>&emsp;0x01000000</td>
+<td align="left">The section contains extended relocations. The count of relocations for the section exceeds the 16 bits that is reserved for it in the section header. If the <strong>NumberOfRelocations</strong> field in the section header is 0xffff, the actual relocation count is stored in the <strong>VirtualAddress</strong> field of the first relocation. It is an error if IMAGE_SCN_LNK_NRELOC_OVFL is set and there are fewer than 0xffff relocations in the section.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_DISCARDABLE</strong>&emsp;0x02000000</td>
+<td align="left">The section can be discarded as needed.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_NOT_CACHED</strong>&emsp;0x04000000</td>
+<td align="left">The section cannot be cached.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_NOT_PAGED</strong>&emsp;0x08000000</td>
+<td align="left">The section cannot be paged.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_SHARED</strong>&emsp;0x10000000</td>
+<td align="left">The section can be shared in memory.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_EXECUTE</strong>&emsp;0x20000000</td>
+<td align="left">The section can be executed as code.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_READ</strong>&emsp;0x40000000</td>
+<td align="left">The section can be read.</td>
+</tr>
+<tr>
+<td align="left"><strong>IMAGE_SCN_MEM_WRITE</strong>&emsp;0x80000000</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<h1 id="RVA-与-FOA-的转换"><a href="#RVA-与-FOA-的转换" class="headerlink" title="RVA 与 FOA 的转换"></a>RVA 与 FOA 的转换</h1><p><img src="/2020/11/04/PE-Files-4/image-20201113220426144.png" alt="image-20201113220426144"></p>
+<p>文件在从磁盘加载进内存时，对齐粒度从文件对齐转向内存对齐，对于我们使用的示例常常是200h和1000h，这使得PE文件在内存中的大小大于在磁盘中的大小。</p>
+<p>如图，对于某个section中某个位置的地址换算如下：</p>
 <blockquote>
-<p>VS特点：入口点只有两行代码，一个CALL后直接JMP，第一个CALL进去后调用的API也是相同的；区段相对于VC6多了一个.reloc。<br>特征：call + jmp指令<br>API：GetSystemTimeAsFlieTime;  GetCurrentThreadId;  GetCurrentProcessId;  QueryPerformanceCounter</p>
+<ol>
+<li>求出该位置相对于section起始位置的偏移量offset</li>
+<li>确定section的RVA对应的FOA是多少（PointerToRawData）</li>
+<li>FOA  = section起始FOA  + offset</li>
+</ol>
 </blockquote>
-<h1 id="脱壳基本方法"><a href="#脱壳基本方法" class="headerlink" title="脱壳基本方法"></a>脱壳基本方法</h1><p>1.单步跟踪</p>
-<p>2.平衡堆栈</p>
-<p>​    OEP的第一条指令是<code>pushad</code>，作用一般是保存寄存器环境，将8各通用寄存器压入堆栈；单步执行程序，指令<code>pushad</code>执行，堆栈变化，此时在栈顶（ESP）设置硬件断点；<br>​    运行，程序在<code>popad</code>附近停止，表示已经处在壳代码末尾，继续单步到一个较大的<code>jmp</code>跳转，目标应该是原始OEP。<br>​    观察代码是否确是原始OEP，可以参照上文不同情况入口点特征做判断。</p>
-<p>步骤：</p>
-<p>1.查找原始OEP</p>
-<p>​    确定原始程序代码的位置</p>
-<p>2.dump内存到文件</p>
-<p>​    内存中被还原的代码和数据抓取下来，重新保存成一个文件</p>
-<p>3.修复文件</p>
-<p>​    修复IAT，对从内存中转储到本地的文件进行修复</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.anquanke.com/post/id/99750" target="_blank" rel="noopener">https://www.anquanke.com/post/id/99750</a><br><a href="https://www.52pojie.cn/forum-68-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/forum-68-1.html</a><br><a href="https://www.52pojie.cn/thread-234739-1-1.html" target="_blank" rel="noopener">https://www.52pojie.cn/thread-234739-1-1.html</a><br><a href="https://zhuanlan.zhihu.com/p/34263050" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34263050</a><br><a href="https://www.cnblogs.com/iBinary/p/7764483.html" target="_blank" rel="noopener">https://www.cnblogs.com/iBinary/p/7764483.html</a></p>
+<p>显然文件在加载入内存时仅仅是文件头和区段整块的重新对齐，区段内的相对地址偏移没有变化。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_section_header" target="_blank" rel="noopener">IMAGE_SECTION_HEADER (winnt.h) - Win32 apps | Microsoft Docs</a></p>
 
     </div>
 
@@ -296,7 +476,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/PE%E6%96%87%E4%BB%B6%E5%A3%B3/" rel="tag"># PE文件壳</a>
+              <a href="/tags/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" rel="tag"># PE文件结构</a>
           </div>
 
         
@@ -305,12 +485,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/" rel="prev" title="SQL注入总结">
-      <i class="fa fa-chevron-left"></i> SQL注入总结
+    <a href="/2020/11/04/PE-Files-5/" rel="prev" title="PE文件结构（5） 导入表">
+      <i class="fa fa-chevron-left"></i> PE文件结构（5） 导入表
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/08/02/UPX%E5%A3%B3%E8%AF%A6%E8%A7%A3/" rel="next" title="UPX壳详解">
-      UPX壳详解 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/11/04/PE-Files-3/" rel="next" title="PE文件结构（3） PE文件头">
+      PE文件结构（3） PE文件头 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -370,7 +550,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#入口点的查找："><span class="nav-number">1.</span> <span class="nav-text">入口点的查找：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#脱壳基本方法"><span class="nav-number">2.</span> <span class="nav-text">脱壳基本方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IMAGE-SECTION-HEADER"><span class="nav-number">1.</span> <span class="nav-text">IMAGE_SECTION_HEADER</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RVA-与-FOA-的转换"><span class="nav-number">2.</span> <span class="nav-text">RVA 与 FOA 的转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
