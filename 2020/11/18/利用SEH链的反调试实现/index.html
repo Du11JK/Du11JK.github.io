@@ -20,18 +20,20 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="article">
-<meta property="og:title" content="PE文件结构（5） 导入表">
-<meta property="og:url" content="http://yoursite.com/2020/11/13/PE-Files-5/index.html">
+  <meta name="description" content="异常处理模式当一个线程出现错误时，操作系统调用一个回调函数负责处理 123456789101112131415161718192021222324252627__cdecl _except_handler( struct _EXCEPTION_RECORD *ExceptionRecord,		&#x2F;&#x2F; 提供指向具有标准 Win32&#x2F;64 定义的异常记录的指针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用SEH链的反调试">
+<meta property="og:url" content="http://yoursite.com/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="某jk的奇怪博客">
+<meta property="og:description" content="异常处理模式当一个线程出现错误时，操作系统调用一个回调函数负责处理 123456789101112131415161718192021222324252627__cdecl _except_handler( struct _EXCEPTION_RECORD *ExceptionRecord,		&#x2F;&#x2F; 提供指向具有标准 Win32&#x2F;64 定义的异常记录的指针">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-11-13T15:00:57.000Z">
-<meta property="article:modified_time" content="2020-11-13T14:22:59.591Z">
+<meta property="article:published_time" content="2020-11-18T14:55:55.000Z">
+<meta property="article:modified_time" content="2020-11-19T15:55:09.374Z">
 <meta property="article:author" content="Du11JK">
-<meta property="article:tag" content="PE文件结构">
+<meta property="article:tag" content="Reverse">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/11/13/PE-Files-5/">
+<link rel="canonical" href="http://yoursite.com/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/">
 
 
 <script id="page-configurations">
@@ -44,7 +46,7 @@
   };
 </script>
 
-  <title>PE文件结构（5） 导入表 | 某jk的奇怪博客</title>
+  <title>利用SEH链的反调试 | 某jk的奇怪博客</title>
   
 
 
@@ -193,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/PE-Files-5/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/a.jpg">
@@ -206,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          PE文件结构（5） 导入表
+          利用SEH链的反调试
         </h1>
 
         <div class="post-meta">
@@ -215,10 +217,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-11-13 23:00:57 / 修改时间：22:22:59" itemprop="dateCreated datePublished" datetime="2020-11-13T23:00:57+08:00">2020-11-13</time>
+              <time title="创建时间：2020-11-18 22:55:55" itemprop="dateCreated datePublished" datetime="2020-11-18T22:55:55+08:00">2020-11-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-19 23:55:09" itemprop="dateModified" datetime="2020-11-19T23:55:09+08:00">2020-11-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>2.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -261,8 +269,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <hr>
-<a id="more"></a>
+        <h1 id="异常处理模式"><a href="#异常处理模式" class="headerlink" title="异常处理模式"></a>异常处理模式</h1><p>当一个线程出现错误时，操作系统调用一个回调函数负责处理</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">__cdecl _except_handler( struct _EXCEPTION_RECORD *ExceptionRecord,		<span class="comment">// 提供指向具有标准 Win32/64 定义的异常记录的指针</span></span><br><span class="line">                        <span class="keyword">void</span> * EstablisherFrame,						<span class="comment">// 此函数的固定堆栈分配的基址</span></span><br><span class="line">                        struct _CONTEXT *ContextRecord,					<span class="comment">// 指向引发异常时的异常上下文（在异常处理程序情况下）</span></span><br><span class="line">                        												<span class="comment">// 或当前“展开”上下文（在终止处理程序情况下）</span></span><br><span class="line">                        <span class="keyword">void</span> * DispatcherContext);						<span class="comment">// 指向此函数的调度程序上下文</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// _EXCEPTION_RECORD 结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_RECORD</span> &#123;</span></span><br><span class="line">   DWORD ExceptionCode;</span><br><span class="line">   DWORD ExceptionFlags;</span><br><span class="line">   <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_RECORD</span> *<span class="title">ExceptionRecord</span>;</span></span><br><span class="line">   PVOID ExceptionAddress;</span><br><span class="line">   DWORD NumberParameters;</span><br><span class="line">   DWORD ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];</span><br><span class="line">&#125; EXCEPTION_RECORD;</span><br><span class="line"><span class="comment">// DispatcherContext</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">DISPATCHER_CONTEXT</span> &#123;</span></span><br><span class="line">    ULONG64 ControlPc;</span><br><span class="line">    ULONG64 ImageBase;</span><br><span class="line">    PRUNTIME_FUNCTION FunctionEntry;</span><br><span class="line">    ULONG64 EstablisherFrame;</span><br><span class="line">    ULONG64 TargetIp;</span><br><span class="line">    PCONTEXT ContextRecord;</span><br><span class="line">    PEXCEPTION_ROUTINE LanguageHandler;</span><br><span class="line">    PVOID HandlerData;</span><br><span class="line">&#125; DISPATCHER_CONTEXT, *PDISPATCHER_CONTEXT;</span><br><span class="line"><span class="comment">// 来自 https://docs.microsoft.com/zh-cn/cpp/build/exception-handling-x64?view=msvc-160&amp;viewFallbackFrom=vs-2017</span></span><br></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<blockquote>
+<p>ExceptionContinueExcetion（等于0）：回调函数返回后，系统将线程环境设置为_lpContext参数指定的CONTEXT结构并继续执行；<br>ExceptionContinueSearch（等于1）：回调函数拒绝处理这个异常，系统将通过EXCEPIONT_REGISTRATION结构的prev字段得到前一个回调函数的地址并调用它；<br>ExceptionNestedException（等于2）：回调函数在执行中又发生了新的异常，即嵌套异常；<br>ExceptionCollidedUnwind（等于3）：发生了嵌套的展开操作。</p>
+</blockquote>
+<h1 id="SEH链状结构"><a href="#SEH链状结构" class="headerlink" title="SEH链状结构"></a>SEH链状结构</h1><p>SEH以链的形式存在，若异常处理器未处理该异常，则将异常传递给下一个异常处理器，直至异常得到处理</p>
+<p>一般来说操作系统会设置一个默认的异常处理程序在链的最后一项，它异于其他定义的异常处理函数并总是选择处理异常，以保证异常一定被处理</p>
+<p>SEH链的项通常是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_REGISTRATION_RECORD</span>&#123;</span></span><br><span class="line">     PEXCEPTION_REGISTRATION_RECORD Next;			<span class="comment">// 指向下一个结构体的指针</span></span><br><span class="line">     PEXCEPTION_DISPOSITION Handler;				<span class="comment">// 异常处理函数的地址</span></span><br><span class="line">&#125; EXCEPTION_REGISTRATION_RECORD, *PEXCEPTION_REGISTRATION_RECORD;</span><br></pre></td></tr></table></figure>
+
+<h2 id="展开Unwinding"><a href="#展开Unwinding" class="headerlink" title="展开Unwinding"></a>展开Unwinding</h2><p>当异常发生时，系统遍历EXCEPTION_REGISTRATION结构链表，直到它找到一个处理这个异常的处理程序。一旦找到，系统就再次遍历这个链表，直到处理这个异常的结点为止。在这第二次遍历中，系统将再次调用每个异常处理函数。关键的区别是，在第二次调用中，异常标志被设置为2。这个值被定义为EH_UNWINDING</p>
+<p>二次调用的过程保证了未处理异常的异常处理函数执行一些清理工作，完成”展开“的动作，在异常处理块中产生的堆栈数据会被清除，然后流程从处理异常的那个回调函数决定的地方开始继续执行。</p>
+<h1 id="利用SEH链反调试"><a href="#利用SEH链反调试" class="headerlink" title="利用SEH链反调试"></a>利用SEH链反调试</h1><p>原理：</p>
+<p>注册SEH后, 正常情况下发生异常会转入SEH处理流程, 但是如果这时处于被调试状态则异常事件会先发给调试器. 基于这个原理就能探测到进程是否是</p>
+<p>被调试运行</p>
+<p>若没有注册SEH，操作系统默认调用<code>UnhandledExceptionFilter()</code></p>
+<p>因此反调试可以通过故意触发异常，在特定异常处理器中修改上下文的EIP，异常处理结束后将到被设置的EIP处执行</p>
+<p>若处于被调试状态，程序会在设定的代码中死循环或者直接退出程序。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://docs.microsoft.com/zh-cn/cpp/build/exception-handling-x64?view=msvc-160&viewFallbackFrom=vs-2017" target="_blank" rel="noopener">x64 异常处理 | Microsoft Docs</a></p>
+<p><a href="https://blog.csdn.net/chenlycly/article/details/52575260" target="_blank" rel="noopener">深入解析结构化异常处理(SEH) - by Matt Pietrek_chenlycly的专栏-CSDN博客</a></p>
+<p><a href="https://www.anquanke.com/post/id/176532" target="_blank" rel="noopener">Windows调试艺术——断点和反调试（上） - 安全客，安全资讯平台 (anquanke.com)</a></p>
+
     </div>
 
     
@@ -271,7 +301,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" rel="tag"># PE文件结构</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
           </div>
 
         
@@ -280,13 +310,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/" rel="prev" title="PE手工加壳实例">
-      <i class="fa fa-chevron-left"></i> PE手工加壳实例
+    <a href="/2020/11/13/PE-Files-4/" rel="prev" title="PE文件结构（4） 节表项与节">
+      <i class="fa fa-chevron-left"></i> PE文件结构（4） 节表项与节
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/11/13/PE-Files-4/" rel="next" title="PE文件结构（4） 节表项与节">
-      PE文件结构（4） 节表项与节 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -345,6 +372,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理模式"><span class="nav-number">1.</span> <span class="nav-text">异常处理模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SEH链状结构"><span class="nav-number">2.</span> <span class="nav-text">SEH链状结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#展开Unwinding"><span class="nav-number">2.1.</span> <span class="nav-text">展开Unwinding</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用SEH链反调试"><span class="nav-number">3.</span> <span class="nav-text">利用SEH链反调试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
