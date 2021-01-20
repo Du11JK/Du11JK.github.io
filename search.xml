@@ -1601,4 +1601,21 @@ password栏：123456</code><br><strong>ag{369a193d-5981-4b62-8ead-daebdcdf79a3}<
         <tag>Reverse</tag>
       </tags>
   </entry>
+  <entry>
+    <title>VMP壳原理</title>
+    <url>/2021/01/21/VMP/</url>
+    <content><![CDATA[<hr>
+<a id="more"></a>
+
+
+
+<p>！！！先立flag， 等有空再写 ！！！</p>
+]]></content>
+      <categories>
+        <category>note</category>
+      </categories>
+      <tags>
+        <tag>PE文件壳</tag>
+      </tags>
+  </entry>
 </search>

