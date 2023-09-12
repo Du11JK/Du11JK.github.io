@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>RSA算法原理 | 又菜又懒不学无术</title><meta name="author" content="Du11jk"><meta name="copyright" content="Du11jk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="RSA算法原理">
+<meta property="og:url" content="http://du11jk.github.io/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="又菜又懒不学无术">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/48244012?v=4">
+<meta property="article:published_time" content="2020-09-12T18:14:21.000Z">
+<meta property="article:modified_time" content="2023-09-12T09:33:41.406Z">
+<meta property="article:author" content="Du11jk">
+<meta property="article:tag" content="Crypto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/48244012?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://du11jk.github.io/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"A0WP5DUMNJ","apiKey":"34f21cab1680a7d8ba70d94b796c5424","indexName":"blog","hits":{"per_page":10},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'RSA算法原理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-12 17:33:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="又菜又懒不学无术" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="又菜又懒不学无术"><span class="site-name">又菜又懒不学无术</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">RSA算法原理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-09-12T18:14:21.000Z" title="Created 2020-09-13 02:14:21">2020-09-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-12T09:33:41.406Z" title="Updated 2023-09-12 17:33:41">2023-09-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OldNotes/">OldNotes</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>6min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="RSA算法原理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><hr>
+<span id="more"></span>
+
+<h1 id="数论的一些知识"><a href="#数论的一些知识" class="headerlink" title="数论的一些知识"></a>数论的一些知识</h1><h2 id="欧拉函数-φ-x"><a href="#欧拉函数-φ-x" class="headerlink" title="欧拉函数 φ(x)"></a>欧拉函数 φ(x)</h2><p>&amp;emsp;将不大于正整数 m 且与之互素的正整数个数称之为欧拉函数，记为 φ(m) </p>
+<h2 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h2><p>&amp;emsp;设正整数 m 与整数 a 互素，则 </p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;a<sup>φ(m)</sup> ≡ 1 (mod m)</p>
+</blockquote>
+<h2 id="欧拉函数的积性"><a href="#欧拉函数的积性" class="headerlink" title="欧拉函数的积性"></a>欧拉函数的积性</h2><p>&amp;emsp;<strong>定义</strong>：设正整数 m 与 n 互素，若 f(mn) &#x3D; f(m) f(n)，则称数论函数 f 为积性函数</p>
+<p>&amp;emsp;<strong>-&gt;定理</strong>：设正整数 n 有素分解式 n &#x3D; p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则积性函数 f 的函数值 </p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;f(n) &#x3D; f(p<sub>1</sub><sup>a<sub>1</sub></sup>) f(p<sub>2</sub><sup>a<sub>2</sub></sup>) … f(p<sub>s</sub><sup>a<sub>s</sub></sup>)</p>
+</blockquote>
+<h2 id="φ-x-的计算"><a href="#φ-x-的计算" class="headerlink" title="φ(x) 的计算"></a>φ(x) 的计算</h2><p>&amp;emsp;<strong>定理1</strong> 若 p 为素数，则 φ(p) &#x3D; p - 1；反之，若自然数p满足等式 φ(p) &#x3D; p - 1，则 p 是素数</p>
+<p>&amp;emsp;<strong>定理2</strong> 若 p 为素数，a 为正整数，则</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;φ(p<sup>a</sup>) &#x3D; p<sup>a</sup> - p<sup>a-1</sup></p>
+</blockquote>
+<p>&amp;emsp;<strong>定理3</strong> 设正整数 n 有素分解式 n &#x3D; p<sub>1</sub><sup>a<sub>1</sub></sup> p<sub>2</sub><sup>a<sub>2</sub></sup> … p<sub>s</sub><sup>a<sub>s</sub></sup>，则</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;φ(x) &#x3D; n (1-${1\over p_{1}}$) (1-${1\over p_{2}}$) … (1-${1\over p_{s}}$)</p>
+</blockquote>
+<p>&amp;emsp;<strong>定理4</strong> 设 n 是大于2的正整数，则欧拉函数 φ(x) 是偶数</p>
+<h2 id="模反元素"><a href="#模反元素" class="headerlink" title="模反元素"></a>模反元素</h2><p>若两个正整数 a 和 n 互素，那么必有整数 b，使得 ab ≡ 1 (mod n)。此时，称 b 为 a 的”模反元素“</p>
+<p>&amp;emsp;证明：由欧拉定理知</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;a<sup>φ(n)</sup> ≡ 1 (mod n)</p>
+</blockquote>
+<p>&amp;emsp;那么至少有 b &#x3D; a<sup>φ(n)-1</sup>，满足</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;ab &#x3D; a * a<sup>φ(n)-1</sup> &#x3D; a<sup>φ(n)</sup> ≡ 1 (mod n)</p>
+</blockquote>
+<p>&amp;emsp;所以正整数 a 和 n 互素的前提下，a 的模反元素 b 一定存在</p>
+<p>模反元素没有唯一性</p>
+<p>&amp;emsp;证明：已知 b &#x3D; a<sup>φ(n)-1</sup> 是 a 的模反元素</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;ab ≡ 1 (mod n) &lt;&#x3D;&gt; ab &#x3D; kn + 1 ( k ∈ Z )</p>
+</blockquote>
+<p>&amp;emsp;令 t &#x3D; k - a</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;ab &#x3D; ( t + a )n + 1</p>
+</blockquote>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;a( b - n) &#x3D; tn + 1</p>
+</blockquote>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;即 a( b - n) ≡ 1 (mod n)</p>
+</blockquote>
+<p>&amp;emsp;那么  (b - n) 也是 a 的模反元素，而且同样构造于 mod n 上</p>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p>若素数 p 不整除正整数 a ，则</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;a<sup>p-1</sup> ≡ 1 ( mod p )</p>
+</blockquote>
+<p><em>以上所有内容看不懂请从头学习《初等数论》</em></p>
+<h1 id="密钥的生成"><a href="#密钥的生成" class="headerlink" title="密钥的生成"></a>密钥的生成</h1><p><strong>Step 1</strong>：随机选两个不相等的质数  p 和 q</p>
+<p>&amp;emsp;一般这两个质数越大安全性越高</p>
+<p><strong>Step 2</strong>：计算 p * q &#x3D; n</p>
+<p>&amp;emsp;n 转换为二进制的位数即为密钥长度</p>
+<p><strong>Step 3</strong>：计算欧拉函数 φ(n)</p>
+<p>&amp;emsp;算法如上所示</p>
+<p><strong>Step 4</strong>：随机选择一个整数 e（1&lt; e &lt; φ(n)，e 与 φ(n) 互素）</p>
+<p>&amp;emsp;常用建议的是 65537</p>
+<p><strong>Step 5</strong>：计算 e 对于 φ(n) 的模反元素 d</p>
+<p>&amp;emsp;e 与 φ(n) 互素，由模反元素定义知，存在 d 满足</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;ed ≡ 1 (mod φ(n))</p>
+</blockquote>
+<p>&amp;emsp;可以利用扩展欧几里得算法求解</p>
+<p><strong>Step 6</strong>：公钥和私钥</p>
+<p>&amp;emsp;公钥： n 和 e</p>
+<p>&amp;emsp;私钥： n 和 d</p>
+<h1 id="加密解密"><a href="#加密解密" class="headerlink" title="加密解密"></a>加密解密</h1><p>约定明文为 M，密文为 S</p>
+<p>加密：</p>
+<p>&amp;emsp;使用到公钥 ( n , e )</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;C ≡ M<sup>e</sup> ( mod n )</p>
+</blockquote>
+<p>解密：</p>
+<p>&amp;emsp;使用到私钥 ( n , d )</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;M ≡ C<sup>d</sup> ( mod n )</p>
+</blockquote>
+<p>证明：由加密方程知</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;M<sup>e</sup> + remainder &#x3D; C + kn + remainder</p>
+<p>&amp;emsp;&amp;emsp;C &#x3D; M<sup>e</sup> - kn</p>
+</blockquote>
+<p>&amp;emsp;代入解密方程右半：</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;( M<sup>e</sup> - kn )<sup>d</sup>  mod n &#x3D; M<sup>ed</sup> mod n</p>
+</blockquote>
+<p>&amp;emsp;由于 ed ≡ 1 (mod φ(n))，故</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;ed &#x3D; hφ(n) + 1</p>
+</blockquote>
+<p>&amp;emsp;代入上式：</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;C<sup>d</sup> ≡ M<sup>hφ(n)+1</sup> (mod n)</p>
+</blockquote>
+<p>&amp;emsp;(1) 若 M 与 n互素：</p>
+<p>&amp;emsp;由欧拉定理知</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;M<sup>φ(n)</sup> ≡ 1 (mod n)</p>
+<p>&amp;emsp;&amp;emsp;M<sup>φ(n)</sup> &#x3D; kn + 1</p>
+<p>&amp;emsp;&amp;emsp;( M<sup>φ(n)</sup> )<sup>h</sup> &#x3D; ( kn + 1 )<sup>h</sup> ≡ 1 ( mod n )</p>
+<p>&amp;emsp;&amp;emsp;M<sup>hφ(n)+1</sup> ≡ M ( mod n )</p>
+</blockquote>
+<p>&amp;emsp;(2) 若 M 与 n 不互素：</p>
+<p>&amp;emsp;由于 n 有唯一素分解式 n &#x3D; p * q </p>
+<p>&amp;emsp;则 gcd( M , n ) &#x3D; p 或 gcd( M , n ) &#x3D; q</p>
+<p>&amp;emsp;不妨：gcd( M , n ) &#x3D; q ； M &#x3D; k * p</p>
+<p>&amp;emsp;由费马小定理：</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;m<sup>q-1</sup> ≡ 1 ( mod q )</p>
+</blockquote>
+<p>&amp;emsp;使用欧拉定理同上：</p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;( M<sup>φ(q)</sup> )<sup>h(p-1)</sup> &#x3D; ( kq + 1 )<sup>h(p-1)</sup> ≡ 1 ( mod q )</p>
+<p>&amp;emsp;-&gt;	( M<sup>q-1</sup> )<sup>h(p-1)</sup>  ≡ 1 ( mod q )</p>
+</blockquote>
+<p>&amp;emsp;已知 </p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;φ(n) &#x3D; ( p - 1 )( q - 1 )</p>
+<p>&amp;emsp;&amp;emsp;ed &#x3D; hφ(n) + 1</p>
+<p>&amp;emsp;-&gt;	M<sup>ed-1</sup> ≡ 1 ( mod q )</p>
+<p>&amp;emsp;-&gt;	M<sup>ed-1</sup> &#x3D; sq + 1</p>
+<p>&amp;emsp;-&gt;	M<sup>ed</sup> &#x3D; sqM + M</p>
+<p>&amp;emsp;&amp;emsp;M &#x3D; k * p</p>
+<p>&amp;emsp;-&gt;	M<sup>ed</sup> &#x3D; sqkp + M</p>
+<p>&amp;emsp;-&gt;	M<sup>ed</sup> &#x3D; skn + M</p>
+<p>&amp;emsp;-&gt;	M<sup>ed </sup> ≡ M ( mod n )</p>
+</blockquote>
+<p>&amp;emsp;综上所述，解密方程 M ≡ C<sup>d</sup> ( mod n ) 成立</p>
+<h1 id="RSA算法的安全性"><a href="#RSA算法的安全性" class="headerlink" title="RSA算法的安全性"></a>RSA算法的安全性</h1><p>解密的关键在私钥中的模反元素 d </p>
+<blockquote>
+<p>&amp;emsp;&amp;emsp;ed ≡ 1 (mod φ(n))</p>
+</blockquote>
+<p>要求出 d 必定需要知道 φ(n)</p>
+<p>在公钥中可以获得 n ，但是不知道 p 和 q 的情况下，只能依靠</p>
+<p>&amp;emsp;1. 计算 n 的素分解式 p ，q</p>
+<p>&amp;emsp;2. 迭代验证 0 ~ n 中与 n 互素的整数个数</p>
+<p>事实是，在 n 的素分解式未知的情况下几乎不可能在可接受时间内获得d，<br>所以认为算法是安全的</p>
+<p>但是针对不恰当的参数设置，RSA有可能被破解，详细方法可以参考以下资料</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://www.0x002.com/2020/%E5%AF%B9RSA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E7%9A%84%E7%AE%80%E5%8D%95%E7%A0%94%E7%A9%B6#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80">https://www.0x002.com/2020/%E5%AF%B9RSA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8%E7%9A%84%E7%AE%80%E5%8D%95%E7%A0%94%E7%A9%B6#%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80</a></p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6459">https://xz.aliyun.com/t/6459</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/84632">https://www.anquanke.com/post/id/84632</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://du11jk.github.io">Du11jk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://du11jk.github.io/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/">http://du11jk.github.io/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Crypto/">Crypto</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/48244012?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/" title="PE手工加壳实例"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">PE手工加壳实例</div></div></a></div><div class="next-post pull-right"><a href="/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/" title="OLLVM 控制流平坦化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">OLLVM 控制流平坦化</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Du11jk</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Du11JK"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/du11jk" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="Rss"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Email uncracka61e@gmail.com</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E8%AE%BA%E7%9A%84%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">数论的一些知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0-%CF%86-x"><span class="toc-number">1.1.</span> <span class="toc-text">欧拉函数 φ(x)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%AE%9A%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">欧拉定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%E7%9A%84%E7%A7%AF%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">欧拉函数的积性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%CF%86-x-%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">1.4.</span> <span class="toc-text">φ(x) 的计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%8F%8D%E5%85%83%E7%B4%A0"><span class="toc-number">1.5.</span> <span class="toc-text">模反元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%AE%9A%E7%90%86"><span class="toc-number">1.6.</span> <span class="toc-text">费马小定理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%86%E9%92%A5%E7%9A%84%E7%94%9F%E6%88%90"><span class="toc-number">2.</span> <span class="toc-text">密钥的生成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86"><span class="toc-number">3.</span> <span class="toc-text">加密解密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#RSA%E7%AE%97%E6%B3%95%E7%9A%84%E5%AE%89%E5%85%A8%E6%80%A7"><span class="toc-number">4.</span> <span class="toc-text">RSA算法的安全性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="Deep Learning with Differential Privacy 阅读记录">Deep Learning with Differential Privacy 阅读记录</a><time datetime="2021-04-01T02:00:00.000Z" title="Created 2021-04-01 10:00:00">2021-04-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/" title="利用SEH链的反调试">利用SEH链的反调试</a><time datetime="2020-11-18T14:55:55.000Z" title="Created 2020-11-18 22:55:55">2020-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/" title="PE手工加壳实例">PE手工加壳实例</a><time datetime="2020-11-06T09:02:15.000Z" title="Created 2020-11-06 17:02:15">2020-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" title="RSA算法原理">RSA算法原理</a><time datetime="2020-09-12T18:14:21.000Z" title="Created 2020-09-13 02:14:21">2020-09-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/" title="OLLVM 控制流平坦化">OLLVM 控制流平坦化</a><time datetime="2020-09-12T17:06:38.000Z" title="Created 2020-09-13 01:06:38">2020-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Du11jk</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></body></html>

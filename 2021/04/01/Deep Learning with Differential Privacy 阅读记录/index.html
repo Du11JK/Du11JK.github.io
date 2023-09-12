@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Deep Learning with Differential Privacy 阅读记录 | 又菜又懒不学无术</title><meta name="author" content="Du11jk"><meta name="copyright" content="Du11jk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="Deep Learning with Differential Privacy 阅读记录">
+<meta property="og:url" content="http://du11jk.github.io/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="又菜又懒不学无术">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/48244012?v=4">
+<meta property="article:published_time" content="2021-04-01T02:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-12T09:33:41.402Z">
+<meta property="article:author" content="Du11jk">
+<meta property="article:tag" content="Differential Privacy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/48244012?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://du11jk.github.io/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"A0WP5DUMNJ","apiKey":"34f21cab1680a7d8ba70d94b796c5424","indexName":"blog","hits":{"per_page":10},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Deep Learning with Differential Privacy 阅读记录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-12 17:33:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="又菜又懒不学无术" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="又菜又懒不学无术"><span class="site-name">又菜又懒不学无术</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Deep Learning with Differential Privacy 阅读记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-04-01T02:00:00.000Z" title="Created 2021-04-01 10:00:00">2021-04-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-12T09:33:41.402Z" title="Updated 2023-09-12 17:33:41">2023-09-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OldNotes/">OldNotes</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>7min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Deep Learning with Differential Privacy 阅读记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><hr>
+<span id="more"></span>
+
+<h1 id="Deep-Learning-with-Differential-Privacy-阅读记录"><a href="#Deep-Learning-with-Differential-Privacy-阅读记录" class="headerlink" title="Deep Learning with Differential Privacy 阅读记录"></a>Deep Learning with Differential Privacy 阅读记录</h1><p>Created: Mar 23, 2021 2:27 PM<br>Created By: JK H<br>Last Edited By: JK H<br>Last Edited Time: Apr 1, 2021 12:58 AM</p>
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><h1 id="Differential-Privacy-概念"><a href="#Differential-Privacy-概念" class="headerlink" title="Differential Privacy 概念"></a>Differential Privacy 概念</h1><p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%2010.png" alt="Untitled%2010.png"></p>
+<p>D：定义域（input） R：值域（output） S是R的一个子集</p>
+<p>M是 <strong>D→R</strong> 的映射</p>
+<p><strong>d</strong> 和 <strong>d’</strong> 是一组临近数据，掌握足够多先验知识后，可以判断原输入到底是d还是d’</p>
+<p>满足差分隐私即无法区分d和d’</p>
+<p>我们引入噪声使得<strong>M(d)</strong> 和 <strong>M(d’)</strong> 分布足够接近</p>
+<p>定义，对于任意输出 <strong>S ⊆ R</strong>，满足</p>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%207.png" alt="Untitled%207.png"></p>
+<ul>
+<li>\(e^ε\) 项是确保了隐私泄露的概率有一个数学的上界</li>
+<li>原本的定义中不含δ项， (ε, δ)-DP 在 ε-DP 的基础上允许了一定概率的错误</li>
+</ul>
+<h2 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h2><ul>
+<li><strong>composability</strong> enables modular design of mechanisms: if allthe components of a mechanism are differentially private,then so is their composition. （可结合性）</li>
+<li><strong>group privacy</strong> implies graceful degradation of privacy guarantees if datasets contain cor-related inputs. （隐私保证的降级）</li>
+<li><strong>robustness to auxiliary information</strong> means that privacy guarantees are not affected by any side information available to the adversary. （隐私保证不受辅助信息影响）</li>
+</ul>
+<h2 id="Gaussian-noise-mechanism（高斯机制）"><a href="#Gaussian-noise-mechanism（高斯机制）" class="headerlink" title="Gaussian noise mechanism（高斯机制）"></a>Gaussian noise mechanism（高斯机制）</h2><p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%208.png" alt="Untitled%208.png"></p>
+<p>噪声满足高斯分布 \(N(0,S^2_{f}·σ^2)\) with mean 0 and standard deviation $S_{f}σ$</p>
+<p>satisfies (ε,δ) - differential privacy  if</p>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%209.png" alt="Untitled%209.png"></p>
+<p>另见：Laplace机制</p>
+<h2 id="Implements-steps"><a href="#Implements-steps" class="headerlink" title="Implements: steps"></a>Implements: steps</h2><ol>
+<li>approximating the functionality by a sequential composition （顺序组成）of bounded-sensitivity（有界灵敏度） functions;</li>
+<li>choosing parameters of additive noise;</li>
+<li>performing privacy analysis of the resulting mechanism.</li>
+</ol>
+<p>设计一种差分私有加噪音机制的步骤：</p>
+<p>i）通过有界灵敏度的顺序组成来逼近函数</p>
+<p>ii）选择加噪参数</p>
+<p>iii）对生成机制进行隐私分析</p>
+<h1 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h1><h2 id="SGD算法"><a href="#SGD算法" class="headerlink" title="SGD算法"></a>SGD算法</h2><p>这里选择了更精细的方法来控制训练数据的影响，平衡隐私保护和可用性，防止保守估计的噪声破坏模型的有效性</p>
+<ol>
+<li>minimizing the empirical loss function</li>
+<li>compute the gradient for a random subset of examples</li>
+<li>clip the norm of each gradient</li>
+<li>compute the average</li>
+<li>add noise in order to protect privacy</li>
+<li>take a step in the opposite direction of this average noisy gradient</li>
+<li>compute the privacy loss of the mechanism based on the information maintained by the privacy accountant</li>
+</ol>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%201.png" alt="Untitled%201.png"></p>
+<h3 id="Norm-clipping"><a href="#Norm-clipping" class="headerlink" title="Norm clipping"></a>Norm clipping</h3><p>the gradient vector g is replaced by  \(g&#x2F;max(1,‖g‖_{2}&#x2F;C)\)</p>
+<h3 id="Per-layer-and-time-dependent-parameters"><a href="#Per-layer-and-time-dependent-parameters" class="headerlink" title="Per-layer and time-dependent parameters"></a>Per-layer and time-dependent parameters</h3><p>setting different clipping thresholds C and noise scales σ for different layers.</p>
+<h3 id="lots"><a href="#lots" class="headerlink" title="lots"></a>lots</h3><p>通过计算一组例子的梯度并取平均估算L的梯度。这个平均值提供了一个无偏差的估计值，它的变化随着数据量的增加迅速减少。称这个组合为lot，与通常的计算组合batch区别开</p>
+<ul>
+<li>set the batch size much smaller than the lot size L</li>
+<li>group several batches into a lot for adding noise</li>
+<li>an epoch consists of N&#x2F;L lots</li>
+</ul>
+<h3 id="Privacy-accounting"><a href="#Privacy-accounting" class="headerlink" title="Privacy accounting"></a>Privacy accounting</h3><p>compute the privacy cost at each access to the training data, and accumulates this cost as the training progresses.</p>
+<h2 id="moments-accountant"><a href="#moments-accountant" class="headerlink" title="moments accountant"></a>moments accountant</h2><p>对于高斯噪声而言，若我们选择 Algo 1 中的 \(σ &#x3D; \sqrt{2log\frac{1.25}{δ}}&#x2F;ε\)</p>
+<p>那么根据标准参数，每一步对于此 lot 都满足 (ε,δ) - differentially private</p>
+<p>Since the lot itself is a random sample from the database, the privacy amplification theorem implies that each step is (qε,qδ) - differentially private with respect to the full database where q&#x3D;L&#x2F;N is the sampling ratio per lot.</p>
+<p>Prove that Algorithm 1 is (\(O(qε\sqrt{T}),δ\)) - differentially private for appropriately chosen settings of the noise scale and the clipping threshold</p>
+<p>Our bound is tighter in two ways: </p>
+<ol>
+<li>a \(\sqrt{log(1&#x2F;δ)}\) factor in the ε part</li>
+<li>a Tq factor in the δ part</li>
+</ol>
+<p>Expect δ to be small and T &gt;&gt; 1&#x2F;q (i.e., each example is examined multiple times)</p>
+<p><strong>Theorem1.</strong></p>
+<p>There exist constants c1 and c2 so that given the sampling probability q &#x3D; L&#x2F;N and the number of steps T, for any \(ε &lt; c_{1}q^2T\), Algorithm 1 is (ε,δ) - differentially private for any δ &gt; 0 if we choose </p>
+<p>使用强组合理论的话会多出一个\(\sqrt{log(1&#x2F;δ)}\)  的因子，并且 ε 可能会大得多</p>
+<h3 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h3><p><strong>隐私损失定义</strong></p>
+<p>For neighboring databases d, d′ ∈ Dn, a mechanism M, auxiliary input aux, and an outcome o∈R, define the privacy loss at o as</p>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%202.png" alt="Untitled%202.png"></p>
+<p><strong>adaptive composition</strong></p>
+<p>让之前机制的输出作为( \(k^{th}\) 的M机制 )的辅助输入(auxiliary input)</p>
+<p>For a given mechanism M, we define the \(λ^{th}\) moment αM(λ;aux,d,d′) as the log of the moment generating function evaluated at the value λ</p>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%203.png" alt="Untitled%203.png"></p>
+<p>define: </p>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%204.png" alt="Untitled%204.png"></p>
+<p>the maximum is taken over all possible aux and all the neighboring databases d, d′</p>
+<p><strong>Properties of α</strong></p>
+<p><strong>Theorem2.</strong></p>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%205.png" alt="Untitled%205.png"></p>
+<ol>
+<li><p>对先前机制输出进行选择</p>
+</li>
+<li><p>计算，或者去界定每一步的 \(α_{M_{i}}(λ)\) ，并求和以限制整个机制的 moments</p>
+<p> Use the tail bound to convert the moments bound to the (ε,δ)-differential privacy guarantee</p>
+</li>
+</ol>
+<p>The main challenge that remains is to bound the value \(α_{M_{i}}(λ)\) for each step</p>
+<p>Let \(μ_{0}\) denote the probability density function(pdf) of \(N(0,σ^2)\), and μ1 denote the pdf of \(N(1,σ^2)\). Let μ be the mixture of two Gaussians \(μ&#x3D; (1−q)μ_{0}+qμ_{1}\), Then we need to compute \(α(λ) &#x3D; log(max(E_{1},E_{2}))\) where</p>
+<p><img src="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/Untitled%206.png" alt="Untitled%206.png"></p>
+<p>另外，渐进界限</p>
+<p>$$α(λ)≤q^2λ(λ+ 1)&#x2F;(1−q)σ^2+O(q^3&#x2F;σ^3).$$</p>
+<h2 id="Hyperparameter-Tuning"><a href="#Hyperparameter-Tuning" class="headerlink" title="Hyperparameter Tuning"></a>Hyperparameter Tuning</h2><ul>
+<li>与神经网络的结构相比, 模型准确性对训练参数（如批量大小和噪音水平）更敏感</li>
+<li>批量过大时会增加隐私成本</li>
+<li>differentially private training never reaches a regime where it would be justified</li>
+<li>there is a small benefit to starting with a relatively large learning rate, then linearly decaying it to a smaller value in a few epochs, and keeping it constant afterwards</li>
+</ul>
+<h1 id="implementation"><a href="#implementation" class="headerlink" title="implementation"></a>implementation</h1><ul>
+<li>sanitizer，对梯度进行预处理来保护隐私</li>
+<li>privacy-accountant，跟踪训练过程中的隐私开销</li>
+</ul>
+<p><strong>Sanitizer.</strong></p>
+<ul>
+<li>限制每个单独例子的敏感度（Norm clipping）</li>
+<li>更新网络参数之前对 batch 梯度加噪音</li>
+</ul>
+<p><strong>Privacy accountant.</strong></p>
+<ul>
+<li>计算α(λ)：渐进界限（evaluating a closed-form expression）和数值积分</li>
+<li>选用 numerical integration（数值积分）来计算E1和E2</li>
+</ul>
+<p><strong>Differentially private PCA.</strong></p>
+<p>捕获输入数据主要特征：</p>
+<p>从训练样本中随机抽取样本，将每个向量规范化为 unit \(l_{2}\) norm 来形成矩阵A。给协方差矩阵加高斯噪声，计算出噪音协方差的主要方向。之后对每个输入样本在此方向投影，再将其输入到神经网络中</p>
+<p>产生了隐私成本，提升了模型质量，减少了运行时间</p>
+<p><strong>Convolutional layers.</strong></p>
+<p>略。</p>
+<p>DPSGD_Optimizer DP-Train 参考代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DPSGD_Optimizer</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, accountant, sanitizer</span>):</span><br><span class="line">        self._accountant = accountant</span><br><span class="line">        self._sanitizer = sanitizer</span><br><span class="line"></span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">Minimize</span>(<span class="params">self, loss, params,</span></span><br><span class="line"><span class="params">		             batch_size, noise_options</span>):</span><br><span class="line">		    <span class="comment"># Accumulate privacy spending before computing</span></span><br><span class="line">		    <span class="comment"># and using the gradients.</span></span><br><span class="line">		    priv_accum_op =</span><br><span class="line">		    self._accountant.AccumulatePrivacySpending(</span><br><span class="line">		        batch_size, noise_options)</span><br><span class="line">		    <span class="keyword">with</span> tf.control_dependencies(priv_accum_op):</span><br><span class="line">		        <span class="comment"># Compute per example gradients</span></span><br><span class="line">		        px_grads = per_example_gradients(loss, params)</span><br><span class="line">		    <span class="comment"># Sanitize gradients</span></span><br><span class="line">		        sanitized_grads = self._sanitizer.Sanitize(</span><br><span class="line">		            px_grads, noise_options)</span><br><span class="line">		    <span class="comment"># Take a gradient descent step</span></span><br><span class="line">		    <span class="keyword">return</span> apply_gradients(params, sanitized_grads)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">DPTrain</span>(<span class="params">loss, params, batch_size, noise_options</span>):</span><br><span class="line">    accountant = PrivacyAccountant()</span><br><span class="line">    sanitizer = Sanitizer()</span><br><span class="line">    dp_opt = DPSGD_Optimizer(accountant, sanitizer)</span><br><span class="line">    sgd_op = dp_opt.Minimize(</span><br><span class="line">        loss, params, batch_size, noise_options)</span><br><span class="line">    eps, delta = (<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">    <span class="comment"># Carry out the training as long as the privacy</span></span><br><span class="line">    <span class="comment"># is within the pre-set limit.</span></span><br><span class="line">    <span class="keyword">while</span> within_limit(eps, delta):</span><br><span class="line">        sgd_op.run()</span><br><span class="line">        eps, delta = accountant.GetSpentPrivacy()</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p> <a target="_blank" rel="noopener" href="https://www.freebuf.com/column/147115.html">大数据时代下的隐私保护</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44549245/article/details/104078004">【论文记录】Deep Learning with Differential Privacy</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39715243/article/details/113137913">论文阅读：Deep Learning with Differential Privacy</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42803125/article/details/81232037">Deep Learning with Differential Privacy翻译</a></p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/4296470/blog/3275849">【论文学习】Deep Learning with Differential Privacy</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://du11jk.github.io">Du11jk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://du11jk.github.io/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/">http://du11jk.github.io/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Differential-Privacy/">Differential Privacy</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/48244012?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/" title="利用SEH链的反调试"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">利用SEH链的反调试</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Du11jk</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Du11JK"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/du11jk" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="Rss"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Email uncracka61e@gmail.com</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Deep-Learning-with-Differential-Privacy-%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">Deep Learning with Differential Privacy 阅读记录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Overview"><span class="toc-number">2.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Differential-Privacy-%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">Differential Privacy 概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Properties"><span class="toc-number">3.1.</span> <span class="toc-text">Properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gaussian-noise-mechanism%EF%BC%88%E9%AB%98%E6%96%AF%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">Gaussian noise mechanism（高斯机制）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implements-steps"><span class="toc-number">3.3.</span> <span class="toc-text">Implements: steps</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Algorithm"><span class="toc-number">4.</span> <span class="toc-text">Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SGD%E7%AE%97%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">SGD算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Norm-clipping"><span class="toc-number">4.1.1.</span> <span class="toc-text">Norm clipping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Per-layer-and-time-dependent-parameters"><span class="toc-number">4.1.2.</span> <span class="toc-text">Per-layer and time-dependent parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lots"><span class="toc-number">4.1.3.</span> <span class="toc-text">lots</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Privacy-accounting"><span class="toc-number">4.1.4.</span> <span class="toc-text">Privacy accounting</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#moments-accountant"><span class="toc-number">4.2.</span> <span class="toc-text">moments accountant</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Details"><span class="toc-number">4.2.1.</span> <span class="toc-text">Details</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyperparameter-Tuning"><span class="toc-number">4.3.</span> <span class="toc-text">Hyperparameter Tuning</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#implementation"><span class="toc-number">5.</span> <span class="toc-text">implementation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">6.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="Deep Learning with Differential Privacy 阅读记录">Deep Learning with Differential Privacy 阅读记录</a><time datetime="2021-04-01T02:00:00.000Z" title="Created 2021-04-01 10:00:00">2021-04-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/" title="利用SEH链的反调试">利用SEH链的反调试</a><time datetime="2020-11-18T14:55:55.000Z" title="Created 2020-11-18 22:55:55">2020-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/" title="PE手工加壳实例">PE手工加壳实例</a><time datetime="2020-11-06T09:02:15.000Z" title="Created 2020-11-06 17:02:15">2020-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" title="RSA算法原理">RSA算法原理</a><time datetime="2020-09-12T18:14:21.000Z" title="Created 2020-09-13 02:14:21">2020-09-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/" title="OLLVM 控制流平坦化">OLLVM 控制流平坦化</a><time datetime="2020-09-12T17:06:38.000Z" title="Created 2020-09-13 01:06:38">2020-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Du11jk</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typesetPromise()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></body></html>

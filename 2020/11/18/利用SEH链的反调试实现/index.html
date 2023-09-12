@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>利用SEH链的反调试 | 又菜又懒不学无术</title><meta name="author" content="Du11jk"><meta name="copyright" content="Du11jk"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="利用SEH链的反调试">
+<meta property="og:url" content="http://du11jk.github.io/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="又菜又懒不学无术">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/48244012?v=4">
+<meta property="article:published_time" content="2020-11-18T14:55:55.000Z">
+<meta property="article:modified_time" content="2023-09-12T09:33:41.416Z">
+<meta property="article:author" content="Du11jk">
+<meta property="article:tag" content="Reverse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/48244012?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://du11jk.github.io/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"A0WP5DUMNJ","apiKey":"34f21cab1680a7d8ba70d94b796c5424","indexName":"blog","hits":{"per_page":10},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '利用SEH链的反调试',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-09-12 17:33:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="又菜又懒不学无术" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="又菜又懒不学无术"><span class="site-name">又菜又懒不学无术</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">利用SEH链的反调试</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-11-18T14:55:55.000Z" title="Created 2020-11-18 22:55:55">2020-11-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2023-09-12T09:33:41.416Z" title="Updated 2023-09-12 17:33:41">2023-09-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OldNotes/">OldNotes</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">885</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>2min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="利用SEH链的反调试"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><hr>
+<span id="more"></span>
+
+
+<h1 id="异常处理模式"><a href="#异常处理模式" class="headerlink" title="异常处理模式"></a>异常处理模式</h1><p>当一个线程出现错误时，操作系统调用一个回调函数负责处理</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">__cdecl _except_handler( <span class="keyword">struct</span> _EXCEPTION_RECORD *ExceptionRecord,		<span class="comment">// 提供指向具有标准 Win32/64 定义的异常记录的指针</span></span><br><span class="line">                        <span class="type">void</span> * EstablisherFrame,						<span class="comment">// 此函数的固定堆栈分配的基址</span></span><br><span class="line">                        <span class="keyword">struct</span> _CONTEXT *ContextRecord,					<span class="comment">// 指向引发异常时的异常上下文（在异常处理程序情况下）</span></span><br><span class="line">                        												<span class="comment">// 或当前“展开”上下文（在终止处理程序情况下）</span></span><br><span class="line">                        <span class="type">void</span> * DispatcherContext);						<span class="comment">// 指向此函数的调度程序上下文</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// _EXCEPTION_RECORD 结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_EXCEPTION_RECORD</span> &#123;</span><br><span class="line">   DWORD ExceptionCode;</span><br><span class="line">   DWORD ExceptionFlags;</span><br><span class="line">   <span class="keyword">struct</span> <span class="title class_">_EXCEPTION_RECORD</span> *ExceptionRecord;</span><br><span class="line">   PVOID ExceptionAddress;</span><br><span class="line">   DWORD NumberParameters;</span><br><span class="line">   DWORD ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];</span><br><span class="line">&#125; EXCEPTION_RECORD;</span><br><span class="line"><span class="comment">// DispatcherContext</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_DISPATCHER_CONTEXT</span> &#123;</span><br><span class="line">    ULONG64 ControlPc;</span><br><span class="line">    ULONG64 ImageBase;</span><br><span class="line">    PRUNTIME_FUNCTION FunctionEntry;</span><br><span class="line">    ULONG64 EstablisherFrame;</span><br><span class="line">    ULONG64 TargetIp;</span><br><span class="line">    PCONTEXT ContextRecord;</span><br><span class="line">    PEXCEPTION_ROUTINE LanguageHandler;</span><br><span class="line">    PVOID HandlerData;</span><br><span class="line">&#125; DISPATCHER_CONTEXT, *PDISPATCHER_CONTEXT;</span><br><span class="line"><span class="comment">// 来自 https://docs.microsoft.com/zh-cn/cpp/build/exception-handling-x64?view=msvc-160&amp;viewFallbackFrom=vs-2017</span></span><br></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<blockquote>
+<p>ExceptionContinueExcetion（等于0）：回调函数返回后，系统将线程环境设置为_lpContext参数指定的CONTEXT结构并继续执行；<br>ExceptionContinueSearch（等于1）：回调函数拒绝处理这个异常，系统将通过EXCEPIONT_REGISTRATION结构的prev字段得到前一个回调函数的地址并调用它；<br>ExceptionNestedException（等于2）：回调函数在执行中又发生了新的异常，即嵌套异常；<br>ExceptionCollidedUnwind（等于3）：发生了嵌套的展开操作。</p>
+</blockquote>
+<h1 id="SEH链状结构"><a href="#SEH链状结构" class="headerlink" title="SEH链状结构"></a>SEH链状结构</h1><p>SEH以链的形式存在，若异常处理器未处理该异常，则将异常传递给下一个异常处理器，直至异常得到处理</p>
+<p>一般来说操作系统会设置一个默认的异常处理程序在链的最后一项，它异于其他定义的异常处理函数并总是选择处理异常，以保证异常一定被处理</p>
+<p>SEH链的项通常是</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">EXCEPTION_REGISTRATION_RECORD</span>&#123;</span></span><br><span class="line">     PEXCEPTION_REGISTRATION_RECORD Next;			<span class="comment">// 指向下一个结构体的指针</span></span><br><span class="line">     PEXCEPTION_DISPOSITION Handler;				<span class="comment">// 异常处理函数的地址</span></span><br><span class="line">&#125; EXCEPTION_REGISTRATION_RECORD, *PEXCEPTION_REGISTRATION_RECORD;</span><br></pre></td></tr></table></figure>
+
+<h2 id="展开Unwinding"><a href="#展开Unwinding" class="headerlink" title="展开Unwinding"></a>展开Unwinding</h2><p>当异常发生时，系统遍历EXCEPTION_REGISTRATION结构链表，直到它找到一个处理这个异常的处理程序。一旦找到，系统就再次遍历这个链表，直到处理这个异常的结点为止。在这第二次遍历中，系统将再次调用每个异常处理函数。关键的区别是，在第二次调用中，异常标志被设置为2。这个值被定义为EH_UNWINDING</p>
+<p>二次调用的过程保证了未处理异常的异常处理函数执行一些清理工作，完成”展开“的动作，在异常处理块中产生的堆栈数据会被清除，然后流程从处理异常的那个回调函数决定的地方开始继续执行。</p>
+<h1 id="利用SEH链反调试"><a href="#利用SEH链反调试" class="headerlink" title="利用SEH链反调试"></a>利用SEH链反调试</h1><p>原理：</p>
+<p>注册SEH后, 正常情况下发生异常会转入SEH处理流程, 但是如果这时处于被调试状态则异常事件会先发给调试器. 基于这个原理就能探测到进程是否是</p>
+<p>被调试运行</p>
+<p>若没有注册SEH，操作系统默认调用<code>UnhandledExceptionFilter()</code></p>
+<p>因此反调试可以通过故意触发异常，在特定异常处理器中修改上下文的EIP，异常处理结束后将到被设置的EIP处执行</p>
+<p>若处于被调试状态，程序会在设定的代码中死循环或者直接退出程序。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/cpp/build/exception-handling-x64?view=msvc-160&viewFallbackFrom=vs-2017">x64 异常处理 | Microsoft Docs</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/chenlycly/article/details/52575260">深入解析结构化异常处理(SEH) - by Matt Pietrek_chenlycly的专栏-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/176532">Windows调试艺术——断点和反调试（上） - 安全客，安全资讯平台 (anquanke.com)</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="http://du11jk.github.io">Du11jk</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://du11jk.github.io/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/">http://du11jk.github.io/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Reverse/">Reverse</a></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/48244012?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="Deep Learning with Differential Privacy 阅读记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Deep Learning with Differential Privacy 阅读记录</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/" title="PE手工加壳实例"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">PE手工加壳实例</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/" title="OLLVM 控制流平坦化"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-13</div><div class="title">OLLVM 控制流平坦化</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/48244012?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Du11jk</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Du11JK"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/du11jk" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="Rss"><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">Email uncracka61e@gmail.com</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">异常处理模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SEH%E9%93%BE%E7%8A%B6%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">SEH链状结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%95%E5%BC%80Unwinding"><span class="toc-number">2.1.</span> <span class="toc-text">展开Unwinding</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%A9%E7%94%A8SEH%E9%93%BE%E5%8F%8D%E8%B0%83%E8%AF%95"><span class="toc-number">3.</span> <span class="toc-text">利用SEH链反调试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2021/04/01/Deep%20Learning%20with%20Differential%20Privacy%20%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/" title="Deep Learning with Differential Privacy 阅读记录">Deep Learning with Differential Privacy 阅读记录</a><time datetime="2021-04-01T02:00:00.000Z" title="Created 2021-04-01 10:00:00">2021-04-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/18/%E5%88%A9%E7%94%A8SEH%E9%93%BE%E7%9A%84%E5%8F%8D%E8%B0%83%E8%AF%95%E5%AE%9E%E7%8E%B0/" title="利用SEH链的反调试">利用SEH链的反调试</a><time datetime="2020-11-18T14:55:55.000Z" title="Created 2020-11-18 22:55:55">2020-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/06/PE%E6%89%8B%E5%B7%A5%E5%8A%A0%E5%A3%B3%E5%AE%9E%E4%BE%8B/" title="PE手工加壳实例">PE手工加壳实例</a><time datetime="2020-11-06T09:02:15.000Z" title="Created 2020-11-06 17:02:15">2020-11-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/RSA%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86/" title="RSA算法原理">RSA算法原理</a><time datetime="2020-09-12T18:14:21.000Z" title="Created 2020-09-13 02:14:21">2020-09-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/13/OLLVM-%E6%8E%A7%E5%88%B6%E6%B5%81%E5%B9%B3%E5%9D%A6%E5%8C%96/" title="OLLVM 控制流平坦化">OLLVM 控制流平坦化</a><time datetime="2020-09-12T17:06:38.000Z" title="Created 2020-09-13 01:06:38">2020-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Du11jk</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div id="algolia-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="search-wrap"><div id="algolia-search-input"></div><hr/><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-info"><div class="algolia-stats"></div><div class="algolia-poweredBy"></div></div></div></div></div><div id="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/algoliasearch/dist/algoliasearch-lite.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instantsearch.js/dist/instantsearch.production.min.js"></script><script src="/js/search/algolia.js"></script></div></body></html>
