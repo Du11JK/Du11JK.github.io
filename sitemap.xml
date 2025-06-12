@@ -2,18 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.bocchi.icu/</loc>
-    <lastmod>2025-05-20T20:58:14+08:00</lastmod>
+    <loc>https://blog.bocchi.icu/categories/</loc>
+    <lastmod>2025-06-13T00:15:04+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.bocchi.icu/categories/category/</loc>
+    <lastmod>2025-06-13T00:15:04+08:00</lastmod>
   </url><url>
     <loc>https://blog.bocchi.icu/posts/</loc>
-    <lastmod>2025-05-20T20:58:14+08:00</lastmod>
+    <lastmod>2025-06-13T00:15:04+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.bocchi.icu/tags/tag/</loc>
+    <lastmod>2025-06-13T00:15:04+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.bocchi.icu/tags/</loc>
+    <lastmod>2025-06-13T00:15:04+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.bocchi.icu/posts/test/</loc>
+    <lastmod>2025-06-13T00:15:04+08:00</lastmod>
+  </url><url>
+    <loc>https://blog.bocchi.icu/</loc>
+    <lastmod>2025-06-13T00:15:04+08:00</lastmod>
   </url><url>
     <loc>https://blog.bocchi.icu/pages/about/</loc>
   </url><url>
-    <loc>https://blog.bocchi.icu/categories/</loc>
+    <loc>https://blog.bocchi.icu/archives/</loc>
   </url><url>
     <loc>https://blog.bocchi.icu/pages/</loc>
   </url><url>
-    <loc>https://blog.bocchi.icu/tags/</loc>
+    <loc>https://blog.bocchi.icu/search/</loc>
   </url>
 </urlset>
